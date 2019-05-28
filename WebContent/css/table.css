@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.table-num {
+	min-width: 65px!important;
+}
+.table-title {
+	max-width: 950px!important;
+}
+.table-writer {
+	min-width: 70px!important;
+}
+.table-date {
+	min-width: 70px!important;
+}
+.table-count {
+	min-width: 70px!important;
+}
