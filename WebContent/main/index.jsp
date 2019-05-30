@@ -31,15 +31,12 @@
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main main-start">
-	<button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey w3-xlarge w3-left" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
-  
-  
+	<button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-aqua w3-xlarge w3-left" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
   
   	<!------------------------------ 메인 내용 ---------------------------------->
   	
   	<!-- Main-img -->
   	<div class="w3-container main-space">
-   		<button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey w3-xlarge w3-left" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
     	<img src="${pageContext.request.contextPath}/images/main/library.jpg" alt="mainimg" class="main-img w3-left w3-card">
     	<div class="top-left-text"><span style="font-size: 20px;">짱구의 원픽...</span><br>부산 아이티윌 도서관<br>빠른 검색은 요기요 <i class="fa fa-hand-o-down"></i></div>
  		<div class="bottom-left-search">

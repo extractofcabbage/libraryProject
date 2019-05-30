@@ -81,7 +81,7 @@
      			<h1>회원가입</h1>
       			<hr>
       			<input type="email" placeholder="이메일" name="email" required class="join-input">
-      			<input type="button" value="CHECK" onclick="emailCheck()">
+      			<input type="button" value="CHECK" onclick="emailCheck()" class="join-button" >
       			<span>이메일 형식으로 입력해주세요.</span>
 
       			<input type="password" placeholder="비밀번호를 입력해주세요." name="password" required class="join-input">

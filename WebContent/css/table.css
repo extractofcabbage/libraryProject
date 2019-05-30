@@ -1,17 +1,22 @@
 @charset "UTF-8";
 
-.table-num {
-	min-width: 65px!important;
+td {
+	text-align: center!important;
 }
-.table-title {
-	max-width: 950px!important;
+
+/***** qna *****/
+.qna-num {
+	width: 90px;
 }
-.table-writer {
-	min-width: 70px!important;
+.qna-writer {
+	width: 120px;
 }
-.table-date {
-	min-width: 70px!important;
+.qna-date {
+	width: 120px;
 }
-.table-count {
-	min-width: 70px!important;
+.qna-count {
+	width: 90px;
 }
+
+
+/***** page_admin *****/
