@@ -40,14 +40,14 @@
   	<!-- Main-img -->
   	<div class="w3-container main-space">
    		<button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey w3-xlarge w3-left" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
-    	<img src="./sample-img/library.jpg" alt="mainimg" class="main-img w3-left w3-card">
+    	<img src="${pageContext.request.contextPath}/images/main/library.jpg" alt="mainimg" class="main-img w3-left w3-card">
     	<div class="top-left-text"><span style="font-size: 20px;">짱구의 원픽...</span><br>부산 아이티윌 도서관<br>빠른 검색은 요기요 <i class="fa fa-hand-o-down"></i></div>
  		<div class="bottom-left-search">
  			<input type="text" name="search" placeholder="검색어를 입력해주세요."><button><i class="fa fa-search"></i></button>
  		</div>
   		<div class="bottom-right-text"><b>이것이 부산<br>아이티윌 도서관!</b></div>
-    		<img src="./sample-img/poongseong.png" class="bottom-right-img">
-    		<img src="./sample-img/jjangoo.gif" class="bottom-right-img2">
+    		<img src="${pageContext.request.contextPath}/images/main/poongseong.png" class="bottom-right-img">
+    		<img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" class="bottom-right-img2">
   		</div>
   	<!-- Main-img -->
   	
@@ -58,7 +58,7 @@
   		<h1 class="best-subject"><b>베스트 대여!</b></h1>
   		<div class="best-book">
   			<div class="w3-card w3-margin w3-margin-top w3-left" style="width:100%">
-  				<img src="./sample-img/sampleimg.jpg" style="width:100%">
+  				<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" style="width:100%">
     			<div class="w3-container w3-blue">
      				<h2 class="w3-center"><b>1위</b></h2>
     			</div>
@@ -67,7 +67,7 @@
     	
   		<div class="best-book">
   			<div class="w3-card w3-margin w3-margin-top w3-left" style="width:100%">
-  				<img src="./sample-img/sampleimg.jpg" style="width:100%">
+  				<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" style="width:100%">
     			<div class="w3-container w3-blue">
      				<h2 class="w3-center"><b>2위</b></h2>
     			</div>
@@ -76,7 +76,7 @@
     		
   		<div class="best-book">
   			<div class="w3-card w3-margin w3-margin-top w3-left" style="width:100%">
-  				<img src="./sample-img/sampleimg.jpg" style="width:100%">
+  				<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" style="width:100%">
     			<div class="w3-container w3-blue">
      				<h2 class="w3-center"><b>3위</b></h2>
     			</div>
@@ -85,7 +85,7 @@
     	
   		<div class="best-book">
   			<div class="w3-card w3-margin w3-margin-top w3-left" style="width:100%">
-  				<img src="./sample-img/sampleimg.jpg" style="width:100%">
+  				<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" style="width:100%">
     			<div class="w3-container w3-blue">
      				<h2 class="w3-center"><b>4위</b></h2>
     			</div>

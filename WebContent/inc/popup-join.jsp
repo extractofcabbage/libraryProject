@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="${pageContext.request.contextPath}/scripts/jquery.min.js"></script>
 <script type="text/javascript">
 	function popupClose(){
 		var f = document.getElementById('join');

@@ -7,9 +7,9 @@
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<link rel="stylesheet" href="./css/main.css">
-<link rel="stylesheet" href="./css/joinForm.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/joinForm.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="./scripts/jquery.simpleTicker.js"></script>
-<script src="./scripts/main.js"></script>
+<script src="${pageContext.request.contextPath}/scripts/jquery.simpleTicker.js"></script>
+<script src="${pageContext.request.contextPath}/scripts/main.js"></script>

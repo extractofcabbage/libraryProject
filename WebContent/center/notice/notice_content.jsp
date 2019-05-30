@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!------------------- CSS/JS ---------------------->
-<jsp:include page="./inc/common-append.jsp" />
+<jsp:include page="../../inc/common-append.jsp" />
 <!------------------- CSS/JS ---------------------->
 
 <!------------------------ append css ------------------------------>
@@ -19,7 +19,7 @@
 <body class="w3-light-grey">
 
 <!----------- Sidebar/menu ------------>
-<jsp:include page="./inc/sidebar.jsp" />
+<jsp:include page="../../inc/sidebar.jsp" />
 <!----------- Sidebar/menu ------------>
 
      
@@ -74,7 +74,7 @@
   
   
   	<!--------------- footer ---------------->
-	<jsp:include page="./inc/footer.jsp" />
+	<jsp:include page="../../inc/footer.jsp" />
 	<!--------------- footer ---------------->
 	
  <!-- End page content -->

@@ -4,7 +4,7 @@
 
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:4;width:300px;" id="mySidebar">
    
-  <a href="index.ma"><img src="./sample-img/logo.png" alt="logo" style="padding: 10px; width: 96%" ></a>
+  <a href="index.ma"><img src="${pageContext.request.contextPath}/images/main/logo.png" alt="logo" style="padding: 10px; width: 96%" ></a>
   <hr style="margin: 1px 0 10px 0">
   <div class="w3-container w3-row">
   
@@ -30,7 +30,7 @@
 <%} else { %>
     
     <div class="w3-col s4"> 
-      <img src="./sample-img/gji.jpg" class="w3-circle w3-margin-right" style="width:60px; height: 60px; margin-top: 8px;">
+      <img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" class="w3-circle w3-margin-right" style="width:60px; height: 60px; margin-top: 8px;">
     </div>
     <div class="w3-col s8 w3-bar">
       <span><a href="#"><strong class="w3-xxlarge"><%=memberBean.getName() %></strong></a></span>
