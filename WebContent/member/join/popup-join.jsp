@@ -80,8 +80,8 @@
     		<div class="container">
      			<h1>회원가입</h1>
       			<hr>
-      			<input type="email" placeholder="이메일" name="email" required class="join-input">
-      			<input type="button" value="CHECK" onclick="emailCheck()" class="join-button" >
+      			<input type="email" placeholder="이메일" name="email" required class="join-input"  style="width:70%">
+      			<input type="button" value="중복검사" onclick="emailCheck()" class="join-button" style="width:87px; height: 48px;"><br>
       			<span>이메일 형식으로 입력해주세요.</span>
 
       			<input type="password" placeholder="비밀번호를 입력해주세요." name="password" required class="join-input">
@@ -100,8 +100,8 @@
       			<input type="text" placeholder="전화번호" name="phone" required class="join-input">
       			<span>전화번호를 '-'없이 입력해주세요.</span><br>
       			
-      			<input type="number" name="postcode" placeholder="우편번호" required class="join-input" style="width: 30%" disabled>
-      			<button class="join-button" style="width:25%; height: 48px;" onclick="searchJuso()">검색</button><br>
+      			<input type="number" name="postcode" placeholder="우편번호" required class="join-input" style="width: 50%" disabled>
+      			<button class="join-button" style="width:65px; height: 48px;" onclick="searchJuso()">검색</button><br>
       			<span>우편번호를 검색해주세요.</span>
       			
       			<input type="text" placeholder="주소" name="address1" required class="join-input">

@@ -5,28 +5,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"><title>Insert title here</title>
+<title>Insert title here</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!------------------- CSS/JS ---------------------->
+<jsp:include page="../../inc/common-append.jsp" />
+<!------------------- CSS/JS ---------------------->
+
+<!------------------------ append css ------------------------------>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/book_list.css">
+<!------------------------ append css ------------------------------>
+
 <script type="text/javascript">
 	function ok() {
-
-		
 		window.close();
-		
 	}
 </script>
 </head>
-<body>
-	<h1>emailCheck.jsp</h1>
+<body> 
+	<div class="w3-container w3-center">
 	<%
 		//String =userEmail파라미터 가져오기
 		String email = request.getParameter("email");
 	%>
-	입력한 email값 :<%=email%><br>
-	
-	아이디 사용가능 합니다.
-	<input type="button" value="아이디사용" onclick="ok()">
-	
+		<h2>사용 가능한 아이디 입니다.</h2>
+		<input type="text" value="<%=email%>" class="join-input" style="width:50%">
+		<input type="button" value="아이디사용" onclick="ok()" class="join-button" style="width:150px;  height: 48px;">
 
-
+	</div>
 </body>
 </html>

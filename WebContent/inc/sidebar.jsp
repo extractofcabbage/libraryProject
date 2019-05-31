@@ -23,8 +23,8 @@
     <!--------------------------------------------- 로그인 전 --------------------------------------------------------------------->
     
     <!--------- 로그인, 회원가입 팝업 ----------->
-    <jsp:include page="./popup-login.jsp" />
-	<jsp:include page="./popup-join.jsp" />
+    <jsp:include page="../member/login/popup-login.jsp" />
+	<jsp:include page="../member/join/popup-join.jsp" />
     <!--------- 로그인, 회원가입 팝업 ----------->
     
 <%} else { %>

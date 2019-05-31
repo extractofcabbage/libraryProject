@@ -5,7 +5,7 @@
   <footer class="w3-container w3-padding-16 w3-light-grey">
     <div class="footerBox">
     <div class="w3-bar-item w3-left">
-    	<a href="#"><img src="${pageContext.request.contextPath}/main/logo.png" alt="logo" style="margin: 7px 0 10px 40px;"></a>
+    	<a href="#"><img src="${pageContext.request.contextPath}/images/main/logo.png" alt="logo" style="margin: 7px 0 10px 40px;"></a>
     </div>
     <ul style="margin-top: 10px">
     	<li>부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층(접수)</li>
