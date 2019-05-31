@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import svc.book.BookRentProService;
 import vo.ActionForward;
+import vo.MemberBean;
 import vo.book.DbCode;
 import vo.book.RentBean;
 
@@ -17,7 +18,9 @@ public class BookRentProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		
-		int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
+		//int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
+		MemberBean memberBean = (MemberBean)request.getSession().getAttribute("memberBean");
+		int memberNo = memberBean.getNo();
 		String isbn = request.getParameter("isbn");
 		
 		BookRentProService bookRentProService = new BookRentProService();

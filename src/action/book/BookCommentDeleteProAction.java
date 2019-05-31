@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import svc.book.BookCommentDeleteProService;
 import vo.ActionForward;
+import vo.MemberBean;
 
 public class BookCommentDeleteProAction implements Action {
 
@@ -15,7 +16,9 @@ public class BookCommentDeleteProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		
-		int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
+		//int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
+		MemberBean memberBean = (MemberBean)request.getSession().getAttribute("memberBean");
+		int memberNo = memberBean.getNo();
 		int bookCommentNo = Integer.parseInt(request.getParameter("bookCommentNo"));
 
 		System.out.println("memberNo: " + memberNo);

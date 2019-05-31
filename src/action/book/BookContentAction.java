@@ -9,6 +9,7 @@ import action.Action;
 import svc.book.BookContentService;
 import svc.book.NaverAPISearchBook;
 import vo.ActionForward;
+import vo.MemberBean;
 import vo.book.BookBean;
 import vo.book.BookCommentBean;
 
@@ -17,7 +18,9 @@ public class BookContentAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
+		//int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
+		MemberBean memberBean = (MemberBean)request.getSession().getAttribute("memberBean");
+		int memberNo = memberBean.getNo();
 		
 		String isbn = request.getParameter("isbn");
 		String page = request.getParameter("page");

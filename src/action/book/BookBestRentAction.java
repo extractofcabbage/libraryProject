@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import svc.book.BookBestRentService;
 import vo.ActionForward;
+import vo.MemberBean;
 import vo.book.BookBean;
 import vo.book.PageInfo;
 
@@ -17,7 +18,9 @@ public class BookBestRentAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
+		//int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
+		MemberBean memberBean = (MemberBean)request.getSession().getAttribute("memberBean");
+		int memberNo = memberBean.getNo();
 		
 		int nowYear = Calendar.getInstance().get(Calendar.YEAR);
 		int nowMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;

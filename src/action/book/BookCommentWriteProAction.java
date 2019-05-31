@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import svc.book.BookCommentWriteProService;
 import vo.ActionForward;
+import vo.MemberBean;
 import vo.book.BookCommentBean;
 
 public class BookCommentWriteProAction implements Action {
@@ -16,7 +17,9 @@ public class BookCommentWriteProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		
-		int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
+		//int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
+		MemberBean memberBean = (MemberBean)request.getSession().getAttribute("memberBean");
+		int memberNo = memberBean.getNo();
 		String isbn = request.getParameter("isbn");
 		String page = request.getParameter("page");
 		int grade = Integer.parseInt(request.getParameter("grade"));

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import svc.book.BookListService;
 import vo.ActionForward;
+import vo.MemberBean;
 import vo.book.BookBean;
 import vo.book.PageInfo;
 
@@ -16,7 +17,9 @@ public class BookListAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
+		//int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
+		MemberBean memberBean = (MemberBean)request.getSession().getAttribute("memberBean");
+		int memberNo = memberBean.getNo();
 		
 		ArrayList<BookBean> bookList = new ArrayList<BookBean>();
 		String searchType = "";
