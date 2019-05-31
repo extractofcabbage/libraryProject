@@ -10,6 +10,9 @@ import org.apache.commons.codec.binary.Base64;
 
 public class AES256Cipher {
 	
+	private final static String KEY = "aes256-test-key!";
+	private final static String IV = "aes256-test-key!";
+	
 	private static AES256Cipher instance = null;
 	
 	public static AES256Cipher getInstance() {
@@ -19,14 +22,11 @@ public class AES256Cipher {
 		return instance;
 	}
 	
-	private final static String KEY = "aes256-test-key!";
-	private final static String IV = "aes256-test-key!";
-	
 	private AES256Cipher() {
 		
 	}
 	
-	public String encryption(String plainText) {
+	public String encryption(String plainText) { // 암호화
 		
 		String encryptionText = null;
 		
@@ -48,7 +48,7 @@ public class AES256Cipher {
 		return encryptionText;
 	}
 	
-	public String decryption(String encryptionText) {
+	public String decryption(String encryptionText) { // 복호화
 
 		String decryptionText = null;
 
@@ -69,15 +69,16 @@ public class AES256Cipher {
 		return decryptionText;
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
-		String password = "test12133$%&fgGG@!!";
+		String password = "1";
 		System.out.println("비밀번호: " + password);
 		
 		String encryptionText = AES256Cipher.getInstance().encryption(password);
-		System.out.println("암 호 화: " + encryptionText + ", length: " + encryptionText.length());
+		System.out.println("암 호 화: " + encryptionText);
+		
 		String plainText = AES256Cipher.getInstance().decryption(encryptionText);
 		System.out.println("복 호 화: " + plainText);
 		
-	}
+	}*/
 }

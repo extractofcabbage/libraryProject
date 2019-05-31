@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import db.AES256Cipher;
 import vo.MemberBean;
 import static db.JdbcUtil.*;
 
@@ -75,7 +76,8 @@ public class MemberDAO {
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memberBean.getEmail());
-			pstmt.setString(2, memberBean.getPassword());
+			//pstmt.setString(2, memberBean.getPassword());
+			pstmt.setString(2, AES256Cipher.getInstance().encryption(memberBean.getPassword()));
 			pstmt.setString(3, memberBean.getName());
 			pstmt.setString(4, memberBean.getGender());
 			pstmt.setString(5, memberBean.getBirth());
@@ -146,7 +148,8 @@ public class MemberDAO {
 			
 			rs=pstmt.executeQuery();
 			
-			memberBean.setEmail(rs.getString("email"));
+			//memberBean.setEmail(rs.getString("email"));
+			memberBean.setEmail(AES256Cipher.getInstance().decryption(rs.getString("email")));
 			
 			if(rs.next()==true) {
 				isCheck=1;
@@ -170,7 +173,8 @@ public class MemberDAO {
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memberBean.getEmail());
-			pstmt.setString(2, memberBean.getPassword());
+			//pstmt.setString(2, memberBean.getPassword());
+			pstmt.setString(2, AES256Cipher.getInstance().encryption(memberBean.getPassword()));
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()) {
