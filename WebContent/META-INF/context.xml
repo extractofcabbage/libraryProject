@@ -3,7 +3,7 @@
 		name="jdbc/teamproject"
 		auth="Container"
 		type="javax.sql.DataSource"
-		url="jdbc:mysql://libraryproject.cpxdnuezzwcv.ap-northeast-2.rds.amazonaws.com/libraryproject"
+		url="jdbc:mysql://libraryproject.cpxdnuezzwcv.ap-northeast-2.rds.amazonaws.com/libraryproject?characterEncoding=UTF-8"
 		username="root"
 		password="itwillbs1234"
 		driverClassName="com.mysql.jdbc.Driver"
