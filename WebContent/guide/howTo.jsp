@@ -15,40 +15,6 @@
 <jsp:include page="../inc/common-append.jsp" />
 <!------------------- CSS/JS ---------------------->
 
-<!------------------------ append css ------------------------------>
-<link rel="stylesheet" href="./css/table.css">
-<!------------------------ append css ------------------------------>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet"
-	href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
-<link rel='stylesheet'
-	href='https://fonts.googleapis.com/css?family=Open+Sans'>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<style type="text/css">
-h1 {
-	text-align: center;
-	text-decoration: blink;
-	margin-top: 50px;
-	margin-bottom: 70px;
-}
-
-table {
-	height: 300px;
-}
-
-th { /* border:none; */
-	border: 1px solid #777777;
-	text-align: left;
-	padding: 12px 16px;
-}
-
-div>h3 {
-	color: #607d8b;
-	font-weight: bold;
-}
-</style>
 </head>
 <body class="w3-light-grey">
 
@@ -74,12 +40,11 @@ div>h3 {
 
 		<!------------------------------ 메인 내용 ---------------------------------->
 		<!-- Header -->
-		<header id="portfolio">
+		<header>
 			<div class="w3-container">
 				<h1>
 					<b>도서대여순서</b>
 				</h1>
-
 			</div>
 		</header>
 

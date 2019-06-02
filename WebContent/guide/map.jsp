@@ -15,10 +15,6 @@
 <jsp:include page="../inc/common-append.jsp" />
 <!------------------- CSS/JS ---------------------->
 
-<!------------------------ append css ------------------------------>
-<link rel="stylesheet" href="./css/table.css">
-<!------------------------ append css ------------------------------>
-
 </head>
 <body class="w3-light-grey">
 
@@ -49,21 +45,13 @@
 				<h1>
 					<b>오시는길</b>
 				</h1>
-
 			</div>
 		</header>
-
-		<br> <br>
-
-		<div class="w3-container">
-<b>
-						부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층<br> 기관명 : 아이티윌 부산교육센터<br>
-						TEL : 051-803-0909 &nbsp; FAX : 051-803-0979 &nbsp; 이메일 :
-						class@itwillbs.co.kr 
-					</b>
-					<div id="map" style="width: 550px; height: 450px; margin-top: 50px;"></div>
-					<script type="text/javascript"
-						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94e4a001d8136f6c27ad20e1e520770a"></script>
+		
+		<div class="w3-container w3-center">
+    			<div id="map" style="width:900px; height: 450px; margin: 40px auto 0 auto;"></div>
+      				<!-- 지도 스크립트 -->
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94e4a001d8136f6c27ad20e1e520770a"></script>
 					<script>
 						var lat = '35.158430';
 						var lng = '129.062072';
@@ -107,17 +95,15 @@
 						map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 						
 					</script>
-
-			<br>
-		</div>
-
-		
+					
+					<div class="w3-row-padding w3-large w3-center" style="margin:32px 0">
+    					<div class="w3-third"><i class="fa fa-phone w3-text-red"></i> TEL: 051-803-0909</div>
+    					<div class="w3-third"><i class="fas fa-fax w3-text-red"></i> FAX:051-803-0979</div>
+    					<div class="w3-third"><i class="fa fa-envelope w3-text-red"></i> Email: class@itwillbs.co.kr</div><br>
+    					<p>부산광역시 부산진구 부전동 112-3번지 삼한골든게이트 7층 (도로명주소 : 부산광역시 부산진구 동천로 109 삼한골든게이트 7층)</p>
+  					</div>
+  		</div>
 		<!------------------------------ 메인 내용 ---------------------------------->
-
-<!-- JAVASCRIPTS -->
-	<script src="${pageContext.request.contextPath}/scripts/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/scripts/jquery.backtotop.js"></script>
-	<script src="${pageContext.request.contextPath}/scripts/jquery.mobilemenu.js"></script>
 
 		<!--------------- footer ---------------->
 		<jsp:include page="../inc/footer.jsp" />
