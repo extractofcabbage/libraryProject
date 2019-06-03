@@ -24,7 +24,7 @@ public class JoinProAction implements Action {
 		MemberBean memberBean = null;
 		
 		String realFolder = "";
-		String saveFolder = "/images";
+		String saveFolder = "/images/member/";
 		int fileSize = 5 * 1024 * 1024;
 		
 		ServletContext context = request.getServletContext(); // 현재 서블릿 컨텍스트 객체 얻어오기
