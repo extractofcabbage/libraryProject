@@ -2,12 +2,14 @@
     pageEncoding="UTF-8"%>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+
 	function popupClose(){
 		var f = document.getElementById('join');
 		f.action = "${pageContext.request.contextPath}/joinPro.me";
 		f.submit();
 		window.open("about:blank","_self").close();
 	}
+	
 	function emailCheck() {
 		//id상자 비어있으면 "입력하세요"포커스
 		//새창 열기
@@ -76,7 +78,7 @@
      <!------------------------------------------ 회원가입 팝업 ------------------------------------------>
 	 <div id="joinpop" class="modal">
   		<span onclick="document.getElementById('joinpop').style.display='none'" class="close" title="창닫기">&times;</span>
- 		<form class="modal-content animate" action="joinPro.me" id="join" method="post" name="fr" enctype="multipart/form-data" onsubmit="popupClose()">
+ 		<form class="modal-content animate" action="joinPro.me" id="join" method="post" name="fr" enctype="multipart/form-data" >
     		<div class="container">
      			<h1>회원가입</h1>
       			<hr>
@@ -90,6 +92,10 @@
      			<input type="password" placeholder="비밀번호 확인" name="password2" required class="join-input">
       			<span>비밀번호를 다시 한번 입력해주세요.</span><br>
       			
+      			<input type="text" placeholder="이름" name="name" required class="join-input">
+      			<span>이름을 입력해 주세요</span><br>
+      			
+      			
       			<input type="text" placeholder="주민번호 앞자리 " name="birth" required class="join-input" style="width: 40%">
 				<span class="w3-xlarge"><b>-</b></span>
      			<input type="text" name="Gender" required class="join-input" maxlength="1" style="width: 10%; text-align: center;" >
@@ -100,7 +106,7 @@
       			<input type="text" placeholder="전화번호" name="phone" required class="join-input">
       			<span>전화번호를 '-'없이 입력해주세요.</span><br>
       			
-      			<input type="number" name="postcode" placeholder="우편번호" required class="join-input" style="width: 50%" disabled>
+      			<input type="number" name="postcode" placeholder="우편번호" required class="join-input" style="width: 50%" readonly="readonly">
       			<button class="join-button" style="width:65px; height: 48px;" onclick="searchJuso()">검색</button><br>
       			<span>우편번호를 검색해주세요.</span>
       			

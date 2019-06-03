@@ -47,7 +47,8 @@ public class MemberFrontController extends HttpServlet {
 		
 		if(command.equals("/loginForm.me")) {
 			forward = new ActionForward();
-			forward.setPath("member/loginForm.jsp");
+//			forward.setPath("member/loginForm.jsp");
+			forward.setPath("index.ma");
 		}else if(command.equals("/loginPro.me")) {
 			action = new LoginProAction();
 			
@@ -61,6 +62,7 @@ public class MemberFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("member/joinForm.jsp");
 		}else if(command.equals("/joinPro.me")) {
+			System.out.println("컨트롤러 joinpro.me");
 			action = new JoinProAction();
 			
 			try {

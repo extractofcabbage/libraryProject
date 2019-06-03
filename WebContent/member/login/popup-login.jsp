@@ -3,8 +3,11 @@
 <script type="text/javascript">
 	function emailFind() {
 		//새창열기
-		window.open("emailFind.jsp", "winname", "width=500,height=300");
+		window.open("emailFind.me", "winname", "width=500,height=300");
 	}
+	
+	
+	
 </script>
 <!------------------------------------------  로그인 팝업  ------------------------------------------>
      <div id="loginpop" class="modal">

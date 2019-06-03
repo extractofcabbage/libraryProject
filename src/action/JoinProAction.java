@@ -24,7 +24,7 @@ public class JoinProAction implements Action {
 		MemberBean memberBean = null;
 		
 		String realFolder = "";
-		String saveFolder = "/memberUpload";
+		String saveFolder = "/images";
 		int fileSize = 5 * 1024 * 1024;
 		
 		ServletContext context = request.getServletContext(); // 현재 서블릿 컨텍스트 객체 얻어오기
@@ -40,7 +40,7 @@ public class JoinProAction implements Action {
 		memberBean.setGender(multi.getParameter("Gender"));
 		memberBean.setBirth(multi.getParameter("birth"));
 		memberBean.setPhone(multi.getParameter("phone"));
-		memberBean.setImage(multi.getOriginalFileName((String) multi.getFileNames().nextElement()));
+//		memberBean.setImage(multi.getOriginalFileName((String) multi.getFileNames().nextElement()));
 		memberBean.setAddress1(multi.getParameter("address1"));
 		memberBean.setAddress2(multi.getParameter("address2"));
 		memberBean.setPostcode(Integer.parseInt(multi.getParameter("postcode")));
@@ -48,6 +48,7 @@ public class JoinProAction implements Action {
 		JoinProService joinProService = new JoinProService();
 
 		boolean isInsertSuccess = joinProService.joinMember(memberBean);
+		System.out.println(isInsertSuccess);
 
 		if (!isInsertSuccess) {
 			response.setContentType("text/html;charset=UTF-8");
@@ -59,7 +60,7 @@ public class JoinProAction implements Action {
 
 		} else {
 			forward = new ActionForward();
-			forward.setPath("joinFrom.me");
+			forward.setPath("loginForm.me");
 			forward.setRedirect(true);
 		}
 		return forward;
