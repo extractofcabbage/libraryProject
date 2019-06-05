@@ -64,9 +64,9 @@
 				<!----- 도서 검색 input ----->
 				<form>
 					<select class="category-select">
-						<option value="subject">제목</option>
-						<option value="author">저자</option>
-						<option value="isbn">ISBN</option>
+						<option value="getTitle">제목</option>
+						<option value="content">내용</option>
+						<option value="name">작성자</option>
 					</select> <input type="text" name="search" placeholder="검색어를 입력해주세요."
 						class="common-search" style="width: 70%">
 					<button type="submit" class="common-search-button"
@@ -118,12 +118,25 @@
 		<!-- Pagination -->
 		<div class="w3-center w3-padding-32 w3-xlarge">
 			<div class="w3-bar">
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a> <a
-					href="#" class="w3-bar-item w3-black w3-button">1</a> <a href="#"
-					class="w3-bar-item w3-button w3-hover-black">2</a> <a href="#"
-					class="w3-bar-item w3-button w3-hover-black">3</a> <a href="#"
-					class="w3-bar-item w3-button w3-hover-black">4</a> <a href="#"
-					class="w3-bar-item w3-button w3-hover-black">»</a>
+			<%if(nowPage <= 1) {%>
+			<a class="w3-bar-item w3-button w3-hover-black">«</a>&nbsp;
+	<%} else {%>
+			<a href="qnaList.bo?page=<%=nowPage - 1%>" class="w3-bar-item w3-button w3-hover-black">«</a>&nbsp;
+	<%} %>
+	
+	<%for(int i = startPage; i <= endPage; i++) { 
+			if(i == nowPage) { %>
+				<a  class="w3-bar-item w3-black w3-button"><%=i %></a>
+		<%} else { %>
+				<a class="w3-bar-item w3-button w3-hover-black" href="qnaList.bo?page=<%=i %>"><%=i %></a>&nbsp;
+		<%} %>
+	<%} %>
+	
+	<%if(nowPage >= maxPage) { %>
+			<a class="w3-bar-item w3-button w3-hover-black">»</a>
+	<%} else { %>
+			<a class="w3-bar-item w3-button w3-hover-black" href="qnaList.bo?page=<%=nowPage + 1 %>">»</a>
+	<%} %>
 			</div>
 		</div>
 		<div id="table_search">
