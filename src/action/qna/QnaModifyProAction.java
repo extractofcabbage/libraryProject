@@ -14,6 +14,7 @@ import action.Action;
 import svc.BoardModifyProService;
 import vo.ActionForward;
 import vo.BoardBean;
+import vo.MemberBean;
 
 public class QnaModifyProAction implements Action {
 
@@ -22,7 +23,7 @@ public class QnaModifyProAction implements Action {
 		ActionForward forward = null;
 		
 		String realFolder = ""; // 실제 경로
-		String saveFolder = "/center/upload";
+		String saveFolder = "/images/qna";
 		int fileSize = 5 * 1024 * 1024; // 파일 사이즈(5MB)
 		
 		ServletContext context = request.getServletContext(); // 현재 서블릿 컨텍스트 객체 얻어오기
@@ -32,7 +33,8 @@ public class QnaModifyProAction implements Action {
 		int board_num = Integer.parseInt(multi.getParameter("board_num"));
 		System.out.println("QnaModifyProAction - board_num = "+board_num);
 		HttpSession session = request.getSession();
-		String email = (String) session.getAttribute("email");
+		MemberBean memberBean= (MemberBean) session.getAttribute("memberBean");
+		String email = memberBean.getEmail();
 		BoardModifyProService boardModifyProService = new BoardModifyProService();
 		boolean isRightUser = boardModifyProService.isArticleWriter(board_num, email);
 		if(!isRightUser) {
@@ -46,7 +48,7 @@ public class QnaModifyProAction implements Action {
 			BoardBean article = new BoardBean();
 			article.setTitle(multi.getParameter("board_subject"));
 			article.setContent(multi.getParameter("board_content"));
-			article.setFile(multi.getOriginalFileName((String) multi.getFileNames().nextElement()));
+//			article.setFile(multi.getOriginalFileName((String) multi.getFileNames().nextElement()));
 			article.setNo(Integer.parseInt(multi.getParameter("board_num")));
 			
 			boolean isModifySuccess = boardModifyProService.ModifyArticle(article);

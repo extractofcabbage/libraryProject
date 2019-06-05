@@ -15,8 +15,8 @@ public class qnaWriteAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		HttpSession session = request.getSession();
-		String email = (String) session.getAttribute("email");
-		MemberBean memberBean = new MemberBean();
+		MemberBean memberBean = (MemberBean) session.getAttribute("memberBean");
+		String email = memberBean.getEmail();
 		
 		memberBean.setEmail(email);
 		MemberInfoService memberInfoService = new MemberInfoService();

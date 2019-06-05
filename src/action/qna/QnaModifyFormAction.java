@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import dao.MemberDAO;
 import svc.BoardDetailService;
 import svc.BoardModifyProService;
 import vo.ActionForward;
@@ -22,7 +23,8 @@ public class QnaModifyFormAction implements Action {
 		
 		int board_num = Integer.parseInt(request.getParameter("board_num"));
 		HttpSession session = request.getSession();
-		String email = (String) session.getAttribute("email");
+		MemberBean memberBean = (MemberBean) session.getAttribute("memberBean");
+		String email = memberBean.getEmail();
 		BoardModifyProService boardModifyProService = new BoardModifyProService();
 		boolean isRightUser = boardModifyProService.isArticleWriter(board_num, email);
 		if(!isRightUser) {
@@ -37,8 +39,7 @@ public class QnaModifyFormAction implements Action {
 		} else {
 			BoardDetailService boardDetailService = new BoardDetailService();
 			BoardBean article = null;
-			ArrayList beans = boardDetailService.getArticle(board_num);
-			MemberBean memberBean = null;
+			ArrayList beans = boardDetailService.getArticle(board_num);  
 			article = (BoardBean) beans.get(0);
 			memberBean = (MemberBean) beans.get(1);
 			

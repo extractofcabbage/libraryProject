@@ -23,7 +23,7 @@ public class QnaWriteProAction implements Action {
 		ActionForward forward = null;
 		BoardBean boardBean = null;
 		String realFolder = "";
-		String saveFolder = "/center/upload";
+		String saveFolder = "/images/qna";
 		int fileSize = 10 * 1024 * 1024;
 		
 		ServletContext context = request.getServletContext();
@@ -36,7 +36,7 @@ public class QnaWriteProAction implements Action {
 		boardBean.setTitle(multi.getParameter("board_subject"));
 		boardBean.setContent(multi.getParameter("board_content"));
 		boardBean.setFile(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
-		boardBean.setEmail_reply(Integer.parseInt(multi.getParameter("email_reply")));
+//		boardBean.setEmail_reply(Integer.parseInt(multi.getParameter("email_reply")));
 		
 		QnaWriteProService qnaWriteProService = new QnaWriteProService();
 		MemberBean memberBean = new MemberBean();

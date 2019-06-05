@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import db.AES256Cipher;
+
 import static db.JdbcUtil.*;
 import vo.BoardBean;
 import vo.CommentBean;
@@ -340,7 +342,8 @@ public class BoardDAO {
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
-			pstmt.setString(2, member_pass);
+//			pstmt.setString(2, member_pass);
+			pstmt.setString(2, AES256Cipher.getInstance().encryption(member_pass));
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				isConfirmByPass = true;
