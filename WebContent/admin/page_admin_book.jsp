@@ -1,8 +1,16 @@
+<%@page import="vo.admin.BookList"%>
+<%@page import="vo.PageInfo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
+function bookdetail(i){
+	window.open(" bookManageListDetail.bm?no="+i,"상세정보", width="400px", height="600px");
+ }
+</script>
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,6 +27,16 @@
 
 </head>
 <body class="w3-light-grey">
+<%request.setCharacterEncoding("UTF-8"); %>
+<%String Class;
+if(request.getParameter("Class")==null){
+	Class="All";
+}
+else{
+	Class=request.getParameter("Class");
+}
+%>
+
 
 <!----------- Sidebar/menu ------------>
 <jsp:include page="../inc/sidebar.jsp" />
@@ -41,13 +59,11 @@
     		<h1><b>도서 관리</b></h1>
 	
 			<!----- 도서 검색 input ----->
-			<form>
+			        <form action="bookManageListSearch.bm" method="post">
 				<select class="category-select">
   					<option value="subject">제목</option>
-  					<option value="author">저자</option>
-  					<option value="isbn">ISBN</option>
 				</select>    
-    			<input type="text" name="search" placeholder="검색어를 입력해주세요." class="common-search" style="width:70%">
+    			<input type="text" name="booksearch" placeholder="검색어를 입력해주세요." class="common-search" style="width:70%">
     			<button type="submit" class="common-search-button"><i class="fa fa-search"></i></button>
     		</form>
    			<!----- 도서 검색 input ----->
@@ -56,84 +72,156 @@
     		<br>
     		<div class="w3-section w3-bottombar w3-padding-16">
       			<span class="w3-margin-right w3-xlarge">카테고리 : </span> 
-      			<button class="w3-button w3-black">ALL</button>
-      			<button class="w3-button w3-white">프로그래밍</button>
-      			<button class="w3-button w3-white">네트워크</button>
-      			<button class="w3-button w3-white">서버</button>
-      			<button class="w3-button w3-white">웹&디자인</button>
-      			<button class="w3-button w3-white">오라클</button>
-      			<button class="w3-button w3-white">IT&자격증</button>
-      			<button class="w3-button w3-white">자기계발</button>
-      			<button class="w3-button w3-white">기타</button>
-      			<select class="w3-right" style="height: 39px;margin: 10px;font-size: 20px;">
-    				<option selected="selected">정렬기준</option>
-			  		<option value="subject">제목</option>
-  					<option value="author">저자</option>
-  					<option value="isbn">ISBN</option>
-				</select>
+      			<button class="w3-button w3-black" onclick="location.href='bookManageList.bm?Class=All'">ALL</button>
+      			<button class="w3-button w3-white" onclick="location.href='bookManageList.bm?Class=A'">프로그래밍</button>
+      			<button class="w3-button w3-white" onclick="location.href='bookManageList.bm?Class=B'">네트워크</button>
+      			<button class="w3-button w3-white" onclick="location.href='bookManageList.bm?Class=C'">서버</button>
+      			<button class="w3-button w3-white" onclick="location.href='bookManageList.bm?Class=D'">웹&디자인</button>
+      			<button class="w3-button w3-white" onclick="location.href='bookManageList.bm?Class=E'">오라클</button>
+      			<button class="w3-button w3-white" onclick="location.href='bookManageList.bm?Class=F'">IT&자격증</button>
+      			<button class="w3-button w3-white" onclick="location.href='bookManageList.bm?Class=G'">자기계발</button>
+      			<button class="w3-button w3-white" onclick="location.href='bookManageList.bm?Class=H'">기타</button>
     		</div>
     	</div>
   	</header>
   	
   <div class="w3-container">
+  <form action="bookManageListCheckDelete.bm" method="post">
     <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
       <tr class="w3-black w3-large" style="font-weight: bold;">
-      	<td><input class="w3-check" type="checkbox"></td>
+      	<td></td>
       	<td>번호</td>
       	<td>도서명</td>
       	<td>저자</td>
       	<td>출판사</td>
-      	<td>출판일</td>
       	<td>isbn</td>
       	<td>상태</td>
       	<td>대출코드</td>
       	<td>바코드</td>
       	<td>등록일</td>
       </tr>
-      <tr>
-      	<td><input class="w3-check" type="checkbox"></td>
-        <td>1</td>
-        <td><a onclick="bookpopup()">도서명도서명도서명도서명도서명도서명도서명도서명도서명도서명</a></td>
-        <td>김은기, 이진훈, 김은영</td>
-        <td>인피니티북스</td>
-        <td>2019-09-12</td>
-        <td>9788983799067</td>
-        <td>대출</td>
-        <td>A-006</td>
-        <td>9788983799067</td>
-        <td>2020-02-31</td>
-      </tr>
-      <tr>
-      	<td><input class="w3-check" type="checkbox"></td>
-        <td>1</td>
-        <td><a onclick="bookpopup()">Do it! 안드로이드 앱 프로그래밍 (마시멜로.안드로이드 스튜디오 반영판!)</a></td>
-        <td>김은기, 이진훈, 김은영</td>
-        <td>인피니티북스</td>
-        <td>2019-09-12</td>
-        <td>9788983799067</td>
-        <td>대출</td>
-        <td>A-006</td>
-        <td>9788983799067</td>
-        <td>2020-02-31</td>
-      </tr>
+      
+      <% 
+ArrayList bookList=(ArrayList)request.getAttribute("bookList");
+PageInfo pageInfo=(PageInfo)request.getAttribute("pageInfo");
+int listCount = pageInfo.getListCount();
+int nowPage = pageInfo.getPage();
+int maxPage = pageInfo.getMaxPage();
+int startPage = pageInfo.getStartPage();
+int endPage = pageInfo.getEndPage();
+%>
+
+<%for(int i=0; i<bookList.size(); i++){
+	BookList bookListVo=new BookList();
+	bookListVo=(BookList)bookList.get(i);
+%>
+      
+      
+<!--       <tr> -->
+<!--       	<td><input class="w3-check" type="checkbox"></td> -->
+<!--         <td>1</td> -->
+<!--         <td><a onclick="bookpopup()">도서명도서명도서명도서명도서명도서명도서명도서명도서명도서명</a></td> -->
+<!--         <td>김은기, 이진훈, 김은영</td> -->
+<!--         <td>인피니티북스</td> -->
+<!--         <td>2019-09-12</td> -->
+<!--         <td>9788983799067</td> -->
+<!--         <td>대출</td> -->
+<!--         <td>A-006</td> -->
+<!--         <td>9788983799067</td> -->
+<!--         <td>2020-02-31</td> -->
+<!--       </tr> -->
+
+<tr>
+<td><input type="checkbox" class="w3-check" value="<%=bookListVo.getNo()%>" name="check"></td>
+<td><%=bookListVo.getNo() %></td>
+<td><a href=" " onclick="bookdetail(<%=bookListVo.getNo()%>)"><%=bookListVo.getTitle() %></a></td>
+<td><%=bookListVo.getAuthor() %></td>
+<td><%=bookListVo.getPublisher() %></td>
+<td><%=bookListVo.getIsbn() %></td>
+<td><%=bookListVo.getStatus() %></td>
+<td><%=bookListVo.getRent_code() %></td>
+<td><%=bookListVo.getBar_code() %></td>
+<td><%=bookListVo.getReg_date() %></td>
+</tr>
+<%
+}
+%>
     </table><br>
-    <button class="w3-button w3-dark-grey w3-right">무슨버튼? <i class="fa fa-arrow-right"></i></button>
-	<select class="w3-right" style="height: 39px;margin-right: 5px;font-size: 20px;">
-  		<option value="subject">제목</option>
-  		<option value="author">저자</option>
-  		<option value="isbn">ISBN</option>
-	</select>
+    <input type="submit" class="w3-button w3-dark-grey w3-right" value="체크항목삭제">
+    
+    </form>
   </div>
+  
   
    	<!-- Pagination -->
   	<div class="w3-center w3-padding-32 w3-xlarge">
     	<div class="w3-bar">
-      		<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-      		<a href="#" class="w3-bar-item w3-black w3-button">1</a>
-      		<a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-      		<a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-      		<a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-      		<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+<!--       		<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a> -->
+<!--       		<a href="#" class="w3-bar-item w3-black w3-button">1</a> -->
+<!--       		<a href="#" class="w3-bar-item w3-button w3-hover-black">2</a> -->
+<!--       		<a href="#" class="w3-bar-item w3-button w3-hover-black">3</a> -->
+<!--       		<a href="#" class="w3-bar-item w3-button w3-hover-black">4</a> -->
+<!--       		<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a> -->
+      		
+      		<%
+if(request.getParameter("booksearch")==null){
+	%>
+	<%if(nowPage <= 1) {%>
+			<span class="w3-bar-item w3-button w3-hover-black">«</span>
+	<%} else {%>
+			<a href="bookManageList.bm?page=<%=nowPage - 1%>&Class=<%=Class%>" class="w3-bar-item w3-button w3-hover-black">«</a>&nbsp;
+	<%} %>
+	
+	<%for(int i = startPage; i <= endPage; i++) { 
+			if(i == nowPage) { %>
+				<span class="w3-bar-item w3-black w3-button"><%=i %></span>
+		<%} else { %>
+				<a href="bookManageList.bm?page=<%=i %>&Class=<%=Class%>" class="w3-bar-item w3-button w3-hover-black">[<%=i %>]</a>&nbsp;
+		<%} %>
+	<%} %>
+	
+	<%if(nowPage >= maxPage) { %>
+			<span class="w3-bar-item w3-button w3-hover-black">»</span>
+	<%} else { %>
+			<a href="bookManageList.bm?page=<%=nowPage + 1 %>&Class=<%=Class%>" class="w3-bar-item w3-button w3-hover-black">»</a>
+	<%} %>
+	<%
+	
+	
+	%>
+	
+	<%
+	}else if(request.getParameter("booksearch")!=null){
+		%>
+		<%if(nowPage <= 1) {%>
+				<span class="w3-bar-item w3-button w3-hover-black">«</span>
+		<%} else {%>
+				<a href="bookManageListSearch.bm?page=<%=nowPage - 1%>&booksearch=<%=request.getParameter("booksearch")%>" class="w3-bar-item w3-button w3-hover-black">«</a>&nbsp;
+		<%} %>
+		
+		<%for(int i = startPage; i <= endPage; i++) { 
+				if(i == nowPage) { %>
+					<span class="w3-bar-item w3-black w3-button"><%=i %></span>
+			<%} else { %>
+					<a href="bookManageListSearch.bm?page=<%=i %>&booksearch=<%=request.getParameter("booksearch")%>" class="w3-bar-item w3-button w3-hover-black">[<%=i %>]</a>&nbsp;
+			<%} %>
+		<%} %>
+		
+		<%if(nowPage >= maxPage) { %>
+				<span class="w3-bar-item w3-button w3-hover-black">»</span>
+		<%} else { %>
+				<a href="bookManageListSearch.bm?page=<%=nowPage + 1 %>&booksearch=<%=request.getParameter("booksearch")%>" class="w3-bar-item w3-button w3-hover-black">»</a>
+		<%} %>
+		<%
+		
+		
+		%>
+	  <%
+	}
+	%>
+      		
+      		
+      		
     	</div>
   	</div>  	
   <!------------------------------ 메인 내용 ---------------------------------->

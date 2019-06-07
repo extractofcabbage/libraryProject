@@ -1,9 +1,26 @@
+<%@page import="vo.PageInfo"%>
+<%@page import="vo.MemberBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>W3.CSS Template</title>
+<script type="text/javascript">
+	function memberDetail() {
+		window.open("../pages/bestRental.jsp", "",
+				"width=325,height=100,left=300, top=400");
+	}
+	
+	
+	function classify(str){
+        var Class=str;
+		location.href="memberManageList.mm?Class="+Class;
+	}
+	
+	
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -17,6 +34,7 @@
 
 </head>
 <body class="w3-light-grey">
+<%request.setCharacterEncoding("UTF-8"); %>
 
 <!----------- Sidebar/menu ------------>
 <jsp:include page="../inc/sidebar.jsp" />
@@ -35,15 +53,35 @@
   	<!------------------------------ 메인 내용 ---------------------------------->
   <div class="w3-container">
     <h1><b>회원 관리</b></h1>
-    <select class="w3-right" style="height: 39px;margin: 10px;font-size: 20px;">
-    	<option selected="selected">정렬기준</option>
-  		<option value="subject">제목</option>
-  		<option value="author">저자</option>
-  		<option value="isbn">ISBN</option>
-	</select>
+    <%String Class;
+											if(request.getParameter("Class")==null) {
+												Class="전체";
+											}
+											else {
+												Class=request.getParameter("Class");
+											}
+									%>
+<!--     <select class="w3-right" style="height: 39px;margin: 10px;font-size: 20px;"> -->
+<!--     	<option selected="selected">정렬기준</option> -->
+<!--   		<option value="subject">제목</option> -->
+<!--   		<option value="author">저자</option> -->
+<!--   		<option value="isbn">ISBN</option> -->
+<!-- 	</select> -->
+									<select name="type" class="w3-right" style="height: 39px;margin: 10px;font-size: 20px;" onchange="classify(this.value)">
+										<option value="전체" <%if(Class.equals("전체")){%>selected="selected" <%} %>>전체</option>
+										<option value="미승인" <%if(Class.equals("미승인")){%>selected="selected" <%} %>>미승인</option>
+										<option value="교육생" <%if(Class.equals("교육생")){%>selected="selected" <%} %>>교육생</option>
+										<option value="수료생" <%if(Class.equals("수료생")){%>selected="selected" <%} %>>수료생</option>
+										<option value="중도탈락" <%if(Class.equals("중도탈락")){%>selected="selected" <%} %>>중도탈락</option>
+										<option value="강사" <%if(Class.equals("강사")){%>selected="selected" <%} %>>강사</option>
+										<option value="관리자" <%if(Class.equals("관리자")){%>selected="selected" <%} %>>관리자</option>
+	
+	
+									</select>
+	<form action="memberManageModifyMember.mm?Class=<%=Class%>" method="post">
     <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
       <tr class="w3-black w3-large" style="font-weight: bold;">
-      	<td><input class="w3-check" type="checkbox"></td>
+      	<td></td>
       	<td>번호</td>
       	<td>아이디</td>
       	<td>이름</td>
@@ -57,43 +95,115 @@
       	<td>등급</td>
       	<td>가입날짜</td>
       </tr>
-      <tr>
-      	<td><input class="w3-check" type="checkbox"></td>
-        <td>1</td>
-        <td>abcd@efghij.klm</td>
-        <td>콩길동</td>
-        <td>남</td>
-        <td>999999</td>
-        <td>011-1100-0101</td>
-        <td>http://fdsg@fgdsgsgafdsafewarwrdfdfgd</td>
-        <td>주소는 어디를 말하는 거이오 집이 업소</td>
-        <td>의식의 흐름에 맡겨 글을 쓰라라라쓰라</td>
-        <td>0548451054</td>
-        <td>다이아</td>
-        <td>2019-05-23</td>
-      </tr>
-      <tr>
-      	<td><input class="w3-check" type="checkbox"></td>
-        <td>1</td>
-        <td>abcd@efghij.klm</td>
-        <td>콩길동</td>
-        <td>남</td>
-        <td>999999</td>
-        <td>011-1100-0101</td>
-        <td>http://fdsg@fgdsgsgafdsafewarwrdfdfgd</td>
-        <td>주소는 어디를 말하는 거이오 집이 업소</td>
-        <td>의식의 흐름에 맡겨 글을 쓰라라라쓰라</td>
-        <td>0548451054</td>
-        <td>다이아</td>
-        <td>2019-05-23</td>
-      </tr>
+      
+      		<%ArrayList memberList=(ArrayList)request.getAttribute("memberList");
+			      		PageInfo pageInfo=(PageInfo)request.getAttribute("pageInfo");
+			int listCount = pageInfo.getListCount();
+			int nowPage = pageInfo.getPage();
+			int maxPage = pageInfo.getMaxPage();
+			int startPage = pageInfo.getStartPage();
+			int endPage = pageInfo.getEndPage();%>
+  					<%for(int i=0; i<memberList.size(); i++){
+  						MemberBean memberBean=new MemberBean();
+  						memberBean=(MemberBean)memberList.get(i);
+  						%>
+      
+      
+      										<tr class="memberManage_table_tr">
+											<th><input type="checkbox" class="w3-check" value="<%=memberBean.getNo()%>" name="check"></th>
+									        <th><%=memberBean.getNo()%></th>
+											<th><%=memberBean.getEmail()%></th>
+											<th><%=memberBean.getName()%></th>
+											<th><%=memberBean.getGender()%></th>
+											<th><%=memberBean.getBirth()%></th>
+											<th><%=memberBean.getPhone()%></th>
+											<th><%=memberBean.getImage()%></th>
+											<th><%=memberBean.getAddress1()%></th>
+											<th><%=memberBean.getAddress2()%></th>
+											<th><%=memberBean.getPostcode()%></th>
+											<th><%=memberBean.getType()%></th>
+											<th><%=memberBean.getReg_date()%></th>
+										</tr>
+										<%
+										}
+										%>
+
+
     </table><br>
-    <button class="w3-button w3-dark-grey w3-right">무슨버튼? <i class="fa fa-arrow-right"></i></button>
-	<select class="w3-right" style="height: 39px;margin-right: 5px;font-size: 20px;">
-  		<option value="subject">제목</option>
-  		<option value="author">저자</option>
-  		<option value="isbn">ISBN</option>
-	</select>
+    
+    										<select name="update_type" class="w3-right" style="height: 39px;margin-right: 5px;font-size: 20px;">
+											<option value="전체">전체</option>
+											<option value="미승인">미승인</option>
+											<option value="교육생">교육생</option>
+											<option value="수료생">수료생</option>
+											<option value="중도탈락">중도탈락</option>
+											<option value="강사">강사</option>
+											<option value="관리자">관리자</option>
+										</select> <input type="submit" value="변경">
+										
+	</form>
+		  	<div class="w3-center w3-padding-32 w3-xlarge">
+    	<div class="w3-bar">
+									<%
+if(request.getParameter("booksearch")==null){
+	%>
+	<%if(nowPage <= 1) {%>
+			<span class="w3-bar-item w3-button w3-hover-black">«</span>
+	<%} else {%>
+			<a href="memberManageList.mm?page=<%=nowPage - 1%>&Class=<%=Class%>" class="w3-bar-item w3-button w3-hover-black">«</a>&nbsp;
+	<%} %>
+	
+	<%for(int i = startPage; i <= endPage; i++) { 
+			if(i == nowPage) { %>
+				<span class="w3-bar-item w3-black w3-button"><%=i %></span>
+		<%} else { %>
+				<a href="memberManageList.mm?page=<%=i %>&Class=<%=Class%>" class="w3-bar-item w3-button w3-hover-black">[<%=i %>]</a>&nbsp;
+		<%} %>
+	<%} %>
+	
+	<%if(nowPage >= maxPage) { %>
+			<span class="w3-bar-item w3-button w3-hover-black">»</span>
+	<%} else { %>
+			<a href="memberManageList.mm?page=<%=nowPage + 1 %>&Class=<%=Class%>" class="w3-bar-item w3-button w3-hover-black">»</a>
+	<%} %>
+	<%
+	
+	
+	%>
+	
+<!-- 	//검색기능필요할떄 필요한 페이징(현재사용x) -->
+	<%
+	}else if(request.getParameter("booksearch")!=null){
+		%>
+		<section id="pageList">
+		<%if(nowPage <= 1) {%>
+				«&nbsp;
+		<%} else {%>
+				<a href="memberManageList.mm?page=<%=nowPage - 1%>&booksearch=<%=request.getParameter("booksearch")%>" class="w3-bar-item w3-button w3-hover-black">«</a>&nbsp;
+		<%} %>
+		
+		<%for(int i = startPage; i <= endPage; i++) { 
+				if(i == nowPage) { %>
+					[<%=i %>]
+			<%} else { %>
+					<a href="memberManageList.mm?page=<%=i %>&booksearch=<%=request.getParameter("booksearch")%>" class="w3-bar-item w3-button w3-hover-black">[<%=i %>]</a>&nbsp;
+			<%} %>
+		<%} %>
+		
+		<%if(nowPage >= maxPage) { %>
+				»
+		<%} else { %>
+				<a href="memberManageList.mm?page=<%=nowPage + 1 %>&booksearch=<%=request.getParameter("booksearch")%>" class="w3-bar-item w3-button w3-hover-black">»</a>
+		<%} %>
+		</section>
+		<%
+		
+		
+		%>
+	  <%
+	}
+	%>
+	</div>
   </div>
     <!------------------------------ 메인 내용 ---------------------------------->
   
