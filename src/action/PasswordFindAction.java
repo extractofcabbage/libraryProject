@@ -6,10 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import svc.EmailFindService;
+import svc.PasswordFindService;
 import vo.ActionForward;
 import vo.MemberBean;
 
-public class EmailFindAction implements Action{
+public class PasswordFindAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -18,16 +19,16 @@ public class EmailFindAction implements Action{
 		int isCheckSuccess=0;
 	//	System.out.println(request.getParameter("name"));
 		MemberBean memberBean = new MemberBean();
-		memberBean.setName(request.getParameter("name"));
+		memberBean.setEmail(request.getParameter("email"));
 		memberBean.setPhone(request.getParameter("phone"));
 	
 		//System.out.println(memberBean.getName());
-		EmailFindService emailFindService=new EmailFindService();
-		MemberBean memberBean2=emailFindService.emailFind(memberBean);
+		PasswordFindService passwordFindService=new PasswordFindService();
+		MemberBean memberBean2=passwordFindService.passwordFind(memberBean);
 		
 		if(memberBean2!=null) {
 			forward = new ActionForward();
-			forward.setPath("./member/login/emailFindResult.jsp?email="+memberBean2.getEmail());
+			forward.setPath("./member/login/passwordCheck.jsp?password="+memberBean2.getPassword());
 			forward.setRedirect(false);
 			
 		}else if(memberBean2==null) {
@@ -35,7 +36,7 @@ public class EmailFindAction implements Action{
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('이메일찾기 불가 정보재입력 바랍니다')");
+			out.println("alert('비밀번호 찾기 불가 정보재입력 바랍니다')");
 			out.println("window.close()");
 			out.println("</script>");
 		    out.close();			

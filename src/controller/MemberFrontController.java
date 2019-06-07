@@ -15,7 +15,7 @@ import action.EmailFindAction;
 import action.JoinProAction;
 import action.LoginProAction;
 import action.LogoutAction;
-
+import action.PasswordFindAction;
 import vo.ActionForward;
 
 @WebServlet("*.me")
@@ -100,6 +100,31 @@ public class MemberFrontController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if(command.equals("/emailFindAction.me")) {
+			action=new EmailFindAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if(command.equals("/emailFindForm.me")) {
+			forward = new ActionForward();		
+			forward.setPath("./member/login/emailFind.jsp");
+			
+		}else if(command.equals("/passwordFindAction.me")) {
+			action=new PasswordFindAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if(command.equals("/passwordFindForm.me")) {
+			forward = new ActionForward();		
+			forward.setPath("./member/login/passwordFind.jsp");
 		}
 		
 	

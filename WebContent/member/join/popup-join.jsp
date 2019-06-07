@@ -103,7 +103,7 @@
      			<br>
 				<span>주민번호 앞자리 6자리와 뒷자리 맨앞의 한자리를 입력해주세요.</span>     	
 						
-      			<input type="number" placeholder="전화번호" name="phone" required class="join-input">
+      			<input type="number" placeholder="전화번호" name="phone" required class="join-input" >
       			<span>전화번호를 '-'없이 입력해주세요.</span><br>
       			
       			<input type="number" name="postcode" placeholder="우편번호" required class="join-input" style="width: 50%" readonly="readonly">

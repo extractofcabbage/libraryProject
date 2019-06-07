@@ -8,10 +8,10 @@ import java.sql.Connection;
 import dao.MemberDAO;
 import vo.MemberBean;
 
-public class EmailFindService {
+public class PasswordFindService {
 	
 	
-	public MemberBean emailFind(MemberBean memberBean) {
+	public MemberBean passwordFind(MemberBean memberBean) {
 		
 		
 		//String name;
@@ -23,7 +23,7 @@ public class EmailFindService {
 		MemberDAO memberDAO=MemberDAO.getInstance();
 		memberDAO.setConnection(con);
 		
-		MemberBean memberBean2=memberDAO.emailFind(memberBean);
+		MemberBean memberBean2=memberDAO.passwordFind(memberBean);
 		
 		
 		close(con);
