@@ -1,5 +1,6 @@
 package action.book;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,16 @@ public class BookListAction implements Action {
 
 		//int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
 		MemberBean memberBean = (MemberBean)request.getSession().getAttribute("memberBean");
+		if(memberBean == null) {
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다.')");
+			out.println("history.back()");
+			out.println("</script>");
+			
+			return null;
+		} 
 		int memberNo = memberBean.getNo();
 		
 		ArrayList<BookBean> bookList = new ArrayList<BookBean>();
