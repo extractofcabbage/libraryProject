@@ -66,34 +66,29 @@
 				<table>
 					<tr>
 						<td class="td_left" width="100px;"><label for="board_name">이름</label></td>
-						<td class="td_right" width="100px;"><input type="text"
-							name="board_name" required="required" readonly="readonly"
-							value="<%=name%>" width="150px;" /></td>
-						<td width="150px;"><label for="wantAlert">이메일로답변받기</label></td>
-						<td><input type="radio" id="email_reply_yes" value=1
-							name="email_reply" style="display: inline; width: 50px;">네<input
-							type="radio" id="email_reply_no" value=0 name="email_reply"
-							checked="checked" style="display: inline; width: 50px;">아니오</td>
+						<td class="td_right" width="100px;"><input type="text" name="board_name" required="required" readonly="readonly" value="<%=name%>" width="150px;" /></td>
+<!-- 						<td width="150px;"><label for="wantAlert">이메일로답변받기</label></td> -->
+<!-- 						<td><input type="radio" id="email_reply_yes" value=1 -->
+<!-- 							name="email_reply" style="display: inline; width: 50px;">네<input -->
+<!-- 							type="radio" id="email_reply_no" value=0 name="email_reply" -->
+<!-- 							checked="checked" style="display: inline; width: 50px;">아니오</td> -->
 					</tr>
 					<tr>
 						<td class="td_left"><label for="board_subject">제목</label></td>
-						<td class="td_right" colspan="3"><input type="text"
-							name="board_subject" required="required" /></td>
+						<td class="td_right" colspan="3"><input type="text" name="board_subject" required="required" /></td>
 					</tr>
 					<tr>
 						<td class="td_left"><label for="board_content">내용</label></td>
-						<td class="td_right" colspan="3"><textarea id="board_content"
-								name="board_content" cols="40" rows="15" required="required"></textarea></td>
+						<td class="td_right" colspan="3"><textarea id="board_content" name="board_content" cols="40" rows="15" required="required"></textarea></td>
 					</tr>
-					<tr>
-						<td class="td_left"><label for="board_file">파일 첨부</label></td>
-						<td class="td_right" colspan="3"><input type="file"
-							name="board_file"/></td>
-					</tr>
+<!-- 					<tr> -->
+<!-- 						<td class="td_left"><label for="board_file">파일 첨부</label></td> -->
+<!-- 						<td class="td_right" colspan="3"><input type="file" name="board_file"/></td> -->
+<!-- 					</tr> -->
 				</table>
 				<div id="commentsbtn">
-					<input name="submit" type="submit" value="확인"> &nbsp; <input
-						name="reset" type="button" value="취소" onclick="history.back()">
+					<input name="submit" type="submit" value="확인"> &nbsp; 
+					<input name="reset" type="button" value="취소" onclick="history.back()">
 				</div>
 			</form>
 			<br>

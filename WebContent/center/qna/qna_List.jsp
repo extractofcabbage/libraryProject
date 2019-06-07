@@ -54,11 +54,11 @@
     		<h1><b>Q&A</b></h1>
 	
 			<!----- 도서 검색 input ----->
-			<form>
+			<form action = "qnaListSearch.bo" method="post">
 				<select class="category-select">
   					<option value="subject">제목</option>
-  					<option value="author">내용</option>
-  					<option value="isbn">작성자</option>
+  					<option value="content">내용</option>
+  					<option value="writer">작성자</option>
 				</select>
     			<input type="text" name="keyword" placeholder="검색어를 입력해주세요." class="common-search" style="width:40%;">
     			<input type="submit" value="검색" class="common-search-button"/>

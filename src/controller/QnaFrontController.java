@@ -57,7 +57,10 @@ public class QnaFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/qnaWrite.bo")) {
+		}else if(command.equals("/qnaListSearch.bo")) {
+//			request.getAttribute(arg0)
+		}
+		else if (command.equals("/qnaWrite.bo")) {
 			/*
 			 * forward = new ActionForward(); forward.setPath("/center/qna/qna_Write.jsp");
 			 */
@@ -129,7 +132,16 @@ public class QnaFrontController extends HttpServlet {
 			System.out.println("qnaDeleteForm.bo 에 왔다!");
 			HttpSession session = request.getSession();
 			MemberBean memberBean = (MemberBean) session.getAttribute("memberBean");
-			if (memberBean==null) {
+			System.out.println("qnaDeleteForm.bo - memberBean : "+memberBean);
+			if (memberBean!=null) {
+				int board_num = Integer.parseInt(request.getParameter("board_num"));
+				System.out.println("qnaDeleteForm - board_num : " + board_num);
+				request.setAttribute("board_num", board_num);
+				request.setAttribute("page", request.getParameter("page"));
+				forward = new ActionForward();
+				forward.setPath("/center/qna/qna_Delete.jsp");
+			}else {
+				System.out.println("memberBean이 Null");
 				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");// 자바스크립트 시작 태그
@@ -137,12 +149,6 @@ public class QnaFrontController extends HttpServlet {
 				out.println("history.back()");// 이전 페이지로 돌아가기
 				out.println("</script>");// 자바스크립트 종료 태그
 			}
-			int board_num = Integer.parseInt(request.getParameter("board_num"));
-			System.out.println("qnaDeleteForm - board_num : " + board_num);
-			request.setAttribute("board_num", board_num);
-			request.setAttribute("page", request.getParameter("page"));
-			forward = new ActionForward();
-			forward.setPath("/center/qna/qna_Delete.jsp");
 		} else if (command.equals("/qnaDeletePro.bo")) {
 			System.out.println("qnaDeletePro.bo에 왔다!");
 			action = new QnaDeleteProAction();
