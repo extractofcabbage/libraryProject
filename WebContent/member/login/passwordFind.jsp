@@ -10,17 +10,15 @@
 <body>
 
 	
-	<form action="emailFind.me" id="join" method="post" name="fr">
-	
+	<form action="./passwordFindAction.me" id="login" method="post" name="fr">
 	
 	<fieldset class="fs">
-    <legend>아이디찾기</legend>
-    
-	이름 입력 :<input type="text" placeholder="이름입력" name="name"><br>
+    <legend>비밀번호찾기</legend>
+	
+	이메일 입력 :<input type="text" placeholder="이메일입력" name="email"><br>
 	전화번호 입력 :<input type="text" placeholder="전화번호입력" name="phone"><br>
 	
-	<input type="submit" value="이메일찾기" >
-	</fieldset>
+	<input type="submit" value="비밀번호찾기" >
 	</form>
 	
 </body>

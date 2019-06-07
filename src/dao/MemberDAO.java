@@ -133,26 +133,29 @@ public class MemberDAO {
 		return isCheck;
 	}
 	
-	public int emailFind(MemberBean memberBean) {
+public MemberBean emailFind(MemberBean memberBean) {
 		
+		System.out.println(memberBean.getName());
+		System.out.println(memberBean.getPhone());
+		//int isCheck=0;
+//		String emailCheck=null;
+		MemberBean memberBean2=null;
 		
-		int isCheck=0;
-		String emailCheck;
-		
-		String sql="SELECT * FROM member where email=? AND phone=?";
+		String sql="SELECT * FROM member where name=? AND phone=?";
 		
 		try {
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, memberBean.getEmail());
+			pstmt.setString(1, memberBean.getName());
 			pstmt.setString(2, memberBean.getPhone());
 			
 			rs=pstmt.executeQuery();
 			
 			//memberBean.setEmail(rs.getString("email"));
-			memberBean.setEmail(AES256Cipher.getInstance().decryption(rs.getString("email")));
 			
 			if(rs.next()==true) {
-				isCheck=1;
+				memberBean2=new MemberBean();
+				memberBean2.setEmail(rs.getString("email"));
+				//isCheck=1;
 			}
 			
 			
@@ -164,7 +167,45 @@ public class MemberDAO {
 		}
 		
 		
-		return isCheck;
+		return memberBean2;
+	}
+	
+public MemberBean passwordFind(MemberBean memberBean) {
+		
+		System.out.println(memberBean.getEmail());
+		System.out.println(memberBean.getPhone());
+		//int isCheck=0;
+//		String emailCheck=null;
+		MemberBean memberBean2=null;
+		
+		String sql="SELECT * FROM member where email=? AND phone=?";
+		
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, memberBean.getEmail());
+			pstmt.setString(2, memberBean.getPhone());
+			
+			rs=pstmt.executeQuery();
+			
+			//memberBean.setEmail(rs.getString("email"));
+			
+			if(rs.next()==true) {
+				memberBean2=new MemberBean();
+				//memberBean2.setPassword(rs.getString("password"));
+				memberBean2.setPassword(AES256Cipher.getInstance().decryption(rs.getString("password")));
+				//isCheck=1;
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return memberBean2;
 	}
 	public boolean isRightUser(MemberBean memberBean) {
 		boolean isRightUser = false;

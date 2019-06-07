@@ -1,11 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script type="text/javascript">
-	function emailFind() {
-		//새창열기
-		window.open("emailFind.me", "winname", "width=500,height=300");
-	}
+function emailFind(){
 	
+	
+	//새창열기
+	
+	window.open("./emailFindForm.me","winname","width=500,height=200")
+	//location.href("/member/emailFind.jsp","winname","width=500,height=300")
+}
+
+function passwordFind(){
+	
+	
+	//새창열기
+	
+	window.open("./passwordFindForm.me","winname","width=500,height=200")
+	//location.href("/member/emailFind.jsp","winname","width=500,height=300")
+}
 	
 	
 </script>
@@ -24,7 +36,8 @@
       				 <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> 비밀번호 기억하기
       			</label>
       			
-      			<a href="#" class="w3-right" style="margin-left: 10px;">비밀번호 찾기</a>
+      			
+      			<a href="#" class="w3-right" style="margin-left: 10px;" onclick="passwordFind()" >비밀번호 찾기</a>
       			<a href="#" class="w3-right" onclick="emailFind()">아이디 찾기</a>
 
      			<div class="clearfix">

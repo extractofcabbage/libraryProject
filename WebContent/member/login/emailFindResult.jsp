@@ -25,16 +25,13 @@
 </head>
 <body> 
 	<div class="w3-container w3-center">
-
-	<form action="emailFind.me" id="join" method="post" name="fr">
-	
-	<h2>이름 입력 : </h2> <input type="text" value="이름입력" class="join-input" name="name" style="width:50%"> 
-	<h2>전화번호 입력 :</h2> <input type="text" value="전화번호입력" class="join-input" name="phone" style="width:150px;  height: 48px;">
-	
-	<input type="submit" value="이메일찾기" class="join-button" >
-	</form>
-
-
+	<%
+		//String =userEmail파라미터 가져오기
+		String email = request.getParameter("email");
+	%>
+		<h2>이메일 주소</h2>
+		<input type="text" value="<%=email%>" class="join-input" style="width:50%">
+		<input type="button" value="확인완료" onclick="ok()" class="join-button" style="width:150px;  height: 48px;">
 
 	</div>
 </body>

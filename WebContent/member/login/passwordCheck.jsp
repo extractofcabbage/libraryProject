@@ -25,14 +25,14 @@
 </head>
 <body> 
 	<div class="w3-container w3-center">
+	<%
+		//String =password파라미터 가져오기
+		String password = request.getParameter("password");
+	%>
+		<h2>PASSWORD값</h2>
+		<input type="text" value="<%=password%>" class="join-input" style="width:50%">
+		<input type="button" value="확인완료" onclick="ok()" class="join-button" style="width:150px;  height: 48px;">
 
-	<form action="emailFind.me" id="join" method="post" name="fr">
-	
-	<h2>이름 입력 : </h2> <input type="text" value="이름입력" class="join-input" name="name" style="width:50%"> 
-	<h2>전화번호 입력 :</h2> <input type="text" value="전화번호입력" class="join-input" name="phone" style="width:150px;  height: 48px;">
-	
-	<input type="submit" value="이메일찾기" class="join-button" >
-	</form>
 
 
 
