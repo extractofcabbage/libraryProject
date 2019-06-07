@@ -17,6 +17,7 @@ import action.qna.QnaCommentProAction;
 import action.qna.QnaDeleteProAction;
 import action.qna.QnaDetailAction;
 import action.qna.QnaListAction;
+import action.qna.QnaListSearchAction;
 import action.qna.QnaModifyFormAction;
 import action.qna.QnaModifyProAction;
 import action.qna.QnaWriteProAction;
@@ -58,7 +59,17 @@ public class QnaFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else if(command.equals("/qnaListSearch.bo")) {
-//			request.getAttribute(arg0)
+			String keyword = request.getParameter("keyword");
+			String option = request.getParameter("option");
+			System.out.println("/qnaListSearch.bo - keyword : "+keyword);
+			System.out.println("/qnaListSearch.bo - option : "+option);
+			action = new QnaListSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 		else if (command.equals("/qnaWrite.bo")) {
 			/*
