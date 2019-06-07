@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import svc.QnaDeleteProService;
 import vo.ActionForward;
+import vo.MemberBean;
 
 public class QnaDeleteProAction implements Action {
 
@@ -21,7 +22,8 @@ public class QnaDeleteProAction implements Action {
 		//게시물 번호 가져오기
 		int board_num = Integer.parseInt(request.getParameter("board_num"));
 		HttpSession session = request.getSession();
-		String email = (String) session.getAttribute("email");
+		MemberBean memberBean = (MemberBean) session.getAttribute("memberBean");
+		String email = memberBean.getEmail();
 		QnaDeleteProService qnaDeleteProService = new QnaDeleteProService();
 		String member_pass = request.getParameter("member_pass");
 		//isArticleWriter() 메서드 호출하여 본인확인(파라미터로 글번호, 입력받은 패스워드 전달)

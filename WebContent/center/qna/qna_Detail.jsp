@@ -19,14 +19,13 @@
 <link rel="stylesheet" href="./css/book_list.css">
 <!------------------------ append css ------------------------------>
 <%
-	System.out.print("qna_Detail - page attribute : " + request.getAttribute("page"));
 	BoardBean article = (BoardBean) request.getAttribute("article");
 	int nowPage = Integer.parseInt(request.getAttribute("page").toString());
-	MemberBean memberBean = (MemberBean) request.getAttribute("memberBean");
+	MemberBean board_memberBean = (MemberBean) request.getAttribute("memberBean");
 	ArrayList list = (ArrayList) request.getAttribute("commentList");
 	ArrayList<CommentBean> commentList = (ArrayList) list.get(0);
 	ArrayList<MemberBean> commentMember = (ArrayList) list.get(1);
-	// 	CommentBean comment = (CommentBean) request.getAttribute("comment");
+	MemberBean memberBean = (MemberBean) session.getAttribute("memberBean");
 %>
 </head>
 <body class="w3-light-grey">
@@ -63,7 +62,7 @@
 						<div class="w3-center" style="margin-top: 30px">
 							<h3><%=article.getTitle()%></h3>
 							<h5>
-								<span class="w3-opacity">by <%=memberBean.getName()%><br><%=article.getReg_date()%>
+								<span class="w3-opacity">by <%=board_memberBean.getName()%><br><%=article.getReg_date()%>
 									&nbsp;&nbsp;&nbsp; 조회수 <%=article.getReadcount()%></span>
 							</h5>
 						</div>
@@ -92,49 +91,57 @@
 
 							<p>
 								<a href="qnaList.bo" class="w3-right" style="margin-left: 10px">목록</a>
-								<a href="qnaDeleteForm.bo?board_num=<%=article.getNo()%>&page=<%=nowPage%>" class="w3-right" style="margin-left: 10px">삭제</a> 
-								<a href="qnaModifyForm.bo?board_num=<%=article.getNo()%>&page=<%=nowPage%>" class="w3-right">수정</a>
+								<a
+									href="qnaDeleteForm.bo?board_num=<%=article.getNo()%>&page=<%=nowPage%>"
+									class="w3-right" style="margin-left: 10px">삭제</a> <a
+									href="qnaModifyForm.bo?board_num=<%=article.getNo()%>&page=<%=nowPage%>"
+									class="w3-right">수정</a>
 							</p>
 						</div>
-				<%
-					if (memberBean.getType().equals("관리자")) {
-				%>
+						<%
+							if (memberBean != null) {
+								if (memberBean.getType().equals("관리자")) {
+						%>
 						<div class="w3-margin review-content">
 							<hr>
 							<br>
 							<form action="qnaCommentPro.bo" method="post">
-							<input type="hidden" name="page" value="<%=nowPage%>">
-							<input type="hidden" name="board_num" value="<%=article.getNo()%>">
-							<textarea name = "comment_content" class="w3-input w3-border book-comment-input"
-								placeholder="내용을 입력해주세요."></textarea>
-							<span><button type = "submit"
-									class="w3-button w3-padding-large w3-white w3-border w3-large"
-									style="vertical-align: top; height: 79px">
-									<b>등록</b>
-								</button></span>
-</form>
+								<input type="hidden" name="page" value="<%=nowPage%>"> <input
+									type="hidden" name="board_num" value="<%=article.getNo()%>">
+								<textarea name="comment_content"
+									class="w3-input w3-border book-comment-input"
+									placeholder="내용을 입력해주세요."></textarea>
+								<span><button type="submit"
+										class="w3-button w3-padding-large w3-white w3-border w3-large"
+										style="vertical-align: top; height: 79px">
+										<b>등록</b>
+									</button></span>
+							</form>
 							<p>
 								<span class="w3-padding-small w3-xlarge"><b>답변 </b></span>
 							</p>
 							<%
-					}
-				%>
+								}
+								}
+							%>
 							<!-------------------------------- 댓글 -------------------------------------->
-									<%
-									for (int i = 0; i < commentList.size(); i++) {
-								%>
+							<%
+								for (int i = 0; i < commentList.size(); i++) {
+							%>
 							<div class="w3-row">
 								<div class="w3-col m2 text-center">
-									<img class="w3-circle" src="../upload/<%=commentMember.get(i).getImage()%>"
+									<img class="w3-circle"
+										src="../upload/<%=commentMember.get(i).getImage()%>"
 										style="width: 96px; height: 96px">
 								</div>
 								<div class="w3-col m10 w3-container">
 									<h4>
-										<%=commentMember.get(i).getName()%> 
+										<%=commentMember.get(i).getName()%>
 										<span class="w3-opacity w3-medium"><%=commentList.get(i).getReg_date()%>
-											&nbsp;&nbsp;&nbsp;&nbsp;
-											<a href="qnaModifyForm.bo?comment_num=<%=commentList.get(i).getNo()%>&page=<%=nowPage%>">수정</a>
-											<a href="qnaDeleteForm.bo?comment_num=<%=commentList.get(i).getNo()%>&page=<%=nowPage%>">삭제</a>
+											&nbsp;&nbsp;&nbsp;&nbsp; <a
+											href="qnaModifyForm.bo?comment_num=<%=commentList.get(i).getNo()%>&page=<%=nowPage%>">수정</a>
+											<a
+											href="qnaDeleteForm.bo?comment_num=<%=commentList.get(i).getNo()%>&page=<%=nowPage%>">삭제</a>
 										</span>
 									</h4>
 									<p><%=commentList.get(i).getContent()%></p>
@@ -142,8 +149,8 @@
 								</div>
 							</div>
 							<%
-				}
-			%>
+								}
+							%>
 							<!-------------------------------- 댓글 ---------------------------------------->
 						</div>
 					</div>

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import db.AES256Cipher;
+
 import static db.JdbcUtil.*;
 import vo.BoardBean;
 import vo.CommentBean;
@@ -117,8 +119,10 @@ public class BoardDAO {
 
 	public int insertArticle(BoardBean boardBean, MemberBean memberBean) {
 		int insertCount = 0;
-		String sql = "insert into board(title,content,readcount,file,board_type,reg_date,member_no,email_reply)"+ 
-									"values(?,?,0,?,?,now(),?,?)";
+//		String sql = "insert into board(title,content,readcount,file,board_type,reg_date,member_no,email_reply)"+ 
+//									"values(?,?,0,?,?,now(),?,?)";
+		String sql = "insert into board(title,content,readcount,file,board_type,reg_date,member_no)"+ 
+				"values(?,?,0,?,?,now(),?)";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, boardBean.getTitle());
@@ -126,7 +130,7 @@ public class BoardDAO {
 			pstmt.setString(3, boardBean.getFile());
 			pstmt.setString(4, boardBean.getBoard_type());
 			pstmt.setInt(5, memberBean.getNo());
-			pstmt.setInt(6, boardBean.getEmail_reply());
+//			pstmt.setInt(6, boardBean.getEmail_reply());
 			System.out.println(memberBean.getNo());
 			insertCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -144,7 +148,8 @@ public class BoardDAO {
 		BoardBean boardBean = null;
 		MemberBean memberBean = null;
 		
-		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, b.email_reply, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date from board b, member m where b.member_no = m.no and b.no = ?";
+//		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, b.email_reply, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date from board b, member m where b.member_no = m.no and b.no = ?";
+		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date from board b, member m where b.member_no = m.no and b.no = ?";
 //		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, b.email_reply, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date, c.no, c.content, c.reg_date, c.board_no, c.member_no from board b, member m, board_comment c where b.member_no = m.no and b.no = c.board_no and b.no=?";
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -161,7 +166,7 @@ public class BoardDAO {
 				boardBean.setMember_no(rs.getInt("b.member_no"));
 				boardBean.setReadcount(rs.getInt("b.readcount"));
 				boardBean.setReg_date(rs.getDate("b.reg_date"));
-				boardBean.setEmail_reply(rs.getInt("b.email_reply"));
+//				boardBean.setEmail_reply(rs.getInt("b.email_reply"));
 				
 				memberBean = new MemberBean();
 				
@@ -294,14 +299,15 @@ public class BoardDAO {
 
 	public int updateArticle(BoardBean article) {
 		int updateCount = 0;
-		String sql = "update board set title = ?, content = ?, file = ?, email_reply =? where no = ?";
+//		String sql = "update board set title = ?, content = ?, file = ?, email_reply =? where no = ?";
+		String sql = "update board set title = ?, content = ?, file = ? where no = ?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, article.getTitle());
 			pstmt.setString(2, article.getContent());
 			pstmt.setString(3, article.getFile());
-			pstmt.setInt(4, article.getEmail_reply());
-			pstmt.setInt(5, article.getNo());
+//			pstmt.setInt(4, article.getEmail_reply());
+			pstmt.setInt(4, article.getNo());
 			updateCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("updateArticle() 실패 : "+e.getMessage());
@@ -336,7 +342,8 @@ public class BoardDAO {
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
-			pstmt.setString(2, member_pass);
+//			pstmt.setString(2, member_pass);
+			pstmt.setString(2, AES256Cipher.getInstance().encryption(member_pass));
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				isConfirmByPass = true;

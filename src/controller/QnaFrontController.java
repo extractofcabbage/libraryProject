@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.NoticeListAction;
@@ -20,6 +22,7 @@ import action.qna.QnaModifyProAction;
 import action.qna.QnaWriteProAction;
 import action.qna.qnaWriteAction;
 import vo.ActionForward;
+import vo.MemberBean;
 
 @WebServlet("*.bo")
 public class QnaFrontController extends HttpServlet {
@@ -58,6 +61,16 @@ public class QnaFrontController extends HttpServlet {
 			/*
 			 * forward = new ActionForward(); forward.setPath("/center/qna/qna_Write.jsp");
 			 */
+			HttpSession session = request.getSession();
+			MemberBean memberBean = (MemberBean) session.getAttribute("memberBean");
+			if (memberBean==null) {
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");// 자바스크립트 시작 태그
+				out.println("alert('로그인이 필요합니다.')");// 오류 메세지 다이얼로그 표시
+				out.println("history.back()");// 이전 페이지로 돌아가기
+				out.println("</script>");// 자바스크립트 종료 태그
+			}
 			action = new qnaWriteAction();
 			try {
 				forward = action.execute(request, response);
@@ -87,6 +100,16 @@ public class QnaFrontController extends HttpServlet {
 			}
 		} else if (command.equals("/qnaModifyForm.bo")) {
 			System.out.println("qnaModifyForm.bo 에 왔다!");
+			HttpSession session = request.getSession();
+			MemberBean memberBean = (MemberBean) session.getAttribute("memberBean");
+			if (memberBean==null) {
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");// 자바스크립트 시작 태그
+				out.println("alert('로그인이 필요합니다.')");// 오류 메세지 다이얼로그 표시
+				out.println("history.back()");// 이전 페이지로 돌아가기
+				out.println("</script>");// 자바스크립트 종료 태그
+			}
 			action = new QnaModifyFormAction();
 			try {
 				forward = action.execute(request, response);
@@ -104,6 +127,16 @@ public class QnaFrontController extends HttpServlet {
 			}
 		} else if (command.equals("/qnaDeleteForm.bo")) {
 			System.out.println("qnaDeleteForm.bo 에 왔다!");
+			HttpSession session = request.getSession();
+			MemberBean memberBean = (MemberBean) session.getAttribute("memberBean");
+			if (memberBean==null) {
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");// 자바스크립트 시작 태그
+				out.println("alert('로그인이 필요합니다.')");// 오류 메세지 다이얼로그 표시
+				out.println("history.back()");// 이전 페이지로 돌아가기
+				out.println("</script>");// 자바스크립트 종료 태그
+			}
 			int board_num = Integer.parseInt(request.getParameter("board_num"));
 			System.out.println("qnaDeleteForm - board_num : " + board_num);
 			request.setAttribute("board_num", board_num);

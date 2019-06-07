@@ -11,6 +11,7 @@ import svc.QnaCommentProService;
 import vo.ActionForward;
 import vo.BoardBean;
 import vo.CommentBean;
+import vo.MemberBean;
 
 public class QnaCommentProAction implements Action {
 
@@ -21,7 +22,8 @@ public class QnaCommentProAction implements Action {
 		System.out.println("1");
 		HttpSession session = request.getSession();
 		System.out.println("2");
-		String email = (String) session.getAttribute("email");
+		MemberBean memberBean= (MemberBean) session.getAttribute("memberBean");
+		String email = memberBean.getEmail();
 		System.out.println("3");
 		System.out.println("QnaCommentProAction - board_num Attri : "+request.getAttribute("board_num"));
 		System.out.println("QnaCommentProAction - board_num para : "+request.getParameter("board_num"));

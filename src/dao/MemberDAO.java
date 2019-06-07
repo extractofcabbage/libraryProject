@@ -178,6 +178,7 @@ public class MemberDAO {
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()) {
+				System.out.println("select 성공");
 				isRightUser = true;
 			}
 		} catch (SQLException e) {

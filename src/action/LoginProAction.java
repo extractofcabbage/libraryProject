@@ -22,6 +22,9 @@ public class LoginProAction implements Action {
 		String email=request.getParameter("email");
 		String password=request.getParameter("password");
 		
+		System.out.println("LoginProAction - email : "+email);
+		System.out.println("LoginProAction - password : "+password);
+		
 		MemberBean memberBean=new MemberBean();
 		memberBean.setEmail(email);
 		memberBean.setPassword(password);

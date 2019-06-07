@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="./css/table.css">
 <!------------------------ append css ------------------------------>
 <%
-	MemberBean memberBean = (MemberBean) request.getAttribute("memberBean");
+	MemberBean memberBean = (MemberBean)session.getAttribute("memberBean");
 	String email = memberBean.getEmail();
 	String name = memberBean.getName();
 %>
