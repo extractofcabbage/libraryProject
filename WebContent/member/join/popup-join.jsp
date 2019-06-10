@@ -9,6 +9,30 @@
 		f.submit();
 		window.open("about:blank","_self").close();
 	}
+	function isSame(){
+		//alert('테스트');
+		var pw=document.fr.password.value;
+		var confirmPW = document.fr.password2.value;
+		if( pw.length < 6 || pw.length > 16){
+			window.alert('비밀번호는 6글자 이상, 16글자 이하만 이용가능합니다');
+			document.getElementById('pw').value=document.getElementById('pwCheck').value='';
+			document.getElementById('same').innerHTML='';
+		}
+		if(document.getElementById('pw').value!='' && document.getElementById('pwCheck').value!=''){
+			alert('test2');
+			if(document.getElementById('pw').value==document.getElementById('pwCheck').value){
+				document.getElementById('same').innerHTML='비밀번호가 일치합니다';
+				document.getElementById('same').style.color='blue';
+			}else{
+				document.getElementById('same').innerHTML='비밀번호가 일치하지 않습니다';
+				document.getElementById('same').style.color='red';
+			}
+		}
+		
+		
+		
+	}
+	
 	
 	function emailCheck() {
 		//id상자 비어있으면 "입력하세요"포커스
@@ -74,6 +98,9 @@
 			}
 		}).open();
 	}
+	
+
+	
 </script>
      <!------------------------------------------ 회원가입 팝업 ------------------------------------------>
 	 <div id="joinpop" class="modal">
@@ -86,11 +113,12 @@
       			<input type="button" value="중복검사" onclick="emailCheck()" class="join-button" style="width:87px; height: 48px;"><br>
       			<span>이메일 형식으로 입력해주세요.</span>
 
-      			<input type="password" placeholder="비밀번호를 입력해주세요." name="password" required class="join-input">
+      			<input type="password" placeholder="비밀번호를 입력해주세요." name="password"  id="pw" required class="join-input"  >
 				<span>비밀번호를 형식에 맞게 입력해주세요.</span>
 
-     			<input type="password" placeholder="비밀번호 확인" name="password2" required class="join-input">
+     			<input type="password" placeholder="비밀번호 확인" name="password2" id="pwCheck" required class="join-input" onchange="isSame()" >
       			<span>비밀번호를 다시 한번 입력해주세요.</span><br>
+      			<span id="same"></span>
       			
       			<input type="text" placeholder="이름" name="name" required class="join-input">
       			<span>이름을 입력해 주세요</span><br>

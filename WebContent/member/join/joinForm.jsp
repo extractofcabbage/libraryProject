@@ -29,6 +29,29 @@
 				"width=460,height=140");
 
 	}
+	
+	function isSame(){
+		var pw=document.fr.password.value;
+		var confirmPW =document.fr.password2.value;
+		if(pw.length < 6 || pw.length > 16){
+			window.alert('비밀번호는 6글자 이상, 16글자 이하만 이용가능합니다');
+			document.getElmentById('pw').value=document.getElementById('pwCheck').value='';
+			document.getElementById('same').innerHTML='';
+		}
+		if(document.getElementById('pw').value!='' && document.getElementById('pwCheck').value!=''){
+			if(document.getElementById('pw').value==document.getElementById('pwCheck').value){
+				document.getElementById('same').innerHTML='비밀번호가 일치합니다';
+				document.getElementById('same').style.color='blue';
+			}else{
+				document.getElementById('same').innerHTML='비밀번호가 일치하지 않습니다';
+				document.getElementById('same').style.color='red';
+			}
+		}
+		
+		
+		
+	}
+
 
 	//적용예 (api 호출 전에 검색어 체크) 
 	function searchJuso() {
@@ -96,11 +119,11 @@
 				</tr>
 				<tr>
 					<th><label>Password</label></th>
-					<td><input type="password" name="password" class="input_box"></td>
+					<td><input type="password" name="password" class="input_box" id="pw"></td>
 				</tr>
 				<tr>
 					<th><label>Password Check</label></th>
-					<td><input type="password" name="password2" class="input_box"></td>
+					<td><input type="password" name="password2" class="input_box" id="pwCheck"></td>
 				</tr>
 				<tr>
 					<th><label>name</label></th>
