@@ -19,7 +19,7 @@
 			document.getElementById('same').innerHTML='';
 		}
 		if(document.getElementById('pw').value!='' && document.getElementById('pwCheck').value!=''){
-			alert('test2');
+			//alert('test2');
 			if(document.getElementById('pw').value==document.getElementById('pwCheck').value){
 				document.getElementById('same').innerHTML='비밀번호가 일치합니다';
 				document.getElementById('same').style.color='blue';
