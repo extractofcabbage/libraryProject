@@ -68,7 +68,7 @@
    													+ "<br><b>isbn</b> : "
    													+ isbn
    													+ "<br></span></div></td><td>"
-   													+ "<input type='button' value='선택' class='w3-button w3-red w3-left bookilist-td-btn' style='margin-top: 120px;' onclick='searchISBN("
+   													+ "<input type='button' value='선택' class='w3-button w3-red w3-left booklist-td-btn' style='margin-top: 120px;' onclick='searchISBN("
 													+ isbn
 													+ ");'></td></tr>");
 													

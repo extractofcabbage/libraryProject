@@ -102,6 +102,7 @@
 						<img src="${pageContext.request.contextPath}/images/book/no-book-image.jpg" width="100%" height="280px">
 					</c:otherwise>
 				</c:choose>
+	      		</a>
 	      		
 	      		<div class="w3-container w3-blue w3-center w3-xlarge " style="width: 100%;">
 					<span>${status.count + (pageInfo.nowPage - 1) * 10}위 (${book.bestRentCount}회 대출)</span>

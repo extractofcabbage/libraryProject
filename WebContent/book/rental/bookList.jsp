@@ -193,24 +193,24 @@
 	      			</p>
 	      		</div> 
 	      	</td>
-	        <td class="booklist-td-btn-space" style="padding-top: 140px!important;">
+	        <td style="padding-top: 140px!important; width: 140px">
 	        	<c:set var="favorCount" value="${book.favorCount}"/>
 	        	<c:choose>
 					<c:when test="${favorCount > 0}">
-						<button class="w3-button w3-dark-grey w3-right bookilist-td-btn" onclick="location.href='bookFavoritePro.do?isbn=${book.isbn}&favor=delete'">관심삭제<i class="fa fa-arrow-right"></i></button>
+						<button class="w3-button w3-dark-grey w3-right booklist-td-btn" onclick="location.href='bookFavoritePro.do?isbn=${book.isbn}&favor=delete'">관심삭제<i class="fa fa-arrow-right"></i></button>
 					</c:when>
 					<c:otherwise>
-						<button class="w3-button w3-red w3-right bookilist-td-btn" onclick="location.href='bookFavoritePro.do?isbn=${book.isbn}&favor=insert'">관심등록<i class="fa fa-arrow-right"></i></button>
+						<button class="w3-button w3-red w3-right booklist-td-btn" onclick="location.href='bookFavoritePro.do?isbn=${book.isbn}&favor=insert'">관심등록<i class="fa fa-arrow-right"></i></button>
 					</c:otherwise>
 				</c:choose>
 	        	
 	        	<c:set var="rentCount" value="${book.rentCount}"/>
 	        	<c:choose>
 					<c:when test="${rentCount > 0}">
-						<button class="w3-button w3-blue w3-right bookilist-td-btn" onclick="location.href='bookRentPro.do?isbn=${book.isbn}'">대출신청<i class="fa fa-arrow-right"></i></button>
+						<button class="w3-button w3-blue w3-right booklist-td-btn" onclick="location.href='bookRentPro.do?isbn=${book.isbn}'">대출신청<i class="fa fa-arrow-right"></i></button>
 					</c:when>
 					<c:otherwise>
-						<button class="w3-button w3-dark-grey w3-right bookilist-td-btn">대출불가<i class="fa fa-arrow-right"></i></button>
+						<button class="w3-button w3-dark-grey w3-right booklist-td-btn">대출불가<i class="fa fa-arrow-right"></i></button>
 					</c:otherwise>
 				</c:choose>
 	      	</td>

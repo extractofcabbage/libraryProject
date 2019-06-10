@@ -15,10 +15,10 @@
 .fa-star, .fa-star-half-alt{
 	color: orange;
 }
-.bookilist-td-btn {
+.booklist-td-btn {
 	margin-bottom: 10px;
 }
-.bookilist-td-btn:hover, .wishbook-td-btn:hover {
+.booklist-td-btn:hover, .wishbook-td-btn:hover {
 	background-color: white!important;
 }
 

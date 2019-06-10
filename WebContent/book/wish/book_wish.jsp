@@ -127,8 +127,8 @@
 				<td id="imageView"></td>
 			</tr>
     	</table><br>
-    	<input type="submit" class="w3-button w3-dark-grey bookilist-td-btn" style="margin-top: 10px; margin-left: 40%" value="등록">
-    	<input type="reset" class="w3-button w3-dark-grey bookilist-td-btn" style="margin-top: 10px;" value="다시쓰기">
+    	<input type="submit" class="w3-button w3-dark-grey booklist-td-btn" style="margin-top: 10px; margin-left: 40%" value="등록">
+    	<input type="reset" class="w3-button w3-dark-grey booklist-td-btn" style="margin-top: 10px;" value="다시쓰기">
     </form>
   </div>
     	

@@ -97,12 +97,12 @@
     <div class="w3-twothird" style="margin-bottom: 10px;">
     
       <div class="w3-container w3-card w3-white w3-margin-bottom  book-content">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-bookmark fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>${book.title}</h2>
+        <h3 class="w3-text-grey w3-padding-16"><i class="fa fa-bookmark fa-fw w3-margin-right w3-xlarge w3-text-teal"></i>${book.title}</h3>
         <div class="w3-container">
-            <p class="w3-xlarge"><b class="w3-opacity">저자: </b>${book.author}</p>
-          <p class="w3-xlarge"><b class="w3-opacity">출판사: </b>${book.publisher}</p>
-          <p class="w3-xlarge"><b class="w3-opacity">출판일: </b>${book.publish_date}</p>
-          <p class="w3-xlarge"><b class="w3-opacity">카테고리</b>: 
+            <p class="w3-large"><b class="w3-opacity">저자: </b>${book.author}</p>
+          <p class="w3-large"><b class="w3-opacity">출판사: </b>${book.publisher}</p>
+          <p class="w3-large"><b class="w3-opacity">출판일: </b>${book.publish_date}</p>
+          <p class="w3-large"><b class="w3-opacity">카테고리</b>: 
    				<c:set var="book_category" value="${book.category}"/>
      			<c:choose>
      				<c:when test="${book_category eq 'A'}">
@@ -131,7 +131,7 @@
 					</c:otherwise>
 				</c:choose>
 		<br>
-          <p class="w3-xlarge"><b class="w3-opacity">상태: </b>
+          <p class="w3-large"><b class="w3-opacity">상태: </b>
           	<c:set var="rentCount" value="${book.rentCount}"/>
 				<c:choose>
 					<c:when test="${rentCount > 0}">
@@ -143,7 +143,7 @@
 			</c:choose>
           
           </p>
-          <p class="w3-xlarge"><b class="w3-opacity">평점 : </b>
+          <p class="w3-large"><b class="w3-opacity">평점 : </b>
 				<c:set var="averageGrade" value="${book.averageGrade}"/>
       			<c:choose>
 					<c:when test="${averageGrade >= 10}">
@@ -191,6 +191,7 @@
 					</c:otherwise>
 				</c:choose>
       	  </p>
+      	  <br>
           	<c:set var="favorCount" value="${book.favorCount}"/>
 	        	<c:choose>
 					<c:when test="${favorCount > 0}">
@@ -215,7 +216,6 @@
 				</c:choose>
 			<span><button class="w3-button w3-padding-large w3-white w3-border w3-large" onclick="location.href='bookList.do'"><b>도서 목록 »</b></button></span>
           <hr>
-          <br>
         </div>
       </div>
      </div>
@@ -308,8 +308,9 @@
         		<span class="w3-opacity w3-medium">${fn:substring(reg_date, 0, 19)}
         		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         		<c:if test="${memberNo eq bookComment.member_no}">
-        			<a href="bookCommentDeletePro.do?isbn=${book.isbn}&page=${pageInfo.nowPage}&bookCommentNo=${bookComment.no}">삭제</a></span>        		
+        			<a href="bookCommentDeletePro.do?isbn=${book.isbn}&page=${pageInfo.nowPage}&bookCommentNo=${bookComment.no}">삭제</a>        		
         		</c:if>
+        		</span>
         		</h4>
 	       		     <c:set var="grade" value="${bookComment.grade}"/>
 		      			<c:choose>
