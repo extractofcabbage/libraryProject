@@ -49,4 +49,19 @@ public class CommentDAO {
 		
 		return insertCount;
 	}
+
+	public int deleteComment(int comment_num) {
+		int deleteCount = 0;
+		String sql = "delete from board_comment where no = ?";
+		
+		try {
+			pstmt= con.prepareStatement(sql);
+			pstmt.setInt(1, comment_num);
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return deleteCount;
+	}
 }

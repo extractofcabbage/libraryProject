@@ -12,6 +12,13 @@ public class BoardBean {
 	private int member_no;
 	private Date reg_date; // java.sql 패키지
 	private int email_reply;
+	private int comment;
+	public int getComment() {
+		return comment;
+	}
+	public void setComment(int comment) {
+		this.comment = comment;
+	}
 	public int getEmail_reply() {
 		return email_reply;
 	}
