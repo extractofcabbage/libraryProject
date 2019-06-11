@@ -217,7 +217,7 @@ public class WishBookManageDAO {
 					ResultSet rs2=pstmt.executeQuery();
 					rs2.next();
 					String standardBarCode=rs2.getString(2);
-					String AddBarCode=String.valueOf((Integer.parseInt(standardBarCode)+1));
+					String AddBarCode=String.valueOf((Long.parseLong(standardBarCode)+1));
 					wishBookInsertList.setBar_code(AddBarCode);
 					
 					sql="select distinct category from book where title=?";
@@ -241,7 +241,7 @@ public class WishBookManageDAO {
 					String AddRentCode2=frontRentCode2+ModifiedRentCode2;
 					
 					wishBookInsertList.setRent_code(AddRentCode2);
-					String AddBarCode2=String.valueOf((Integer.parseInt(wishBookInsertList.getIsbn())+1));
+					String AddBarCode2=String.valueOf((Long.parseLong(wishBookInsertList.getIsbn())+1));
 					wishBookInsertList.setBar_code(AddBarCode2);			
 				}
 				
