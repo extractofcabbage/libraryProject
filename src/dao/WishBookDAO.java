@@ -43,7 +43,7 @@ public class WishBookDAO {
 			pstmt.setInt(5, wishBookBean.getPrice());
 			pstmt.setString(6, wishBookBean.getIsbn());
 			pstmt.setString(7, wishBookBean.getImage());
-			pstmt.setString(8, "미보유");
+			pstmt.setString(8, "신청");
 			pstmt.setInt(9, 1);
 			insertCount = pstmt.executeUpdate();
 		} catch (SQLException e) {

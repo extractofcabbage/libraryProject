@@ -86,7 +86,7 @@
 		%>
       <tr class="w3-center">
         <td class="qna-num"><%=articleList1.get(i).getNo()%></td>
-        <td><a href="qnaDetail.bo?board_num=<%=articleList1.get(i).getNo()%>&page=<%=nowPage%>"><%=articleList1.get(i).getTitle()%></a></td>
+        <td><a href="qnaDetail.bo?board_num=<%=articleList1.get(i).getNo()%>&page=<%=nowPage%>"><%if(articleList1.get(i).getComment()>=1){%>[답변완료]&nbsp;<%} %><%=articleList1.get(i).getTitle()%></a></td>
         <td class="qna-writer"><%=articleList2.get(i).getName()%></td>
         <td class="qna-date"><%=articleList1.get(i).getReg_date()%></td>
         <td class="qna-count"><%=articleList1.get(i).getReadcount()%></td>

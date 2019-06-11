@@ -26,6 +26,7 @@
 	ArrayList<CommentBean> commentList = (ArrayList) list.get(0);
 	ArrayList<MemberBean> commentMember = (ArrayList) list.get(1);
 	MemberBean memberBean = (MemberBean) session.getAttribute("memberBean");
+	int comment_num = Integer.parseInt(request.getParameter("comment_num"));
 %>
 </head>
 <body class="w3-light-grey">
@@ -141,10 +142,22 @@
 											&nbsp;&nbsp;&nbsp;&nbsp; 
 											<%if(memberBean!=null){ %>
 											<%	if (memberBean.getNo()==commentMember.get(i).getNo()){ %>
-											<a href="qnaCommentModifyForm.bo?comment_num=<%=commentList.get(i).getNo()%>&page=<%=nowPage%>">수정</a>
+											<a href="qnaModifyForm.bo?comment_num=<%=commentList.get(i).getNo()%>&page=<%=nowPage%>">수정</a>
 											<a href="qnaCommentDeletePro.bo?comment_num=<%=commentList.get(i).getNo()%>&page=<%=nowPage%>&board_num=<%=article.getNo() %>" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
 											<%	} 
 											  }%>
+											<%if (commentList.get(i).getNo() == comment_num){ %>
+												<form action="qnaCommentModifyPro.bo" method="post">
+												<input type="hidden" name="page" value="<%=nowPage%>"> 
+												<input type="hidden" name="board_num" value="<%=article.getNo()%>">
+												<textarea name="comment_content" class="w3-input w3-border book-comment-input" placeholder="내용을 입력해주세요."></textarea>
+												<span>
+													<button type="submit" class="w3-button w3-padding-large w3-white w3-border w3-large" style="vertical-align: top; height: 79px">
+														<b>수정완료</b>
+													</button>
+												</span>
+												</form>
+											<%} %>
 										</span>
 									</h4>
 									<p><%=commentList.get(i).getContent()%></p>

@@ -13,9 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.NoticeListAction;
+import action.qna.QnaCommentDeleteProAction;
 import action.qna.QnaCommentProAction;
 import action.qna.QnaDeleteProAction;
 import action.qna.QnaDetailAction;
+import action.qna.QnaDetailCommentModifyAction;
 import action.qna.QnaListAction;
 import action.qna.QnaListSearchAction;
 import action.qna.QnaModifyFormAction;
@@ -51,6 +53,7 @@ public class QnaFrontController extends HttpServlet {
 		System.out.println(requestURI);
 		System.out.println(contextPath);
 		System.out.println(command);
+		//기본 qna페이지 리스트페이지
 		if (command.equals("/qnaList.bo")) {
 			action = new QnaListAction();
 			try {
@@ -59,10 +62,11 @@ public class QnaFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else if(command.equals("/qnaListSearch.bo")) {
-			String keyword = request.getParameter("keyword");
-			String option = request.getParameter("option");
-			System.out.println("/qnaListSearch.bo - keyword : "+keyword);
-			System.out.println("/qnaListSearch.bo - option : "+option);
+//			String keyword = request.getParameter("keyword");
+//			String option = request.getParameter("option");
+//			request.setAttribute("option", option);
+//			request.setAttribute("keyword", keyword);
+			
 			action = new QnaListSearchAction();
 			try {
 				forward = action.execute(request, response);
@@ -96,6 +100,7 @@ public class QnaFrontController extends HttpServlet {
 			forward.setPath("/center/qna/qna_Write.jsp");
 
 		} else if (command.equals("/qnaWritePro.bo")) {
+			System.out.println("Controller - /qnaWritePro.bo");
 			action = new QnaWriteProAction();
 			try {
 				forward = action.execute(request, response);
@@ -171,46 +176,41 @@ public class QnaFrontController extends HttpServlet {
 		} else if (command.equals("/qnaCommentPro.bo")) {
 			System.out.println("qnaCommentPro.bo에 왔다!");
 			String comment_content = request.getParameter("comment_content");
-			System.out.println("q");
 			String board_num = (String) request.getParameter("board_num");
-			System.out.println("w");
 			System.out.println("qnaCommentPro - board_num : " + board_num);
 			request.setAttribute("board_num", board_num);
-			System.out.println("e");
 			request.setAttribute("comment_content", comment_content);
-			System.out.println("r");
 			action = new QnaCommentProAction();
-			System.out.println("t");
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/qnaCommentDeletePro.bo")) {
+			System.out.println("qnaCommentDeletePro.bo에 도착");
+//			String comment_num = request.getParameter("comment_num");
+//			String page = request.getParameter("page");
+			action = new QnaCommentDeleteProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/qnaCommentModifyForm.bo")) {
+			System.out.println("qnaCommentModifyForm.bo에 도착");
+			action = new QnaDetailCommentModifyAction();
+			System.out.println("QnaDetailCommentAction()을 성공했다!");
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
 		}
 
 		// -----------qna 끝 --------------------------------
 
-		// -----------notice 시작 ----------------------------
-		else if (command.equals("/noticeList.bo")) {
-			action = new NoticeListAction();
 
-			try {
-				forward = action.execute(request, response);
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		// -----------notice 끝 ----------------------------
-
-		// -----------faq 시작---------------------------------
-		else if (command.equals("/faq.bo")) {
-			forward = new ActionForward();
-			forward.setPath("center/faq/faq.jsp");
-		}
-		// -----------faq 끝 ----------------------------------
 
 		// ------------------------------------------------------------------------------
 		if (forward != null) {

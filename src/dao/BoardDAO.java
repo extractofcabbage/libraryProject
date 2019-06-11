@@ -42,7 +42,10 @@ public class BoardDAO {
 		BoardBean boardBean = null;
 		MemberBean memberBean = null;
 //		String sql = "select * from board where board_type = 'qna' order by reg_date desc limit ?, ?";
-		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date from board b, member m where b.member_no = m.no and b.board_type = 'qna' order by b.reg_date desc limit ?,?";
+		//느리진 않지만 답변완료를 못달아줌.
+//		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date from board b, member m where b.member_no = m.no and b.board_type = 'qna' order by b.reg_date desc limit ?,?";
+		//엄청느려짐 답변완료 달수있게 boardbean에 코멘트넘버 갯수 넣어줌
+		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date, count(c.no) comment from member m, board b left outer join board_comment c on b.no = c.board_no where b.member_no = m.no and b.board_type = 'qna' group by no order by b.reg_date desc limit ?,?";
 //		String sql = "select * from board where board_type = 'qna' order by reg_date desc";
 		int startRow = (page-1)*10;
 		try {
@@ -61,6 +64,92 @@ public class BoardDAO {
 				boardBean.setContent(rs.getString("b.content"));
 				boardBean.setBoard_type(rs.getString("b.board_type"));
 				boardBean.setFile(rs.getString("b.file"));
+				boardBean.setMember_no(rs.getInt("b.member_no"));
+				boardBean.setReadcount(rs.getInt("b.readcount"));
+				boardBean.setReg_date(rs.getDate("b.reg_date"));
+				boardBean.setComment(rs.getInt("comment"));
+				
+				
+				memberBean = new MemberBean();
+				
+				memberBean.setAddress1(rs.getString("m.address1"));
+				memberBean.setAddress2(rs.getString("m.address2"));
+				memberBean.setBirth(rs.getString("m.birth"));
+				memberBean.setEmail(rs.getString("email"));
+				memberBean.setGender(rs.getString("m.gender"));
+				memberBean.setImage(rs.getString("m.image"));
+				memberBean.setName(rs.getString("m.name"));
+				memberBean.setNo(rs.getInt("b.member_no"));
+				memberBean.setPassword(rs.getString("m.password"));
+				memberBean.setPhone(rs.getString("m.phone"));
+				memberBean.setPostcode(rs.getInt("m.postcode"));
+				memberBean.setReg_date(rs.getDate("m.reg_date"));
+				memberBean.setType(rs.getString("m.type"));
+				
+				articleList1.add(boardBean);
+				articleList2.add(memberBean);
+				
+				
+			}
+			articleListTotal.add(articleList1);
+			articleListTotal.add(articleList2);
+			
+		} catch (SQLException e) {
+			System.out.println("selectArticleList() 실패"+e.getMessage());
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return articleListTotal;
+	}
+	public ArrayList<ArrayList> selectArticleList(int page, int limit, String option, String keyword) {
+		ArrayList<BoardBean> articleList1 = new ArrayList<BoardBean>();
+		ArrayList<MemberBean> articleList2 = new ArrayList<MemberBean>();
+		ArrayList<ArrayList> articleListTotal = new ArrayList<ArrayList>();
+		ArrayList beans = new ArrayList<>();
+		BoardBean boardBean = null;
+		MemberBean memberBean = null;
+//		String sql = "select * from board where board_type = 'qna' order by reg_date desc limit ?, ?";
+//		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date from board b, member m where b.member_no = m.no and b.board_type = 'qna' ";
+//		String sql = "select b.no, b.title, b.content, b.readcount, b.board_type, b.reg_date, b.member_no, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date from board b, member m where b.member_no = m.no and b.board_type = 'qna' ";
+		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date, count(c.no) comment from member m, board b left outer join board_comment c on b.no = c.board_no where b.member_no = m.no and b.board_type = 'qna' ";					
+//		String sql = "select * from board where board_type = 'qna' order by reg_date desc";
+		int startRow = (page-1)*10;
+		try {
+			String[] searches = keyword.split("\\s");
+			System.out.println("length 값 : " +searches.length);
+			int j=0;
+			while(j<searches.length) {
+				sql+=" and "+ option +" like ? ";
+				j++;
+				System.out.println("j값 : "+j);
+			}
+//			sql+=" order by b.reg_date desc limit ?,?";
+			sql+=" group by no order by b.reg_date desc limit ?,?";
+			pstmt = con.prepareStatement(sql);
+			int i=1;
+			for(;i<=searches.length;i++) {
+				pstmt.setString(i, "%"+searches[i-1]+"%");
+				System.out.println("searches값 : " + searches[i-1]);
+				System.out.println("i값 : " + i);
+			}
+			
+			System.out.println("pstmt sql : "+pstmt);
+			System.out.println("startRow : " + startRow);
+			System.out.println("limit : "+limit);
+			System.out.println("for문 바깥 i값 : "+i);
+			pstmt.setInt(i, startRow);
+			pstmt.setInt(i+1, limit);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("sql문 성공");
+				boardBean= new BoardBean();
+				
+				boardBean.setNo(rs.getInt("b.no"));
+				boardBean.setTitle(rs.getString("b.title"));
+				boardBean.setContent(rs.getString("b.content"));
+				boardBean.setBoard_type(rs.getString("b.board_type"));
+//				boardBean.setFile(rs.getString("b.file"));
 				boardBean.setMember_no(rs.getInt("b.member_no"));
 				boardBean.setReadcount(rs.getInt("b.readcount"));
 				boardBean.setReg_date(rs.getDate("b.reg_date"));
@@ -116,6 +205,43 @@ public class BoardDAO {
 		}
 		return listCount;
 	}
+	
+	public int selectListCount(String option, String keyword) {
+		int listCount = 0;
+		String sql = "select count(*) from board where "+ option +" like ?";
+		try {			
+			String[] searches = keyword.split("\\s");
+			System.out.println("length 값 : " +searches.length);
+			int j=1;
+			while(j<searches.length) {
+				sql+=" and "+ option +" like ? ";
+				j++;
+				System.out.println("j값 : "+j);
+			}
+			
+			pstmt = con.prepareStatement(sql);
+			
+			for(int i=1;i<=searches.length;i++) {
+				pstmt.setString(i, "%"+searches[i-1]+"%");
+				System.out.println("searches값 : " + searches[i-1]);
+				System.out.println("i값 : " + i);
+			}
+			
+			System.out.println("select list count sql : "+pstmt);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				System.out.println("selectListCount():");
+				listCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("selectListCount() 실패"+e.getMessage());
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return listCount;
+	}
+	
 
 	public int insertArticle(BoardBean boardBean, MemberBean memberBean) {
 		int insertCount = 0;
@@ -131,7 +257,7 @@ public class BoardDAO {
 			pstmt.setString(4, boardBean.getBoard_type());
 			pstmt.setInt(5, memberBean.getNo());
 //			pstmt.setInt(6, boardBean.getEmail_reply());
-			System.out.println(memberBean.getNo());
+			System.out.println("memberBean getNo : "+memberBean.getNo());
 			insertCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("insertArticle() 실패"+e.getMessage());
@@ -358,5 +484,7 @@ public class BoardDAO {
 		
 		return isConfirmByPass;
 	}
+
+	
 	
 }
