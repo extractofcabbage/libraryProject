@@ -207,22 +207,35 @@ public MemberBean passwordFind(MemberBean memberBean) {
 		
 		return memberBean2;
 	}
-	public boolean isRightUser(MemberBean memberBean) {
-		boolean isRightUser = false;
-		String sql = "SELECT * FROM member WHERE email=? AND password = ?";
+	public int isRightUser(MemberBean memberBean) {
+		int isRightUser = -1;
+		String sql = "SELECT * FROM member WHERE email=?";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memberBean.getEmail());
 			//pstmt.setString(2, memberBean.getPassword());
-			pstmt.setString(2, AES256Cipher.getInstance().encryption(memberBean.getPassword()));
+			
+			
 			rs=pstmt.executeQuery();
 			
+			System.out.println("암호화된 비밀번호는" + AES256Cipher.getInstance().encryption(memberBean.getPassword()));
+			
 			if(rs.next()) {
-				System.out.println("select 성공");
-				isRightUser = true;
+				if(AES256Cipher.getInstance().encryption(memberBean.getPassword()).equals(rs.getString("password"))) {
+					isRightUser=1;//세션값생성 main.jsp이동
+				}else {
+					isRightUser=0;//비밀번호틀림
+					
+				}
+				
+			}else{
+				isRightUser=-1;//아이디없음
 			}
-		} catch (SQLException e) {
+			System.out.println("isRightuser값음 "+isRightUser);
+		} 
+		
+		catch (SQLException e) {			
 			System.out.println("isRightUser() 실패");
 		}finally {
 			close(rs);

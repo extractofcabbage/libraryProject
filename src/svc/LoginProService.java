@@ -11,15 +11,17 @@ public class LoginProService {
 	
 	
 		
-		public boolean loginMember(MemberBean memberBean) {
+		public int loginMember(MemberBean memberBean) {
 			
 			Connection con=getConnection();
 			MemberDAO memberDAO = MemberDAO.getInstance();
 			memberDAO.setConnection(con);
 			
-			boolean isRightUser = memberDAO.isRightUser(memberBean);
+			int isRightUser = memberDAO.isRightUser(memberBean);
 			close(con);
 				
+			
+			System.out.println("이즈라이트유저값을"+isRightUser);
 			
 			return isRightUser;
 		}
