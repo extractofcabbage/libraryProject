@@ -210,6 +210,13 @@ public class QnaFrontController extends HttpServlet {
 
 		// -----------qna 끝 --------------------------------
 
+		//--------------faq-----------------------
+		
+		else if(command.equals("/faq.bo")) {
+			forward = new ActionForward();
+			forward.setPath("center/faq/faq.jsp");
+		}
+		//--------------faq끝---------------------
 
 
 		// ------------------------------------------------------------------------------
