@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.chart.BookChartAction;
 import vo.ActionForward;
 
 @WebServlet("*.gd")
@@ -52,9 +53,18 @@ public class GuideFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("/guide/howTo.jsp");
 		}
-		else if (command.equals("/guideChart.gd")) {
+		else if(command.equals("/guideChartForm.gd")) {
 			forward = new ActionForward();
-			forward.setPath("/guide/chart.jsp");
+			forward.setPath("/guide/bookchart.jsp");
+		}
+		else if (command.equals("/guideChart.gd")) {
+			action = new BookChartAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		// -----------guide 끝--------------------------------
 		if (forward != null) {

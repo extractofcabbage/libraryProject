@@ -7,9 +7,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
 <!------------------- CSS/JS ---------------------->
 <jsp:include page="../inc/common-append.jsp" />
 <!------------------- CSS/JS ---------------------->
+
+<!------------------------ append css ------------------------------>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsiveslides.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/themes.css">
+<!------------------------ append css ------------------------------>
+
+<!------------------------ append js ------------------------------>
+<script src="${pageContext.request.contextPath }/scripts/responsiveslides.min.js"></script>
+<!------------------------ append js ------------------------------>
+
+<script>
+    // You can also use "$(window).load(function() {"
+    $(function () {
+
+      // Slideshow 1
+      $("#slider1").responsiveSlides({
+        auto: true,
+        pager: true,
+        nav: true,
+        speed: 500,
+        maxwidth: 800,
+        namespace: "centered-btns"
+      });
+      
+    });
+ </script>
 <%
 //자체테스트용 아이디설정
 // 	String email = "like2hyun@naver.com";
@@ -51,46 +78,20 @@
   	<br>
   	
   	 <!-- center -->  
-  	<div class="w3-card w3-white center-book-space w3-left">
-  		<h1 class="best-subject"><b>베스트 대여!</b></h1>
-  		<div class="best-book">
-  			<div class="w3-card w3-margin w3-margin-top w3-left" style="width:100%">
-  				<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" style="width:100%">
-    			<div class="w3-container w3-blue">
-     				<h2 class="w3-center"><b>1위</b></h2>
-    			</div>
-  			</div>
-  		</div>
-    	
-  		<div class="best-book">
-  			<div class="w3-card w3-margin w3-margin-top w3-left" style="width:100%">
-  				<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" style="width:100%">
-    			<div class="w3-container w3-blue">
-     				<h2 class="w3-center"><b>2위</b></h2>
-    			</div>
-  			</div>
-  		</div>
-    		
-  		<div class="best-book">
-  			<div class="w3-card w3-margin w3-margin-top w3-left" style="width:100%">
-  				<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" style="width:100%">
-    			<div class="w3-container w3-blue">
-     				<h2 class="w3-center"><b>3위</b></h2>
-    			</div>
-  			</div>
-  		</div>
-    	
-  		<div class="best-book">
-  			<div class="w3-card w3-margin w3-margin-top w3-left" style="width:100%">
-  				<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" style="width:100%">
-    			<div class="w3-container w3-blue">
-     				<h2 class="w3-center"><b>4위</b></h2>
-    			</div>
-  			</div>
-  		</div>
+  	<div class="w3-card w3-sand center-book-space w3-left w3-padding" >
+  		<h3 class="w3-center"  style="margin: 10px 0 0 0"><b>베스트 대여</b></h3>
+  		
+    	<div class="rslides_container">
+      		<ul class="rslides" id="slider1">
+        		<li><img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" alt="베스트 대여" class="w3-card"><h4 class="w3-center" style="margin: 0">1위</h4></li>
+        		<li><img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" alt="베스트 대여" class="w3-card"><h4 class="w3-center" style="margin: 0">2위</h4></li>
+        		<li><img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" alt="베스트 대여" class="w3-card"><h4 class="w3-center" style="margin: 0">3위</h4></li>
+      		</ul>
+    	</div>
+  		
   	</div>
   	
-  	<div class="w3-card w3-right w3-white center-book-space-small w3-center">
+  	<div class="w3-card w3-right w3-white center-book-space-right w3-center">
   	</div>
   	
     <!------------------------------ 메인 내용 ---------------------------------->

@@ -192,16 +192,18 @@ button:hover {
 }
 
 .center-book-space {
-	width:65%;
+	width:41%;
 	height: 420px;
-	margin-left: 15px;
+	margin-left: 2%;
 	margin-bottom: 10px;
 	padding: 15px 0 0 0px;
+	border-radius: 5px;
 }
-.center-book-space-small {
-	margin-right: 10px;
-	width:32%;
+.center-book-space-right {
+	margin-right: 2%;
+	width:53%;
 	height: 420px;
+	border-radius: 5px;
 }
 .center-book-space-item {
 	width: 20%;
@@ -219,6 +221,7 @@ button:hover {
 	font-size: 40px;
 	vertical-align: top;
 }
+
 
 /* overlay */
 .overlay {
@@ -243,10 +246,6 @@ button:hover {
 	max-width: 220px;
 	width: 20%;
 	float: left;
-}
-.best-subject {
-	margin: 0 10px;
-	border-bottom: 1px solid;
 }
 
 /* 반응형 구역 */
