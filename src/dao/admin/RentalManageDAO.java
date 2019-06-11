@@ -237,7 +237,7 @@ public class RentalManageDAO {
 			ArrayList valuesForBook=new ArrayList();
 			try {
 				for(int i=0; i<values.length; i++) {
-				String sql="UPDATE rental SET return_date=now() , status=? where no=?";
+				String sql="update rental set return_date=now(),status=? where no=?";
 				pstmt=con.prepareStatement(sql);
 				pstmt.setString(1, modifyClass);
 				pstmt.setInt(2, Integer.parseInt(values[i]));
@@ -252,11 +252,6 @@ public class RentalManageDAO {
 				while(rs.next()) {
 					valuesForBook.add(rs.getInt("book_no"));
 				}
-				
-				for(int j=0; i<valuesForBook.size();i++) {
-				System.out.println("각 조건에서 추가한 valuseForBook의 book_no : " +valuesForBook.get(i));
-				}
-				
 				}//for문
 				
 				for(int i=0; i<valuesForBook.size(); i++) {
@@ -274,7 +269,6 @@ public class RentalManageDAO {
 				close(rs);
 				close(pstmt);
 			}
-			
 			isModifySuccess=1;
 		}//if("반납")
 		

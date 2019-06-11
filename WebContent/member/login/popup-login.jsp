@@ -32,18 +32,20 @@ function passwordFind(){
       			<input type="text" placeholder="이메일을 입력해주세요." name="email" required class="join-input">
       			<input type="password" placeholder="비밀번호를 입력해주세요." name="password" required class="join-input">
 
-     			<label>
-      				 <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> 비밀번호 기억하기
-      			</label>
+ 
       			
       			
-      			<a href="#" class="w3-right" style="margin-left: 10px;" onclick="passwordFind()" >비밀번호 찾기</a>
-      			<a href="#" class="w3-right" onclick="emailFind()">아이디 찾기</a>
 
      			<div class="clearfix">
        		 		<button type="submit" class="signupbtn join-button">로그인</button>
        				<button type="button" onclick="document.getElementById('loginpop').style.display='none'" class="cancelbtn join-button">취소</button>
      		 	</div>
+     		 	<div>
+     		 	<a href="#" class="w3-right" style="margin-left: 10px;" onclick="passwordFind()" >비밀번호 찾기</a>
+      			<a href="#" class="w3-right" onclick="emailFind()">아이디 찾기</a>
+     		 	</div>
+     		 	<br>
+     		 	
    		 	</div>
   		</form>
 	 </div>
