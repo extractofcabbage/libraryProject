@@ -123,7 +123,7 @@ function a(){
 											<th><%=wishBookJoinBean.getPublish_date()%></th>
 											<th><%=wishBookJoinBean.getPrice()%></th>
 											<th><%=wishBookJoinBean.getIsbn()%></th>
-											<th><%=wishBookJoinBean.getImage()%></th>
+											<th><img src="<%=wishBookJoinBean.getImage()%>"></th>
 											<th><%=wishBookJoinBean.getStatus()%></th>
 											<th><%=wishBookJoinBean.getCount()%></th>
 					
