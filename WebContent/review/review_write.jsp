@@ -34,7 +34,7 @@
   	<div class="w3-clear"></div>
   	<!------------------------------ 메인 내용 ---------------------------------->
   	<div class="review-write-container" style="margin-top: 40px">
- 		<form class="review-write-animate" action="/action_page.php">
+ 		<form class="review-write-animate" action="reviewWritePro.rv" enctype="multipart/form-data" method="post">
      		<div class="review-write-slideshow-container">
 
      			<!-- 읽은 책 목록 4개단위로 뜰 수 있도록 구현해주세요~ -->

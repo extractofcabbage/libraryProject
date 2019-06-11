@@ -1,5 +1,20 @@
+<%@page import="vo.PageInfo"%>
+<%@page import="vo.ReviewBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- <% --%>
+<!--  	request.setCharacterEncoding("UTF-8"); -->
+<!--  	String email = (String) session.getAttribute("email"); -->
+<!--  	ArrayList<ReviewBean> articleList = (ArrayList<ReviewBean>) request.getAttribute("articleList"); -->
+<!--  	PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo"); -->
+
+<!--  	int listCount = pageInfo.getListCount(); -->
+<!--  	int nowPage = pageInfo.getPage(); -->
+<!--  	int maxPage = pageInfo.getMaxPage(); -->
+<!-- 	int startPage = pageInfo.getStartPage(); -->
+<!--  	int endPage = pageInfo.getEndPage(); -->
+<%-- %>     --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,10 +43,10 @@
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main main-start">
-	<button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey w3-xlarge w3-left" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+	<button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey w3-xlarge w3-left"><i class="fa fa-bars"></i>  Menu</button>
   	
   	<!-- 글쓰기 버튼 -->
-  	<button type="button" class="w3-button w3-teal review-write-pen"><i class="fas fa-pencil-alt"></i></button>
+  	<button onclick="location.href='reviewWrite.rv'" type="button" class="w3-button w3-teal review-write-pen"><i class="fas fa-pencil-alt"></i></button>
   
   	<!------------------------------ 메인 내용 ---------------------------------->
 	<!-- Header -->

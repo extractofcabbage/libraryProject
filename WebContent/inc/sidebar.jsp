@@ -59,7 +59,7 @@
     	</div>	
     <a href="#" class="w3-bar-item w3-button w3-padding main-menu"><i class="fas fa-pen-fancy"></i>  리뷰</a>
     	<div class="sub-menu" style="margin-left: 20px">
-    		<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  리뷰 게시판</a>
+    		<a href="reviewList.rv" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  리뷰 게시판</a>
     	</div>	
     <a href="#" class="w3-bar-item w3-button w3-padding main-menu"><i class="far fa-comment-dots"></i>  안내</a>
     	<div class="sub-menu" style="margin-left: 20px">
