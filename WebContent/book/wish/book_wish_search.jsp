@@ -52,9 +52,9 @@
 								$('table')
 										.append(
 												"<tr><td>"
-													+ "<span class='w3-left w3-xxlarge' style='margin-right: 20px;''><b>"
+													+ "<span class='w3-left w3-xxlarge' style='margin-right: 20px;'><b>"
 													+ num + "</b></span>"
-													+ "<img src=" + thumbnail +" class='w3-left' style='width: 120px'>"
+													+ "<img src=" + thumbnail +" class='w3-left' style='width: 120px; margin-right: 20px;'>"
 													+ "<div><span class='w3-large w3-left'><b>제목</b> : "
 													+ title 
    													+ "<br><b>저자</b> : "
@@ -156,7 +156,7 @@
 	           	<option value="isbn">ISBN</option>
 	           	<option value="publisher">Publisher</option>
 			</select>    
-			<input type="text" name="queryInput" placeholder="검색어를 입력해주세요." class="common-search" required="required" id="queryInput" value=<%=queryInput%> style="width:70%">
+			<input type="text" name="queryInput" placeholder="검색어를 입력해주세요." class="common-search" required="required" id="queryInput" value="<%=queryInput%>" style="width:70%">
     		<input type="button" value="SEARCH" class="common-search-button" style="width:10%" onclick="search($('#queryInput').val(),$('#targetkey').val());">
    			<!----- 도서 검색 input ----->
 

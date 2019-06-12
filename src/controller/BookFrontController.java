@@ -118,7 +118,6 @@ public class BookFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
