@@ -221,7 +221,13 @@ button:hover {
 	font-size: 40px;
 	vertical-align: top;
 }
-
+.center-book-review {
+	float: left!important;
+	width: 48%; 
+	height: 280px; 
+	margin-left: 18px!important; 
+	overflow: hidden;
+}
 
 /* overlay */
 .overlay {
@@ -254,4 +260,13 @@ button:hover {
 	padding: 20px 10px 0 10px;
   }
 }
+
+@media screen and (max-width: 1400px) {
+	.center-book-review {
+		display: none;
+	}
+	.center-book-review-img {
+		float: none!important;
+		margin-left: 0!important;
+	}
 }

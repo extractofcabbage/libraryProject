@@ -35,6 +35,16 @@
         namespace: "centered-btns"
       });
       
+   // Slideshow 2
+      $("#slider2").responsiveSlides({
+        auto: true,
+        pager: true,
+        nav: true,
+        speed: 500,
+        maxwidth: 800,
+        namespace: "centered-btns"
+      });
+      
     });
  </script>
 <%
@@ -78,9 +88,10 @@
   	<br>
   	
   	 <!-- center -->  
+  	 
+  	<!-- 베스트 대여 -->
   	<div class="w3-card w3-sand center-book-space w3-left w3-padding" >
   		<h3 class="w3-center"  style="margin: 10px 0 0 0"><b>베스트 대여</b></h3>
-  		
     	<div class="rslides_container">
       		<ul class="rslides" id="slider1">
         		<li><img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" alt="베스트 대여" class="w3-card"><h4 class="w3-center" style="margin: 0">1위</h4></li>
@@ -88,10 +99,54 @@
         		<li><img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" alt="베스트 대여" class="w3-card"><h4 class="w3-center" style="margin: 0">3위</h4></li>
       		</ul>
     	</div>
-  		
   	</div>
   	
-  	<div class="w3-card w3-right w3-white center-book-space-right w3-center">
+  	<!-- 최신 리뷰 -->
+  	<div class="w3-card w3-right w3-sand center-book-space-right w3-center w3-padding">
+		<h3 class="w3-center"  style="margin: 10px 0 0 0"><b>최신 리뷰</b></h3>
+  		
+  		<div class="rslides_container">
+      		<ul class="rslides" id="slider2">
+        		<li>
+        			<div class="w3-left center-book-review-img" style="margin-left: 35px">
+        				<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" alt="최신 리뷰" class="w3-card" >
+        			</div>
+        			<div class="center-book-review">
+        				<h4>제목입니다 제목 맞나요?</h4>
+        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
+        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
+        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
+        			</div>
+        			<h4 class="w3-center w3-clear" style="margin: 0"><a href="#">글보기</a></h4>
+        		</li>
+        		
+        		<li>
+        			<div class="w3-left center-book-review-img" style="margin-left: 35px">
+        				<img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" alt="최신 리뷰" class="w3-card" >
+        			</div>
+        			<div class="center-book-review">
+        				<h4>제목입니다 제목 맞나요?</h4>
+        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
+        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
+        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
+        			</div>
+        			<h4 class="w3-center w3-clear" style="margin: 0"><a href="#">글보기</a></h4>
+        		</li>
+        		
+        		<li>
+        			<div class="w3-left center-book-review-img" style="margin-left: 35px">
+        				<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" alt="최신 리뷰" class="w3-card" >
+        			</div>
+        			<div class="center-book-review">
+        				<h4>제목입니다 제목 맞나요?</h4>
+        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
+        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
+        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
+        			</div>
+        			<h4 class="w3-center w3-clear" style="margin: 0"><a href="#">글보기</a></h4>
+        		</li>
+      		</ul>
+    	</div>
   	</div>
   	
     <!------------------------------ 메인 내용 ---------------------------------->
