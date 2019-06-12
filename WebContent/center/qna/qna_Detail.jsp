@@ -22,10 +22,10 @@
 	BoardBean article = (BoardBean) request.getAttribute("article");
 	int nowPage = Integer.parseInt(request.getAttribute("page").toString());
 	MemberBean board_memberBean = (MemberBean) request.getAttribute("memberBean");
-	ArrayList list = (ArrayList) request.getAttribute("commentList");
-	ArrayList<CommentBean> commentList = (ArrayList) list.get(0);
-	ArrayList<MemberBean> commentMember = (ArrayList) list.get(1);
 	MemberBean memberBean = (MemberBean) session.getAttribute("memberBean");
+	ArrayList commentList = (ArrayList) request.getAttribute("commentList");
+	ArrayList<CommentBean> commentBeanList = (ArrayList<CommentBean>)commentList.get(0);
+	ArrayList<MemberBean> commentMemberList = (ArrayList<MemberBean>)commentList.get(1);
 %>
 </head>
 <body class="w3-light-grey">
@@ -126,28 +126,28 @@
 							%>
 							<!-------------------------------- 댓글 -------------------------------------->
 							<%
-								for (int i = 0; i < commentList.size(); i++) {
+								for (int i = 0; i < commentBeanList.size(); i++) {
 							%>
 							<div class="w3-row">
 								<div class="w3-col m2 text-center">
 									<img class="w3-circle"
-										src="../upload/<%=commentMember.get(i).getImage()%>"
+										src="../upload/<%=commentMemberList.get(i).getImage()%>"
 										style="width: 96px; height: 96px">
 								</div>
 								<div class="w3-col m10 w3-container">
 									<h4>
-										<%=commentMember.get(i).getName()%>
-										<span class="w3-opacity w3-medium"><%=commentList.get(i).getReg_date()%>
+										<%=commentMemberList.get(i).getName()%>
+										<span class="w3-opacity w3-medium"><%=commentBeanList.get(i).getReg_date()%>
 											&nbsp;&nbsp;&nbsp;&nbsp; 
 											<%if(memberBean!=null){ %>
-											<%	if (memberBean.getNo()==commentMember.get(i).getNo()){ %>
-											<a href="qnaCommentModifyForm.bo?comment_num=<%=commentList.get(i).getNo()%>&page=<%=nowPage%>">수정</a>
-											<a href="qnaCommentDeletePro.bo?comment_num=<%=commentList.get(i).getNo()%>&page=<%=nowPage%>&board_num=<%=article.getNo() %>" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
+											<%	if (memberBean.getNo()==commentMemberList.get(i).getNo()){ %>
+											<a href="qnaCommentModifyForm.bo?comment_num=<%=commentBeanList.get(i).getNo()%>&page=<%=nowPage%>">수정</a>
+											<a href="qnaCommentDeletePro.bo?comment_num=<%=commentBeanList.get(i).getNo()%>&page=<%=nowPage%>&board_num=<%=article.getNo() %>" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
 											<%	} 
 											  }%>
 										</span>
 									</h4>
-									<p><%=commentList.get(i).getContent()%></p>
+									<p><%=commentBeanList.get(i).getContent()%></p>
 									<br>
 								</div>
 							</div>

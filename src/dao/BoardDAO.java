@@ -189,7 +189,7 @@ public class BoardDAO {
 
 	public int selectListCount() {
 		int listCount = 0;
-		String sql = "select count(*) from board";
+		String sql = "select count(*) from board where board_type = 'qna'";
 		try {
 			pstmt = con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
@@ -218,7 +218,7 @@ public class BoardDAO {
 				j++;
 				System.out.println("j값 : "+j);
 			}
-			
+			sql+=" board_type = 'qna'";
 			pstmt = con.prepareStatement(sql);
 			
 			for(int i=1;i<=searches.length;i++) {
@@ -337,7 +337,7 @@ public class BoardDAO {
 				commentBean.setMember_no(rs.getInt("c.member_no"));
 				commentBean.setNo(rs.getInt("c.no"));
 				commentBean.setReg_date(rs.getDate("c.reg_date"));
-				
+				memberBean = new MemberBean();
 				memberBean.setAddress1(rs.getString("m.address1"));
 				memberBean.setAddress2(rs.getString("m.address2"));
 				memberBean.setBirth(rs.getString("m.birth"));

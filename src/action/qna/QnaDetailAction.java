@@ -9,6 +9,7 @@ import action.Action;
 import svc.BoardDetailService;
 import vo.ActionForward;
 import vo.BoardBean;
+import vo.CommentBean;
 import vo.MemberBean;
 
 public class QnaDetailAction implements Action {
@@ -32,10 +33,12 @@ public class QnaDetailAction implements Action {
 		ArrayList commentList = (ArrayList) beans.get(2);
 		
 		
+		
 		request.setAttribute("page", page);
 		request.setAttribute("article", article);
 		request.setAttribute("memberBean", memberBean);
 		request.setAttribute("commentList", commentList);
+		
 		ActionForward forward = new ActionForward();
 		forward.setPath("/center/qna/qna_Detail.jsp");
 		
