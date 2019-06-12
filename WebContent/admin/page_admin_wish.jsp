@@ -96,7 +96,6 @@ function a(){
       	<td>출판일</td>
       	<td>가격</td>
       	<td>isbn</td>
-      	<td>이미지</td>
       	<td>상태</td>
       	<td>신청자수</td>
       	<td>상세보기</td>
@@ -123,7 +122,6 @@ function a(){
 											<th><%=wishBookJoinBean.getPublish_date()%></th>
 											<th><%=wishBookJoinBean.getPrice()%></th>
 											<th><%=wishBookJoinBean.getIsbn()%></th>
-											<th><img src="<%=wishBookJoinBean.getImage()%>"></th>
 											<th><%=wishBookJoinBean.getStatus()%></th>
 											<th><%=wishBookJoinBean.getCount()%></th>
 					

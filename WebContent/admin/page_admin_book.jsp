@@ -8,7 +8,7 @@
 <head>
 <script type="text/javascript">
 function bookdetail(i){
-	window.open(" bookManageListDetail.bm?no="+i,"상세정보", width="400px", height="600px");
+	window.open(" bookManageListDetail.bm?no="+i,"상세정보", width="150px", height="200px");
  }
 </script>
 <title>W3.CSS Template</title>

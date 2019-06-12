@@ -452,7 +452,7 @@ public class RentalManageDAO {
 		}
 		
 		else if(rmclass.equals("대여일자")) {
-			String sql="SELECT count(*) FROM rental order by r.rent_date desc";
+			String sql="SELECT count(*) FROM rental";
 			try {
 				pstmt=con.prepareStatement(sql);
 				rs=pstmt.executeQuery();
@@ -468,7 +468,7 @@ public class RentalManageDAO {
 		}
 		
 		else if(rmclass.equals("반납일자")) {
-			String sql="SELECT count(*) FROM rental order by r.return_date desc";
+			String sql="SELECT count(*) FROM rental";
 			try {
 				pstmt=con.prepareStatement(sql);
 				rs=pstmt.executeQuery();
@@ -485,7 +485,7 @@ public class RentalManageDAO {
 		}
 		
 		else if(rmclass.equals("대여자")) {
-			String sql="SELECT count(*) FROM rental order by r.member_no desc";
+			String sql="SELECT count(*) FROM rental";
 			try {
 				pstmt=con.prepareStatement(sql);
 				rs=pstmt.executeQuery();
@@ -501,7 +501,7 @@ public class RentalManageDAO {
 		}
 		
 		else if(rmclass.equals("도서명")) {
-			String sql="SELECT count(*) FROM rental order by r.book_no desc";
+			String sql="SELECT count(*) FROM rental";
 			try {
 				pstmt=con.prepareStatement(sql);
 				rs=pstmt.executeQuery();
@@ -518,7 +518,7 @@ public class RentalManageDAO {
 		}
 		
 		else if(rmclass.equals("반납기한")) {
-			String sql="SELECT count(*) FROM rental order by r.due_date asc";
+			String sql="SELECT count(*) FROM rental";
 			try {
 				pstmt=con.prepareStatement(sql);
 				rs=pstmt.executeQuery();

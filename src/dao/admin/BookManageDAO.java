@@ -35,9 +35,10 @@ public class BookManageDAO {
 		
 		
 		if(Class.equals("All")) {
-		String sql="Select * from book LIMIT ?,10";
+		String sql="Select * from book order by reg_date desc LIMIT ?,10";
 		
 	    try {
+			System.out.println("테스트, startrow :"+startRow);
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			rs=pstmt.executeQuery();
@@ -72,7 +73,7 @@ public class BookManageDAO {
 		}
 		
 		else {
-			String sql="Select * from book WHERE rent_code LIKE ? LIMIT ?,10";
+			String sql="Select * from book WHERE rent_code LIKE ? order by reg_date desc LIMIT ?,10";
 			try {
 				pstmt=con.prepareStatement(sql);
 				pstmt.setString(1, Class+"%");
@@ -295,7 +296,7 @@ public class BookManageDAO {
 		int startRow = (page - 1) * 10;
 		
 		
-			String sql="Select * from book WHERE title LIKE ? LIMIT ?,10";
+			String sql="Select * from book WHERE title LIKE ? order by reg_date desc LIMIT ?,10";
 			try {
 				pstmt=con.prepareStatement(sql);
 				pstmt.setString(1, "%"+search+"%");

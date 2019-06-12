@@ -21,40 +21,42 @@
 
 </head>
 <body class="w3-light-grey">
-
+					<%ArrayList wishBookList=(ArrayList)session.getAttribute("wishBookDetailList");
+					  WishBookJoinBean imgBean=(WishBookJoinBean)wishBookList.get(0);
+					%>
+					
+					
      		<div class="container">
      			<h1>희망도서상세정보</h1>
       			<hr>
+      			<table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+      			<tr>      			<td colspan="4"><h2><%=imgBean.getTitle()%></h2></td> </tr>
+      			<tr> <td colspan="4"><div style="text-align: center;"><img src="<%=imgBean.getImage() %>"></div></td></tr>
+      			<tr> <td>저자</td> <td><%=imgBean.getAuthor() %></td> <td>출판사</td> <td><%=imgBean.getPublisher() %></td></tr>
+      			<tr> <td>출판일</td> <td><%=imgBean.getPublish_date() %></td> <td>가격</td> <td><%=imgBean.getPrice() %></td></tr>
+      			<tr> <td>ISBN</td> <td><%=imgBean.getIsbn() %></td> <td>상태</td> <td><%=imgBean.getStatus() %></td></tr>
+      			<tr> </tr>
+      			</table>
+      			
+      			
+
+      			<br><br>
 				<table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
 				<tr><td>번호</td>
-					<td>도서명</td>
-					<td>저자</td>
-					<td>출판사</td>
-					<td>출판일</td>
-					<td>가격</td>
-					<td>ISBN</td>
-					<td>이미지</td>
-					<td>상태</td>
-					<td>등록일</td>
 					<td>신청자</td>
+					<td>등록일</td>
+
 					</tr>
-					<%ArrayList wishBookList=(ArrayList)session.getAttribute("wishBookDetailList");%>
+
   					<%for(int i=0; i<wishBookList.size(); i++){
   						WishBookJoinBean wishBookJoinBean=new WishBookJoinBean();
   						wishBookJoinBean=(WishBookJoinBean)wishBookList.get(i);
   						%>
   						<tr>
-											<th><%=wishBookJoinBean.getNo()%></th>
-											<th><%=wishBookJoinBean.getTitle()%></th>
-											<th><%=wishBookJoinBean.getAuthor()%></th>
-											<th><%=wishBookJoinBean.getPublisher()%></th>
-											<th><%=wishBookJoinBean.getPublish_date()%></th>
-											<th><%=wishBookJoinBean.getPrice()%></th>
-											<th><%=wishBookJoinBean.getIsbn()%></th>
-											<td><div style="text-align: center;"><img src="<%=wishBookJoinBean.getImage() %>"></div></td>
-											<th><%=wishBookJoinBean.getStatus()%></th>
-											<th><%=wishBookJoinBean.getReg_date()%></th>
-											<th><%=wishBookJoinBean.getEmail()%></th>
+											<td><%=wishBookJoinBean.getNo()%></td>
+											<td><%=wishBookJoinBean.getEmail()%></td>
+											<td><%=wishBookJoinBean.getReg_date()%></td>
+								
 										</tr>
 										<%
 										}

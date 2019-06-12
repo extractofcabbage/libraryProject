@@ -39,7 +39,7 @@ public class MemberManageListAction implements Action {
 		svc.admin.MemberManageListService memberManageListService=new svc.admin.MemberManageListService();
 		
 		int listCount=memberManageListService.getListCount(Class);
-		ArrayList memeberList=memberManageListService.getMemberList_Service(page, limit,Class);
+		ArrayList memeberList=memberManageListService.getMemberList_Service(page, limit, Class);
 		
 		int maxPage = (int)((double)listCount / limit + 0.95); // 총 페이지 수 계산(올림처리를 위해 + 0.95)
 		int startPage = (((int)((double)page / 10 + 0.9)) - 1) * 10 + 1; // 현재 페이지에 표시할 시작 페이지) 번호

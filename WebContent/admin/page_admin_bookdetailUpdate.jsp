@@ -5,6 +5,14 @@
 <html>
 <head>
 <title>W3.CSS Template</title>
+<script type="text/javascript">
+function del(bookno){
+	var str=confirm('삭제하시겠습니까');
+	if(str==true){
+		location.href="bookManagedetailDelete.bm?no="+bookno;
+	}
+}
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -72,8 +80,8 @@ bookListVo=(BookList)request.getAttribute("BookManageListDetail");
 				
      			<div class="clearfix w3-center">
        				        <input type="submit" value="완료" class="join-button admin-book-btn">
-        					<input type="reset" value="취소" class="join-button admin-book-btn w3-orange">
-       						<input type="button" value="삭제" class="join-button admin-book-btn w3-red" onclick="location.href='bookManagedetailDelete.bm?no=<%=bookListVo.getNo()%>'">
+        					<input type="reset" value="리셋" class="join-button admin-book-btn w3-orange">
+       						<input type="button" value="삭제" class="join-button admin-book-btn w3-red" onclick="del(<%=bookListVo.getNo()%>)">
      		 	</div>
      		 	</form>
 			</div>

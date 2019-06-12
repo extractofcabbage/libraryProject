@@ -33,8 +33,9 @@ public class MemberManageDAO {
 		int startRow = (page - 1) * 10;
 		ArrayList memberList=new ArrayList();
 		if(str.equals("전체")) {
-			String sql="select * from member LIMIT ?,10";
+			String sql="select * from member order by reg_date desc LIMIT ?,10";
 			try {
+				System.out.println("테스트, startrow :"+startRow);
 				pstmt=con.prepareStatement(sql);
 				pstmt.setInt(1, startRow);
 				rs=pstmt.executeQuery();
@@ -66,8 +67,7 @@ public class MemberManageDAO {
 		}
 		
 		else {
-			System.out.println("클래스타입"+str);
-		String sql="select * from member where type=? LIMIT ?,10";
+		String sql="select * from member where type=? order by reg_date desc LIMIT ?,10";
 		try {
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(2, startRow);
@@ -126,19 +126,39 @@ public class MemberManageDAO {
 
 	public int getListCount_DAO(String Class) {
 		int listCount=0;
-		String sql="SELECT count(*) FROM member where type=?";
-		try {
-			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, Class);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				listCount=rs.getInt(1);
+		
+		if(Class.equals("전체")) {
+			String sql="SELECT count(*) FROM member";
+			try {
+				pstmt=con.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					listCount=rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
+		
+		}
+		
+		else {
+			String sql="SELECT count(*) FROM member where type=?";
+			try {
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, Class);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					listCount=rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
 		}
 		
 		return listCount;

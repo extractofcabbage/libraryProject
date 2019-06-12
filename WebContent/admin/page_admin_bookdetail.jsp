@@ -4,6 +4,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+function up(bookno){
+	var str=confirm('수정하시겠습니까?');
+	if(str==true){
+		location.href="bookManagedetailUpdate.bm?no="+bookno;
+	}
+}
+
+function del(bookno){
+	var str=confirm('삭제하시겠습니까');
+	if(str==true){
+		location.href="bookManagedetailDelete.bm?no="+bookno;
+	}
+}
+</script>
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,9 +55,9 @@ bookListVo=(BookList)request.getAttribute("BookManageListDetail");
 					<tr><td>ISBN</td> <td><%=bookListVo.getIsbn() %></td> </tr>
 					<tr><td>이미지</td> <td><div style="text-align: center;"><img src="<%=bookListVo.getImage() %>" style="width:200px"></div></td></tr>
 					<tr><td>상태</td> <td><%=bookListVo.getStatus() %></td>     </tr>
-					<tr><td>키워드1</td> <td><%=bookListVo.getKeyword1() %></td>    </tr>
-					<tr><td>키워드2</td> <td><%=bookListVo.getKeyword2() %></td>   </tr>
-					<tr><td>키워드3</td>  <td><%=bookListVo.getKeyword3() %></td></tr>
+					<tr><td>키워드1</td>  <%if(bookListVo.getKeyword1()==null){%><td></td> <%} else{ %><td><%=bookListVo.getKeyword1() %></td>  <%} %>   </tr>
+					<tr><td>키워드2</td> <%if(bookListVo.getKeyword2()==null){%><td></td> <%} else { %><td><%=bookListVo.getKeyword2() %></td>   <%} %></tr>
+					<tr><td>키워드3</td>  <%if(bookListVo.getKeyword3()==null){%><td></td> <%} else{ %><td><%=bookListVo.getKeyword3() %></td>  <%} %></tr>
 					<tr><td>카테고리</td> <td><%=bookListVo.getCategory() %></td>     </tr>
 					<tr><td>대출코드</td> <td><%=bookListVo.getRent_code() %></td>     </tr>
 					<tr><td>바코드</td> <td><%=bookListVo.getBar_code() %></td> </tr>
@@ -51,9 +66,8 @@ bookListVo=(BookList)request.getAttribute("BookManageListDetail");
 				
      			<div class="clearfix w3-center">
 <!--        				        <input type="button" value="수정" class="join-button admin-book-btn" onclick="location.href='bookManagedetailUpdate.bm'"> -->
-       				        <input type="button" value="수정" class="join-button admin-book-btn" onclick="location.href='bookManagedetailUpdate.bm?no=<%=bookListVo.getNo() %>'">
-        					<input type="reset" value="취소" class="join-button admin-book-btn w3-orange">
-       						<input type="button" value="삭제" class="join-button admin-book-btn w3-red" onclick="location.href='bookManagedetailDelete.bm?no=<%=bookListVo.getNo()%>'">
+       				        <input type="button" value="수정" class="join-button admin-book-btn" onclick="up(<%=bookListVo.getNo() %>)">
+       						<input type="button" value="삭제" class="join-button admin-book-btn w3-red" onclick="del(<%=bookListVo.getNo() %>)">
      		 	</div>
 			</div>
 
