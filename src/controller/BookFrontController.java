@@ -21,7 +21,7 @@ import action.book.BookListAction;
 import action.book.BookContentAction;
 import action.book.BookRentProAction;
 import vo.ActionForward;
-import vo.admin.MemberBean;
+import vo.MemberBean;
 
 @WebServlet("*.do") // 서블릿 주소의 .sh 매핑
 public class BookFrontController extends HttpServlet {

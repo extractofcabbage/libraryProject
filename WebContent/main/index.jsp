@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,7 @@
 <!------------------------ append js ------------------------------>
 
 <script>
-    // You can also use "$(window).load(function() {"
+    // You can also use "$(window).load(function() "
     $(function () {
 
       // Slideshow 1
@@ -44,9 +45,19 @@
         maxwidth: 800,
         namespace: "centered-btns"
       });
-      
-    });
- </script>
+    });   
+    
+    function mainSearch() {
+    	var searchWord = $("#searchWord").val();
+    	
+		if(searchWord == "") {
+			alert("검색어를 입력해주세요.");
+		} else {
+			location.href="bookList.do?searchType=title&searchWord=" + searchWord;
+		}
+	}    
+    
+</script>
 <%
 //자체테스트용 아이디설정
 // 	String email = "like2hyun@naver.com";
@@ -77,7 +88,7 @@
     	<img src="${pageContext.request.contextPath}/images/main/library.jpg" alt="mainimg" class="main-img w3-left w3-card">
     	<div class="top-left-text"><span style="font-size: 20px;">짱구의 원픽...</span><br>부산 아이티윌 도서관<br>빠른 검색은 요기요 <i class="fa fa-hand-o-down"></i></div>
  		<div class="bottom-left-search">
- 			<input type="text" name="search" placeholder="검색어를 입력해주세요."><button><i class="fa fa-search"></i></button>
+ 			<input type="text" id="searchWord" placeholder="검색어를 입력해주세요."><button onclick="mainSearch()"><i class="fa fa-search"></i></button>
  		</div>
   		<div class="bottom-right-text"><b>이것이 부산<br>아이티윌 도서관!</b></div>
     		<img src="${pageContext.request.contextPath}/images/main/poongseong.png" class="bottom-right-img">
@@ -94,9 +105,11 @@
   		<h3 class="w3-center"  style="margin: 10px 0 0 0"><b>베스트 대여</b></h3>
     	<div class="rslides_container">
       		<ul class="rslides" id="slider1">
-        		<li><img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" alt="베스트 대여" class="w3-card"><h4 class="w3-center" style="margin: 0">1위</h4></li>
-        		<li><img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" alt="베스트 대여" class="w3-card"><h4 class="w3-center" style="margin: 0">2위</h4></li>
-        		<li><img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" alt="베스트 대여" class="w3-card"><h4 class="w3-center" style="margin: 0">3위</h4></li>
+      			<c:forEach var="book" items="${bestBookList}" varStatus="status">
+        			<li><img src="${book.image}" alt="베스트 대여" class="w3-card">
+        				  <h4 class="w3-center" style="margin: 0">${status.count }위(${book.rentCount}회)</h4>
+        			</li>
+        		</c:forEach>
       		</ul>
     	</div>
   	</div>
