@@ -117,7 +117,7 @@
 											<td><%=memberBean.getGender()%></td>
 											<td><%=memberBean.getBirth()%></td>
 											<td><%=memberBean.getPhone()%></td>
-											<td><%=memberBean.getImage()%></td>
+<%-- 											<td><%=memberBean.getImage()%></td> --%>
 											<td><%=memberBean.getAddress1()%></td>
 											<td><%=memberBean.getAddress2()%></td>
 											<td><%=memberBean.getPostcode()%></td>

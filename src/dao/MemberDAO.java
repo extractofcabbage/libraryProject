@@ -69,7 +69,7 @@ public class MemberDAO {
 	}
 	public int insertMember(MemberBean memberBean) {
 		int insertCount=0;
-		
+		String standard_imgaddress="http://blogfiles.naver.net/MjAxODEwMTJfMTI5/MDAxNTM5MjczODkzNDQ2.BtzkPkx7yq7CEbX2o0B4drmGYNv163YSa0hEJyFgrSYg.uD_iixqh1YxgKuLSgskCewOnEV-7JZVaiFZSBHcVG70g.PNG.box182/%B9%AB%C1%A6671.png";
 		try {
 			
 			String sql = "insert into member values(null,?,?,?,?,?,?,?,?,?,?,?,now())";
@@ -82,7 +82,13 @@ public class MemberDAO {
 			pstmt.setString(4, memberBean.getGender());
 			pstmt.setString(5, memberBean.getBirth());
 			pstmt.setString(6, memberBean.getPhone());
-			pstmt.setString(7, memberBean.getImage());
+			if(memberBean.getImage()==null) {
+				pstmt.setString(7, standard_imgaddress);
+			}
+			else {
+				pstmt.setString(7, memberBean.getImage());
+			}
+
 			pstmt.setString(8, memberBean.getAddress1());
 			pstmt.setString(9, memberBean.getAddress2());
 			pstmt.setInt(10, memberBean.getPostcode());

@@ -124,6 +124,10 @@
     		<div class="container">
      			<h1>회원가입</h1>
       			<hr>
+      			<span>프로필</span><br>
+      			<img id="imgadsrc" style="width:60px; height: 60px; margin-top: 8px;">
+      			<input type="text" id="imgad" name="imgad">
+      			
       			<input type="email" placeholder="이메일" name="email" id="email" required class="join-input"  style="width:70%">
       			<input type="button" value="중복검사" onclick="emailCheck()" class="join-button" style="width:87px; height: 48px;"><br>
       			<span>이메일 형식으로 입력해주세요.</span>
@@ -135,13 +139,14 @@
       			<span>비밀번호를 다시 한번 입력해주세요.</span><br>
       			<span id="same"></span>
       			
-      			<input type="text" placeholder="이름" name="name" required class="join-input">
+      			<input type="text" placeholder="이름" name="name" id="name" required class="join-input">
       			<span>이름을 입력해 주세요</span><br>
+      			<span>카카오 연동시 닉네임이 이름이 아닌경우 실명으로 재입력해주세요</span><br>
       			
       			
       			<input type="number" placeholder="주민번호 앞자리 " name="birth"  required class="join-input" style="width: 40%" size="6" maxlength="6">
 				<span class="w3-xlarge"><b>-</b></span>
-     			<input type="number" name="Gender" required id="gender" class="join-input" maxlength="1" style="width: 10%; text-align: center;" >
+     			<input type="text" name="Gender" required id="gender" class="join-input" maxlength="1" style="width: 10%; text-align: center;" >
 				<span class="w3-xlarge"><b>●●●●●●</b></span>
      			<br>
 				<span>주민번호 앞자리 6자리와 뒷자리 맨앞의 한자리를 입력해주세요.</span>     	
@@ -159,6 +164,10 @@
       			<input type="text" placeholder="상세주소" name="address2" class="join-input">
       			<span>상세주소를 입력해주세요.</span><br>
       			<br>
+      			
+      			
+      			
+      			
       			
       			<section>
 		<a id="kakao-login-btn"></a>
@@ -184,14 +193,19 @@
 							console.log(JSON.stringify(res.kakao_account.birthday));
 							console.log(JSON.stringify(res.kakao_account.gender));
 							
+							
 							/* alert(res.properties.thumbnail_image); */
 							document.getElementById('email').value = res.kakao_account.email;
+							document.getElementById('name').value= res.properties.nickname;
+							document.getElementById('imgad').value= res.properties.profile_image;
+							document.getElementById('imgadsrc').src=res.properties.profile_image;
+							
 							//document.getElementById('image').value = res.properties.thumbnail_image;
-							if (res.kakao_account.gender == 'male') {
-								document.getElementsById('gender')[0].value = 1;
+							if (res.kakao_account.gender=='male') {
+								document.getElementById('gender').value ="1";
 						        player[i].checked = false; 
 							} else {
-								document.getElementsById('gender')[1].value = 2;
+								document.getElementById('gender').value ="2";
 							}
 							
 						},
