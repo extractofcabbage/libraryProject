@@ -27,7 +27,7 @@ function classify(str){
 }
 
 function detail(title,status){
-	window.open("wishBookManageListDetail.wm?title="+title+"&status="+status,"상세정보", width="400px", height="600px");
+	window.open("wishBookManageListDetail.wm?title="+title+"&status="+status,"상세정보", "width=1000, height=800");
 }
 
 function a(){
