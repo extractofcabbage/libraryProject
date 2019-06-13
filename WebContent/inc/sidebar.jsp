@@ -80,13 +80,20 @@
     		<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  Q&A</a>
     		<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  FAQ</a>
     	</div>		
+    	
+    	<%if(memberBean!=null&&memberBean.getType().equals("관리자")){%>
     	<a href="#" class="w3-bar-item w3-button w3-padding main-menu"><i class="fas fa-wrench"></i>  관리페이지</a>
     	<div class="sub-menu" style="margin-left: 20px">
     		<a href="bookManageList.bm" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  도서관리</a>
     		<a href="memberManageList.mm" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  회원관리</a>
     		<a href="rentalManageList.rm" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  대출관리</a>
     		<a href="wishBookManageList.wm" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  희망도서관리</a>
-    	</div>		
+    	</div>
+    	<%	
+    	 }
+    	%>
+    	
+    		
   </div>
   <hr>
   <!----------------------------------------------- 메뉴 --------------------------------------------------------------------->
