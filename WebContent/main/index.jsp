@@ -90,7 +90,7 @@
   	 <!-- center -->  
   	 
   	<!-- 베스트 대여 -->
-  	<div class="w3-card w3-sand center-book-space w3-left w3-padding" >
+  	<div class="w3-card w3-pale-red center-book-space w3-left w3-padding" >
   		<h3 class="w3-center"  style="margin: 10px 0 0 0"><b>베스트 대여</b></h3>
     	<div class="rslides_container">
       		<ul class="rslides" id="slider1">

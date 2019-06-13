@@ -27,19 +27,19 @@
       			<hr>
       			<form action="wishBookManageListUpdatePro.wm" method="post">
 				<table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-				<tr>
-											<th>도서명</th>
-											<th>저자</th>
-											<th>출판사</th>
-											<th>출판일</th>
-											<th>가격</th>
-											<th>ISBN</th>
-											<th>이미지</th>
-											<th>상태</th>
-											<th>키워드1</th>
-											<th>키워드2</th>
-											<th>키워드3</th>
-											<th>카테고리</th>
+				<tr class="w3-black w3-large" style="font-weight: bold;">
+											<td>도서명</td>
+											<td>저자</td>
+											<td>출판사</td>
+											<td>출판일</td>
+											<td>가격</td>
+											<td>ISBN</td>
+											<td>이미지</td>
+											<td>상태</td>
+											<td>키워드1</td>
+											<td>키워드2</td>
+											<td>키워드3</td>
+											<td>카테고리</td>
 
 										</tr>
 						<%ArrayList wishBookUpdateList=(ArrayList)session.getAttribute("wishBookUpdateList");%>
@@ -52,18 +52,18 @@
   						%>
   						
   							<tr>
-											<th><%=wishBookBean.getTitle()%></th>
-											<th><%=wishBookBean.getAuthor()%></th>
-											<th><%=wishBookBean.getPublisher()%></th>
-											<th><%=wishBookBean.getPublish_date()%></th>
-											<th><%=wishBookBean.getPrice()%></th>
-											<th><%=wishBookBean.getIsbn()%></th>
-											<th><div style="text-align: center;"><img src="<%=wishBookBean.getImage()%>"></div></th>
-											<th><input type="text" name="<%=wishBookBean.getNo()%>status" value="대출가능" readonly="readonly"></th>                                
-											<th><input type="text" name="<%=wishBookBean.getNo()%>keyword1"></th>
-											<th><input type="text" name="<%=wishBookBean.getNo()%>keyword2"></th>
-											<th><input type="text" name="<%=wishBookBean.getNo()%>keyword3"></th>
-											<th><select name="<%=wishBookBean.getNo()%>category">
+											<td><%=wishBookBean.getTitle()%></td>
+											<td><%=wishBookBean.getAuthor()%></td>
+											<td><%=wishBookBean.getPublisher()%></td>
+											<td><%=wishBookBean.getPublish_date()%></td>
+											<td><%=wishBookBean.getPrice()%></td>
+											<td><%=wishBookBean.getIsbn()%></td>
+											<td><div style="text-align: center;"><img src="<%=wishBookBean.getImage()%>"></div></td>
+											<td><input type="text" name="<%=wishBookBean.getNo()%>status" value="대출가능" readonly="readonly"></td>                                
+											<td><input type="text" name="<%=wishBookBean.getNo()%>keyword1"></td>
+											<td><input type="text" name="<%=wishBookBean.getNo()%>keyword2"></td>
+											<td><input type="text" name="<%=wishBookBean.getNo()%>keyword3"></td>
+											<td><select name="<%=wishBookBean.getNo()%>category">
 														<option value="A">프로그래밍</option>
 														<option  value="B">네트워크</option>
 														<option  value="C">서버</option>
@@ -72,7 +72,7 @@
 														<option  value="F">IT&자격증</option>
 														<option  value="G">자기계발</option>
 														<option  value="H">기타</option>
-											       </select></th>
+											       </select></td>
 										</tr>
 										<%
 										}

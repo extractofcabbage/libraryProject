@@ -4,10 +4,12 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import svc.WishBookService;
 import vo.ActionForward;
 import vo.WishBookBean;
+import vo.admin.MemberBean;
 
 public class WishBookAction implements Action {
 
@@ -48,7 +50,7 @@ public class WishBookAction implements Action {
 		}else {
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("wishBookSubscriptionForm.do");
+			forward.setPath("bookWish.do");
 		}
 		return forward;
 	}

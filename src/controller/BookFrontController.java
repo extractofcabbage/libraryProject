@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.WishBookAction;
@@ -19,6 +21,7 @@ import action.book.BookListAction;
 import action.book.BookContentAction;
 import action.book.BookRentProAction;
 import vo.ActionForward;
+import vo.admin.MemberBean;
 
 @WebServlet("*.do") // 서블릿 주소의 .sh 매핑
 public class BookFrontController extends HttpServlet {
@@ -99,17 +102,24 @@ public class BookFrontController extends HttpServlet {
 			}
 		}
 		// -----------WishBook 시작-----------------------------
-		else if (command.equals("/wishBookSubscriptionForm.do")) {
-			forward = new ActionForward();
-			forward.setPath("/book/wish/wish_book_subscription.jsp");
-		} 
 		else if (command.equals("/wishBookSearchForm.do")) {
 			forward = new ActionForward();
 			forward.setPath("/book/wish/book_wish_search.jsp");
 		}
 		else if (command.equals("/bookWish.do")) {
-			forward = new ActionForward();
-			forward.setPath("/book/wish/book_wish.jsp");
+			// 로그인 체크
+			MemberBean memberBean = (MemberBean)request.getSession().getAttribute("memberBean");
+			if(memberBean == null) {
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('로그인 후 이용해주세요.')");
+				out.println("history.back()");
+				out.println("</script>");
+			} else {
+				forward = new ActionForward();
+				forward.setPath("/book/wish/book_wish.jsp");
+			}
 		} 
 		else if (command.equals("/wishBookSubscriptionPro.do")) {
 			action = new WishBookAction();

@@ -115,29 +115,26 @@ function a(){
   						
  										<tr>
 <%-- 											<th><input type="checkbox" value="<%=wishBookJoinBean.getNo()%>" name="wishcheck"></th> --%>
-													<th><input <%if(wishBookJoinBean.getStatus().equals("승인") || wishBookJoinBean.getStatus().equals("거절")){%> type="hidden"<%} else{%> class="w3-check" type="checkbox" value="<%=wishBookJoinBean.getTitle()%>" name="wishcheck" <%}%>></th>
-											<th><%=wishBookJoinBean.getTitle()%></th>
-											<th><%=wishBookJoinBean.getAuthor()%></th>
-											<th><%=wishBookJoinBean.getPublisher()%></th>
-											<th><%=wishBookJoinBean.getPublish_date()%></th>
-											<th><%=wishBookJoinBean.getPrice()%></th>
-											<th><%=wishBookJoinBean.getIsbn()%></th>
-											<th><%=wishBookJoinBean.getStatus()%></th>
-											<th><%=wishBookJoinBean.getCount()%></th>
+													<td><input <%if(wishBookJoinBean.getStatus().equals("승인") || wishBookJoinBean.getStatus().equals("거절")){%> type="hidden"<%} else{%> class="w3-check" type="checkbox" value="<%=wishBookJoinBean.getTitle()%>" name="wishcheck" <%}%>></td>
+											<td><%=wishBookJoinBean.getTitle()%></td>
+											<td><%=wishBookJoinBean.getAuthor()%></td>
+											<td><%=wishBookJoinBean.getPublisher()%></td>
+											<td><%=wishBookJoinBean.getPublish_date()%></td>
+											<td><%=wishBookJoinBean.getPrice()%></td>
+											<td><%=wishBookJoinBean.getIsbn()%></td>
+											<td><%=wishBookJoinBean.getStatus()%></td>
+											<td><%=wishBookJoinBean.getCount()%></td>
 					
 <%-- 											<th><a href=" " onclick="Detail(<%=wishBookJoinBean.getTitle()%>)">상세보기</a></th> --%>
-											<th><input type="button" value="상세보기" onclick="detail('<%=wishBookJoinBean.getTitle()%>','<%=wishBookJoinBean.getStatus()%>')">
-											
-											</th>
+											<td><input type="button" value="상세보기" onclick="detail('<%=wishBookJoinBean.getTitle()%>','<%=wishBookJoinBean.getStatus()%>')">
+											</td>
 										</tr>
 										<%
 										}
 										%>					
     </table><br>
-    			<input type="button" value="체크항목추가" class="w3-button w3-dark-grey w3-right" onclick="update()">
-				<input type="button" value="체크항목거절" class="w3-button w3-dark-grey w3-right" onclick="refuse()">
-<!--     <button class="w3-button w3-dark-grey w3-right">체크항목추가 <i class="fa fa-arrow-right" onclick="update()"></i></button> -->
-<!--     <button class="w3-button w3-dark-grey w3-right">체크항목거절 <i class="fa fa-arrow-right" onclick="refuse()"></i></button> -->
+    			<input type="button" value="체크항목추가" class="w3-button w3-black w3-right" onclick="update()" style="margin-left: 5px">
+				<input type="button" value="체크항목거절" class="w3-button w3-black w3-right" onclick="refuse()">
     </form>
     
       	<div class="w3-center w3-padding-32 w3-xlarge">
@@ -203,46 +200,10 @@ if(request.getParameter("booksearch")==null){
 	%>
     
   </div>
-  	</div>  	
+  	</div>
+  </div>   	
   <!------------------------------ 메인 내용 ---------------------------------->
-  
-<!------------------------------------------  팝업  ------------------------------------------>
-     <div id="bookpop" class="modal">
-  		<span onclick="document.getElementById('bookpop').style.display='none'" class="close" title="창닫기">&times;</span>
- 		<form class="modal-content animate" action="#">
-    		<div class="container">
-     			<h1>책수정</h1>
-      			<hr>
-				<table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-					<tr><td>번호</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>도서명</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>저자</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>출판사</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>출판일</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>가격</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>ISBN</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>이미지</td><td><img src="./sample-img/hahaha.gif"></td></tr>
-					<tr><td>상태</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>키워드1</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>키워드2</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>키워드3</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>카테고리</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>대출코드</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>바코드</td><td><input type="text" style="width: 90%"></td></tr>
-					<tr><td>등록일</td><td><input type="text" style="width: 90%"></td></tr>
-				</table>
-      			
-				
-     			<div class="clearfix w3-center">
-       		 		<button type="submit" class="join-button admin-book-btn w3-orange">취소</button>
-       		 		<button type="submit" class="join-button admin-book-btn w3-red">삭제</button>
-       				<button type="button" onclick="document.getElementById('bookpop').style.display='none'" class="join-button admin-book-btn">수정</button>
-     		 	</div>
-   		 	</div>
-  		</form>
-	 </div>
-<!------------------------------------------   팝업  ------------------------------------------>   
-  
+    
   	<!--------------- footer ---------------->
 	<jsp:include page="../inc/footer.jsp" />
 	<!--------------- footer ---------------->

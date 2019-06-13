@@ -110,19 +110,19 @@
       
       
       										<tr class="memberManage_table_tr">
-											<th><input type="checkbox" class="w3-check" value="<%=memberBean.getNo()%>" name="check"></th>
-									        <th><%=memberBean.getNo()%></th>
-											<th><%=memberBean.getEmail()%></th>
-											<th><%=memberBean.getName()%></th>
-											<th><%=memberBean.getGender()%></th>
-											<th><%=memberBean.getBirth()%></th>
-											<th><%=memberBean.getPhone()%></th>
-											<th><%=memberBean.getImage()%></th>
-											<th><%=memberBean.getAddress1()%></th>
-											<th><%=memberBean.getAddress2()%></th>
-											<th><%=memberBean.getPostcode()%></th>
-											<th><%=memberBean.getType()%></th>
-											<th><%=memberBean.getReg_date()%></th>
+											<td><input type="checkbox" class="w3-check" value="<%=memberBean.getNo()%>" name="check"></td>
+									        <td><%=memberBean.getNo()%></td>
+											<td><%=memberBean.getEmail()%></td>
+											<td><%=memberBean.getName()%></td>
+											<td><%=memberBean.getGender()%></td>
+											<td><%=memberBean.getBirth()%></td>
+											<td><%=memberBean.getPhone()%></td>
+											<td><%=memberBean.getImage()%></td>
+											<td><%=memberBean.getAddress1()%></td>
+											<td><%=memberBean.getAddress2()%></td>
+											<td><%=memberBean.getPostcode()%></td>
+											<td><%=memberBean.getType()%></td>
+											<td><%=memberBean.getReg_date()%></td>
 										</tr>
 										<%
 										}
@@ -131,6 +131,7 @@
 
     </table><br>
     
+										<input type="submit" value="변경" class="w3-right w3-button w3-black">
     										<select name="update_type" class="w3-right" style="height: 39px;margin-right: 5px;font-size: 20px;">
 											<option value="전체">전체</option>
 											<option value="미승인">미승인</option>
@@ -139,7 +140,7 @@
 											<option value="중도탈락">중도탈락</option>
 											<option value="강사">강사</option>
 											<option value="관리자">관리자</option>
-										</select> <input type="submit" value="변경">
+										</select> 
 										
 	</form>
 		  	<div class="w3-center w3-padding-32 w3-xlarge">
@@ -204,6 +205,7 @@ if(request.getParameter("booksearch")==null){
 	}
 	%>
 	</div>
+  </div>
   </div>
     <!------------------------------ 메인 내용 ---------------------------------->
   
