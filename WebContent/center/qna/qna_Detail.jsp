@@ -18,6 +18,32 @@
 <!------------------------ append css ------------------------------>
 <link rel="stylesheet" href="./css/book_list.css">
 <!------------------------ append css ------------------------------>
+<script type="text/javascript">
+//댓글작성시 엔터키 가능
+function comment(){
+	var str = document.getElementById("textarea").value;
+	str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+// 	str = str.replace('\r\n', '<br>');
+	document.getElementById("result").value = str;
+}
+
+//댓글창 보이게/숨기게
+function SirenFunction(idMyDiv){
+	
+	var str = document.getElementById("modify_textarea_"+idMyDiv).value;
+//     window.alert(str)
+// 	str = str.replace("<br>","\r\n");
+// 	str = str.replace("/&lt;<br>/g","\r\n");
+	str = str.split("<br>").join("\r\n")
+// 	str = str.replace("/(?:\<br\>)/gm","\r\n");
+// 	str = str.replace("<br>","현욱");
+// 	window.alert(str)
+	document.getElementById("modify_result_"+idMyDiv).value = str;
+	var objDiv = document.getElementById('SirenDiv'+idMyDiv);
+	if(objDiv.style.display=="block"){ objDiv.style.display = "none"; }
+	else{ objDiv.style.display = "block"; }
+}
+</script>
 <%
 	BoardBean article = (BoardBean) request.getAttribute("article");
 	int nowPage = Integer.parseInt(request.getAttribute("page").toString());
@@ -91,11 +117,9 @@
 
 							<p>
 								<a href="qnaList.bo" class="w3-right" style="margin-left: 10px">목록</a>
-								<a
-									href="qnaDeleteForm.bo?board_num=<%=article.getNo()%>&page=<%=nowPage%>"
-									class="w3-right" style="margin-left: 10px">삭제</a> <a
-									href="qnaModifyForm.bo?board_num=<%=article.getNo()%>&page=<%=nowPage%>"
-									class="w3-right">수정</a>
+								<a href="qnaDeleteForm.bo?board_num=<%=article.getNo()%>&page=<%=nowPage%>" class="w3-right" style="margin-left: 10px">삭제</a> 
+								<a href="qnaModifyForm.bo?board_num=<%=article.getNo()%>&page=<%=nowPage%>" class="w3-right"
+									onclick="SirenFunction('SirenDiv<%=article.getNo()%>'); return false;">수정</a>
 							</p>
 						</div>
 						<%
@@ -108,21 +132,20 @@
 							<form action="qnaCommentPro.bo" method="post">
 								<input type="hidden" name="page" value="<%=nowPage%>"> <input
 									type="hidden" name="board_num" value="<%=article.getNo()%>">
-								<textarea name="comment_content"
-									class="w3-input w3-border book-comment-input"
-									placeholder="내용을 입력해주세요."></textarea>
-								<span><button type="submit"
-										class="w3-button w3-padding-large w3-white w3-border w3-large"
-										style="vertical-align: top; height: 79px">
+								<textarea id="textarea" class="w3-input w3-border book-comment-input" placeholder="내용을 입력해주세요."></textarea>
+								<textarea hidden="hidden" id="result" name="comment_content"></textarea>
+								<span>
+									<button type="submit" class="w3-button w3-padding-large w3-white w3-border w3-large" style="vertical-align: top; height: 79px" onclick="comment()">
 										<b>등록</b>
-									</button></span>
+									</button>
+								</span>
 							</form>
 							<p>
 								<span class="w3-padding-small w3-xlarge"><b>답변 </b></span>
 							</p>
 							<%
 								}
-								}
+							}
 							%>
 							<!-------------------------------- 댓글 -------------------------------------->
 							<%
@@ -138,16 +161,33 @@
 									<h4>
 										<%=commentMemberList.get(i).getName()%>
 										<span class="w3-opacity w3-medium"><%=commentBeanList.get(i).getReg_date()%>
-											&nbsp;&nbsp;&nbsp;&nbsp; 
+											&nbsp;&nbsp;&nbsp;&nbsp;
 											<%if(memberBean!=null){ %>
 											<%	if (memberBean.getNo()==commentMemberList.get(i).getNo()){ %>
-											<a href="qnaCommentModifyForm.bo?comment_num=<%=commentBeanList.get(i).getNo()%>&page=<%=nowPage%>">수정</a>
+<%-- 											<a href="qnaCommentModifyForm.bo?comment_num=<%=commentBeanList.get(i).getNo()%>&page=<%=nowPage%>">수정</a> --%>
+<%-- 											<a href="#" onclick="SirenFunction('SirenDiv<%=commentBeanList.get(i).getNo()%>'); return false;" class="blind_view">수정</a> --%>
+											<a href="#" onclick="SirenFunction('<%=commentBeanList.get(i).getNo()%>'); return false;" class="blind_view">수정</a>
 											<a href="qnaCommentDeletePro.bo?comment_num=<%=commentBeanList.get(i).getNo()%>&page=<%=nowPage%>&board_num=<%=article.getNo() %>" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
+											
+											
+											
 											<%	} 
 											  }%>
 										</span>
 									</h4>
 									<p><%=commentBeanList.get(i).getContent()%></p>
+									<div style="display: none;" id="SirenDiv<%=commentBeanList.get(i).getNo()%>">
+										<form action="qnaCommentModifyPro.bo" method="post">
+											<textarea name = "modifyComment" id="modify_result_<%=commentBeanList.get(i).getNo()%>" class="w3-input w3-border book-comment-input" placeholder="내용을 입력해주세요."></textarea>
+											<input type="hidden" name="comment_num" value="<%=commentBeanList.get(i).getNo()%>"> 
+											<input type="hidden" name="board_num" value="<%=article.getNo()%>">
+											<br>
+											
+											<textarea id="modify_textarea_<%=commentBeanList.get(i).getNo()%>" hidden="hidden"><%=commentBeanList.get(i).getContent()%></textarea>
+											<input type="submit" class="reply" value="수정">
+											<input type="button" onclick="SirenFunction('<%=commentBeanList.get(i).getNo()%>'); return false;" value="취소">
+										</form>
+									</div>
 									<br>
 								</div>
 							</div>

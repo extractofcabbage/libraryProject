@@ -275,7 +275,7 @@ public class BoardDAO {
 		MemberBean memberBean = null;
 		
 //		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, b.email_reply, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date from board b, member m where b.member_no = m.no and b.no = ?";
-		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date from board b, member m where b.member_no = m.no and b.no = ?";
+		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, m.no, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date from board b, member m where b.member_no = m.no and b.no = ?";
 //		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, b.email_reply, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date, c.no, c.content, c.reg_date, c.board_no, c.member_no from board b, member m, board_comment c where b.member_no = m.no and b.no = c.board_no and b.no=?";
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -303,7 +303,7 @@ public class BoardDAO {
 				memberBean.setGender(rs.getString("m.gender"));
 				memberBean.setImage(rs.getString("m.image"));
 				memberBean.setName(rs.getString("m.name"));
-				memberBean.setNo(rs.getInt("b.member_no"));
+				memberBean.setNo(rs.getInt("m.no"));
 				memberBean.setPassword(rs.getString("m.password"));
 				memberBean.setPhone(rs.getString("m.phone"));
 				memberBean.setPostcode(rs.getInt("m.postcode"));
@@ -337,6 +337,7 @@ public class BoardDAO {
 				commentBean.setMember_no(rs.getInt("c.member_no"));
 				commentBean.setNo(rs.getInt("c.no"));
 				commentBean.setReg_date(rs.getDate("c.reg_date"));
+				
 				memberBean = new MemberBean();
 				memberBean.setAddress1(rs.getString("m.address1"));
 				memberBean.setAddress2(rs.getString("m.address2"));
@@ -345,12 +346,12 @@ public class BoardDAO {
 				memberBean.setGender(rs.getString("m.gender"));
 				memberBean.setImage(rs.getString("m.image"));
 				memberBean.setName(rs.getString("m.name"));
+				memberBean.setNo(rs.getInt("m.no"));
 				memberBean.setPassword(rs.getString("m.password"));
 				memberBean.setPhone(rs.getString("m.phone"));
 				memberBean.setPostcode(rs.getInt("m.postcode"));
 				memberBean.setReg_date(rs.getDate("m.reg_date"));
 				memberBean.setType(rs.getString("m.type"));
-				
 				commentList1.add(commentBean);
 				commentList2.add(memberBean);
 			}

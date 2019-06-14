@@ -196,10 +196,10 @@ public class QnaFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/qnaCommentModifyForm.bo")) {
-			System.out.println("qnaCommentModifyForm.bo에 도착");
-			action = new QnaDetailCommentModifyAction();
-			System.out.println("QnaDetailCommentAction()을 성공했다!");
+		}else if(command.equals("/qnaCommentModifyPro.bo")) {
+			System.out.println("qnaCommentModifyPro.bo에 도착");
+			action = new QnaCommentModifyProAction();
+			System.out.println("QnaCommentModifyProAction()을 성공했다!");
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -207,6 +207,17 @@ public class QnaFrontController extends HttpServlet {
 			}
 			
 		}
+	//	}else if(command.equals("/qnaCommentModifyForm.bo")) {
+	//		System.out.println("qnaCommentModifyForm.bo에 도착");
+	//		action = new QnaDetailCommentModifyAction();
+	//		System.out.println("QnaDetailCommentAction()을 성공했다!");
+	//		try {
+	//			forward = action.execute(request, response);
+	//		} catch (Exception e) {
+	//			System.out.println(e.getMessage());
+	//		}
+	//		
+	//	}
 
 		// -----------qna 끝 --------------------------------
 
