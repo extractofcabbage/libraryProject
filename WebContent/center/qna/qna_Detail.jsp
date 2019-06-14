@@ -23,8 +23,16 @@
 function comment(){
 	var str = document.getElementById("textarea").value;
 	str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
-// 	str = str.replace('\r\n', '<br>');
 	document.getElementById("result").value = str;
+// 	str = str.replace('\r\n', '<br>');
+}
+//댓글 수정시 엔터키 가능
+function comment_modify(id){
+	var str = document.getElementById("modify_result_"+id).value;
+	str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+	document.getElementById("willModify_"+id).value = str;
+	
+// 	str = str.replace('\r\n', '<br>');
 }
 
 //댓글창 보이게/숨기게
@@ -116,7 +124,7 @@ function SirenFunction(idMyDiv){
 							<!-- 이미지 넣는곳 -->
 
 							<p>
-								<a href="qnaList.bo" class="w3-right" style="margin-left: 10px">목록</a>
+								<a href="qnaList.bo?page=<%=nowPage%>" class="w3-right" style="margin-left: 10px">목록</a>
 								<a href="qnaDeleteForm.bo?board_num=<%=article.getNo()%>&page=<%=nowPage%>" class="w3-right" style="margin-left: 10px">삭제</a> 
 								<a href="qnaModifyForm.bo?board_num=<%=article.getNo()%>&page=<%=nowPage%>" class="w3-right"
 									onclick="SirenFunction('SirenDiv<%=article.getNo()%>'); return false;">수정</a>
@@ -177,14 +185,15 @@ function SirenFunction(idMyDiv){
 									</h4>
 									<p><%=commentBeanList.get(i).getContent()%></p>
 									<div style="display: none;" id="SirenDiv<%=commentBeanList.get(i).getNo()%>">
-										<form action="qnaCommentModifyPro.bo" method="post">
-											<textarea name = "modifyComment" id="modify_result_<%=commentBeanList.get(i).getNo()%>" class="w3-input w3-border book-comment-input" placeholder="내용을 입력해주세요."></textarea>
+										<form action="qnaCommentModifyPro.bo?page=<%=nowPage %>" method="post">
+											<textarea id="modify_result_<%=commentBeanList.get(i).getNo()%>" class="w3-input w3-border book-comment-input" placeholder="내용을 입력해주세요."></textarea>
 											<input type="hidden" name="comment_num" value="<%=commentBeanList.get(i).getNo()%>"> 
 											<input type="hidden" name="board_num" value="<%=article.getNo()%>">
 											<br>
 											
-											<textarea id="modify_textarea_<%=commentBeanList.get(i).getNo()%>" hidden="hidden"><%=commentBeanList.get(i).getContent()%></textarea>
-											<input type="submit" class="reply" value="수정">
+											<textarea hidden="hidden" id="modify_textarea_<%=commentBeanList.get(i).getNo()%>" ><%=commentBeanList.get(i).getContent()%></textarea>
+											<textarea hidden="hidden" name = "comment_content"  id="willModify_<%=commentBeanList.get(i).getNo()%>"></textarea>
+											<input type="submit" class="reply" value="수정" onclick="comment_modify(<%=commentBeanList.get(i).getNo()%>)">
 											<input type="button" onclick="SirenFunction('<%=commentBeanList.get(i).getNo()%>'); return false;" value="취소">
 										</form>
 									</div>

@@ -60,8 +60,27 @@ public class CommentDAO {
 			deleteCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
 		
 		return deleteCount;
+	}
+
+	public int updateComment(int comment_num, String comment_content) {
+		int updateCount = 0;
+		String sql = "update board_comment set content = ? where no = ?";
+		
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, comment_content);
+			pstmt.setInt(2, comment_num);
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return updateCount;
 	}
 }

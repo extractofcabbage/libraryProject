@@ -17,6 +17,7 @@ public class QnaCommentDeleteProAction implements Action {
 		int comment_num = Integer.parseInt(request.getParameter("comment_num"));
 		int page = Integer.parseInt(request.getParameter("page"));
 		int board_num = Integer.parseInt(request.getParameter("board_num"));
+		int nowPage = Integer.parseInt(request.getParameter("page"));
 		QnaCommentDeleteProService qnaCommentDeleteProService = new QnaCommentDeleteProService();
 		boolean isDeleteSuccess = qnaCommentDeleteProService.removeComment(comment_num,page,board_num);
 		if(!isDeleteSuccess) {
@@ -30,7 +31,7 @@ public class QnaCommentDeleteProAction implements Action {
 		//성공시 ActionForward 객체 생성, "boardList.bo"로 포워딩시 파라미터로 page(form태그 hidden으로 전달된 파라미터) 전달
 		else {
 			forward = new ActionForward();
-			forward.setPath("./qnaDetail.bo?page="+request.getParameter("page")+"&board_num="+request.getParameter("board_num"));
+			forward.setPath("./qnaDetail.bo?board_num="+board_num+"&page="+nowPage);
 			forward.setRedirect(true);//Redirect 방식
 		}
 		return forward;

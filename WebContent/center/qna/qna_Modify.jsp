@@ -23,6 +23,7 @@
 	BoardBean article = (BoardBean) request.getAttribute("article");
 	String email = memberBean.getEmail();
 	String name = memberBean.getName();
+	int nowPage = Integer.parseInt(request.getAttribute("page")+"");
 %>
 </head>
 <body class="w3-light-grey">
@@ -64,6 +65,7 @@
 			<form action="qnaModifyPro.bo" method="post"
 				enctype="multipart/form-data">
 				<input type="hidden" name="email" value="<%=memberBean.getEmail()%>">
+				<input type="hidden" name="page" value="<%=nowPage%>">
 				<input type="hidden" name="board_num" value="<%=article.getNo()%>">
 				<input type="hidden" name="member_no"
 					value="<%=article.getMember_no()%>"> <input type="hidden"

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import action.NoticeListAction;
 import action.qna.QnaCommentDeleteProAction;
+import action.qna.QnaCommentModifyProAction;
 import action.qna.QnaCommentProAction;
 import action.qna.QnaDeleteProAction;
 import action.qna.QnaDetailAction;
@@ -177,9 +178,11 @@ public class QnaFrontController extends HttpServlet {
 			System.out.println("qnaCommentPro.bo에 왔다!");
 			String comment_content = request.getParameter("comment_content");
 			String board_num = (String) request.getParameter("board_num");
+//			int page = Integer.parseInt(request.getParameter("page"));
 			System.out.println("qnaCommentPro - board_num : " + board_num);
 			request.setAttribute("board_num", board_num);
 			request.setAttribute("comment_content", comment_content);
+//			request.setAttribute("page", page);
 			action = new QnaCommentProAction();
 			try {
 				forward = action.execute(request, response);
@@ -200,6 +203,8 @@ public class QnaFrontController extends HttpServlet {
 			System.out.println("qnaCommentModifyPro.bo에 도착");
 			action = new QnaCommentModifyProAction();
 			System.out.println("QnaCommentModifyProAction()을 성공했다!");
+//			int page = Integer.parseInt(request.getParameter("page"));
+//			request.setAttribute("page", page);
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

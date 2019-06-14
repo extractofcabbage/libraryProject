@@ -35,6 +35,7 @@ public class QnaModifyProAction implements Action {
 		HttpSession session = request.getSession();
 		MemberBean memberBean= (MemberBean) session.getAttribute("memberBean");
 		String email = memberBean.getEmail();
+//		int nowPage = Integer.parseInt(request.getParameter("page"));
 		BoardModifyProService boardModifyProService = new BoardModifyProService();
 		boolean isRightUser = boardModifyProService.isArticleWriter(board_num, email);
 		if(!isRightUser) {
@@ -65,7 +66,8 @@ public class QnaModifyProAction implements Action {
 				System.out.println("글 수정 성공!");
 				// 글 수정 성공 시
 				// boardDetail.bo 서블릿 주소로 포워딩 => 주소 뒤에 파라미터로 글번호(board_num) 전달 => Redirect 방식
-				forward.setPath("qnaDetail.bo?board_num=" + board_num+"&page=1");
+//				forward.setPath("qnaDetail.bo?board_num=" + board_num+"&page="+nowPage);
+				forward.setPath("qnaDetail.bo?board_num=" + board_num);
 				forward.setRedirect(true);
 			}
 		}

@@ -22,6 +22,7 @@ public class QnaCommentProAction implements Action {
 		HttpSession session = request.getSession();
 		MemberBean memberBean= (MemberBean) session.getAttribute("memberBean");
 		String email = memberBean.getEmail();
+		int nowPage = Integer.parseInt(request.getParameter("page"));
 		comment.setBoard_no(Integer.parseInt(request.getAttribute("board_num").toString()));
 //		comment.setNo((int)request.getAttribute("board_num"));
 		comment.setContent(request.getParameter("comment_content"));
@@ -40,7 +41,7 @@ public class QnaCommentProAction implements Action {
 			// => ActionForward 객체 생성, boardList.bo 서블릿주소 지정, isRedirect 변수 값을 true 로 설정
 			// => boardList.bo 페이지로 이동하면서 주소가 변경되므로(새로운 요청이 발생하므로) Redirect 방식으로 포워딩
 			forward = new ActionForward();
-			forward.setPath("qnaDetail.bo?board_num="+comment.getBoard_no()+"&page=1");
+			forward.setPath("qnaDetail.bo?board_num="+comment.getBoard_no()+"&page="+nowPage);
 			forward.setRedirect(true);
 		}
 		return forward;

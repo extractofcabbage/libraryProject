@@ -25,6 +25,7 @@ public class QnaModifyFormAction implements Action {
 		HttpSession session = request.getSession();
 		MemberBean memberBean = (MemberBean) session.getAttribute("memberBean");
 		String email = memberBean.getEmail();
+		int nowPage = Integer.parseInt(request.getParameter("page"));
 		BoardModifyProService boardModifyProService = new BoardModifyProService();
 		boolean isRightUser = boardModifyProService.isArticleWriter(board_num, email);
 		if(!isRightUser) {
@@ -45,7 +46,7 @@ public class QnaModifyFormAction implements Action {
 			
 			request.setAttribute("article", article);
 			request.setAttribute("memberBean", memberBean);
-			
+			request.setAttribute("page", nowPage);
 			forward.setPath("/center/qna/qna_Modify.jsp");
 		}
 		return forward;

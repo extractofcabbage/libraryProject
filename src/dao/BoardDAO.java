@@ -262,7 +262,6 @@ public class BoardDAO {
 		} catch (SQLException e) {
 			System.out.println("insertArticle() 실패"+e.getMessage());
 		}finally {
-			close(rs);
 			close(pstmt);
 		}
 		return insertCount;
