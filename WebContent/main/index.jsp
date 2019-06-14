@@ -106,7 +106,7 @@
     	<div class="rslides_container">
       		<ul class="rslides" id="slider1">
       			<c:forEach var="book" items="${bestBookList}" varStatus="status">
-        			<li><img src="${book.image}" alt="베스트 대여" class="w3-card">
+        			<li><a href="bookContent.do?isbn=${book.isbn}&page=1"><img src="${book.image}" alt="베스트 대여" class="w3-card"></a>
         				  <h4 class="w3-center" style="margin: 0">${status.count }위(${book.rentCount}회)</h4>
         			</li>
         		</c:forEach>
