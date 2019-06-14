@@ -40,7 +40,7 @@ public class JoinProAction implements Action {
 		memberBean.setGender(multi.getParameter("Gender"));
 		memberBean.setBirth(multi.getParameter("birth"));
 		memberBean.setPhone(multi.getParameter("phone"));
-//		memberBean.setImage(multi.getOriginalFileName((String) multi.getFileNames().nextElement()));
+		memberBean.setImage(multi.getParameter("imgad"));
 		memberBean.setAddress1(multi.getParameter("address1"));
 		memberBean.setAddress2(multi.getParameter("address2"));
 		memberBean.setPostcode(Integer.parseInt(multi.getParameter("postcode")));

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.MainAction;
 import action.NoticeListAction;
-import action.WishBookAction;
 import vo.ActionForward;
 
 @WebServlet("*.ma")
@@ -42,6 +42,15 @@ public class FrontController extends HttpServlet {
 		System.out.println(command);
 		// -----------Main 시작 ---------------------------------
 		if (command.equals("/index.ma")) {
+			action = new MainAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 
+		
+		else if (command.equals("/main.ma")) {
 			forward = new ActionForward();
 			forward.setPath("main/index.jsp");
 		}

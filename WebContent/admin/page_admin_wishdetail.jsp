@@ -29,19 +29,18 @@
      		<div class="container">
      			<h1>희망도서상세정보</h1>
       			<hr>
-      			<table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+      			<table class="w3-table w3-striped  w3-border w3-hoverable w3-white" style="border-color: black!important">
       			<tr>      			<td colspan="4"><h2><%=imgBean.getTitle()%></h2></td> </tr>
       			<tr> <td colspan="4"><div style="text-align: center;"><img src="<%=imgBean.getImage() %>"></div></td></tr>
       			<tr> <td>저자</td> <td><%=imgBean.getAuthor() %></td> <td>출판사</td> <td><%=imgBean.getPublisher() %></td></tr>
       			<tr> <td>출판일</td> <td><%=imgBean.getPublish_date() %></td> <td>가격</td> <td><%=imgBean.getPrice() %></td></tr>
       			<tr> <td>ISBN</td> <td><%=imgBean.getIsbn() %></td> <td>상태</td> <td><%=imgBean.getStatus() %></td></tr>
-      			<tr> </tr>
       			</table>
       			
       			
 
       			<br><br>
-				<table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+				<table class="w3-table w3-striped w3-border w3-hoverable w3-white" style="border-color: black!important">
 				<tr><td>번호</td>
 					<td>신청자</td>
 					<td>등록일</td>

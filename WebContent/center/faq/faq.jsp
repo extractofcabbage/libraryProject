@@ -102,17 +102,10 @@
         			</button>		
         			<div class="panel_a">
 						<p>
-							네이버 라이브러리는 크게 매거진/디자인/백과사전과 IT 도서를 보유하고 있습니다.<br>
-							매년 가치 있는 도서를 선별하여 장서를 더욱 더 확대해 나갈 예정입니다.
+							ITWILL 부산교육센터에서는 보유도서를 카테고리(프로그밍/네트워크/서버/웹&디자인/오라클/IT&자격증/자기계발/기타)별로 관리하고 있습니다.<br>
+							보유도서 현황은 '메뉴->안내->도서현황'에서 확인하실 수 있으며 보유하고 있지 않은 도서는 희망도서메뉴를 통해 신청하실 수 있습니다.<br>
+							그 외에 매년 가치 있는 도서를 선별하여 장서를 더욱 더 확대해 나갈 예정입니다.
 						</p>
-						<p>&nbsp;</p>
-						<p>- 매거진 : &acute;생활/육아&acute;, &acute;패션/미용&acute;,
-								&acute;음식/요리&acute;, &acute;자동차/기술/과학/&acute;, &acute;경제/경영&acute;,
-								&acute;문화&acute;, &acute;여행/여가&acute;등 7개 카테고리의 잡지 250여 종</p>
-						<p>- 디자인 : 건축, 일러스트, 그래픽, 산업디자인, UX, 예술 등의 DESIGN 서적 1만 7천여 권</p>
-						<p>- 백과사전 : &lt;두산 세계 대백과사전&gt;등의 &acute;종합백과&acute;와
-								&lt;DK대백과&gt; 시리즈 등의 &acute;총서/시리즈&acute;류 1천 3백 여권</p>
-						<p>- IT : 인터넷, IT, 프로그래밍, DB 등의 IT 서적 7천여 권</p>
 					</div>
       			</li>
       			<li class="w3-padding-16">
@@ -121,12 +114,12 @@
         				운영시간은 어떻게 되며, 휴관일은 언제인가요?
         			</button>
         			<div class="panel_a">
-						<p>- 운영시간 : 평일 09:00 - 19:30 / 주말 10:00 - 19:30</p>
-						<p>- 휴관일 : 공휴일, 매월 둘째&넷째 월요일</p>
+						<p>- 운영시간 : 평일 09:00 - 17:40</p>
+						<p>- 휴관일 : 주말, 공휴일</p>
 						<p>&nbsp;</p>
 						<p>
-							기타 회사에서 임시로 휴관일을 지정할 수 있으며, 공지사항을 통해 안내해드리고 있습니다.<br>휴관일에는 원활한
-							도서 이용을 위해 장서 및 시설 점검이 이루어집니다.
+							기타 교육기관에서 임시로 휴관일을 지정할 수 있으며, 공지사항을 통해 안내해드리고 있습니다.<br>
+							휴관일에는 원활한 도서 이용을 위해 장서 및 시설 점검이 이루어집니다.
 						</p>
 					</div>
       			</li>
@@ -137,31 +130,69 @@
         			</button>
         			<div class="panel_a">
 						<p>
-							네이버 라이브러리 홈페이지(<a href="http://library.navercorp.com/"
-							target="_blank">library.navercorp.com</a>)에서 검색하실 수 있습니다.<br>
-							각층에 마련된 도서검색 PC를 이용하시면 책의 위치정보를 출력할 수 있어 조금 더 편리하게 이용 가능합니다.
+							'메뉴->도서목록'에서 보유도서 전체 목록은 물론 카테고리별로 조회가능합니다.<br>
+							보유하고 있지 않은 도서는 검색이 불가하며 원하는 도서를 대출신청 할 수 있습니다.<br>
+							대출이 불가능한 도서는 '대출불가'라고 표시가 되며, 해당 도서가 대출되어 반납되지 않은 상태입니다.
 						</p>
 					</div>
       			</li>
       			<li class="w3-padding-16">
         			<button class="accordion_q">
         				<img src="${pageContext.request.contextPath}/images/main/q.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        				책은 대출할 수 있나요?
+        				대출 신청은 어떻게 이루어지나요?
         			</button>
         			<div class="panel_a">
 						<p>
-							보다 많은 사람들이 함께 책을 볼 수 있도록 책은 네이버 라이브러리 내에서만 열람할 수 있습니다.<br> 
-							분실로 인한 불편을 미연에 방지하기 위함이니 양해 부탁드립니다.
+						  홈페이지를 통해 대출신청이 이루어지면 도서관을 방문하여 관리자를 통해 승인처리를 거쳐 대출하실 수 있습니다.<br>
 						</p>
 					</div>
       			</li>
+      			
+      						<li class="w3-padding-16">
+        			<button class="accordion_q">
+        				<img src="${pageContext.request.contextPath}/images/main/q.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+        				희망도서 신청은 어떻게 이루어지나요?
+        			</button>
+        			<div class="panel_a">
+						<p>
+						  홈페이지를 통해 희망도서 신청이 이루어지면 해당 도서의 신청 수 및 필요에 따라 관리자를 통해 승인 후 구매 및 등록하게 됩니다. 
+						</p>
+					</div>
+      			</li>
+      			
+      				<li class="w3-padding-16">
+        			<button class="accordion_q">
+        				<img src="${pageContext.request.contextPath}/images/main/q.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+        				회원가입을 하였는데 로그인이 안됩니다.
+        			</button>
+        			<div class="panel_a">
+						<p>
+						 최초 회원가입을 하실경우 미승인인 상태로 가입이 되며, 홈페이지는 관리자의 승인 후 이용하실 수 있습니다.<br>
+						 홈페이지를 통해 회원가입 후 안내데스크 및 관리자에게 승인 요청을 해주시면 감사하겠습니다.
+						</p>
+					</div>
+      			</li>
+      			
+      			    <li class="w3-padding-16">
+        			<button class="accordion_q">
+        				<img src="${pageContext.request.contextPath}/images/main/q.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+        				궁금하거나 불편한 점이 있으면 어디로 연락하나요?
+        			</button>
+        			<div class="panel_a">
+						<p>
+						궁금하거나 불편한 점이 있으시면 '메뉴->고객센터->Q&A게시판'에 글을 등록하여주시면 확인 후 직접답변<br>
+					    혹은 공지사항에 게시할 수 있도록 하겠습니다.
+						</p>
+					</div>
+      			</li>
+      			
       			<li class="w3-padding-16">
         			<button class="accordion_q">
         				<img src="${pageContext.request.contextPath}/images/main/q.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
         				복사나 스캔이 가능한가요?
         			</button>
         			<div class="panel_a">
-						<p>저작권법 보호를 위해 복사 및 스캔서비스는 운영하지 않습니다.</p>
+						<p>승인된 교육생이신 분들은 관리자 허가하에 복사 및 스캔을 하실 수 있습니다.</p>
 					</div>
       			</li>
     		</ul>

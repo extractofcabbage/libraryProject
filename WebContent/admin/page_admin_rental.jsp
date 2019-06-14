@@ -114,16 +114,16 @@ request.setCharacterEncoding("UTF-8");
 											  %>
 											  
 					<tr  class="memberManage_table_tr">
-											<th style="width: 25px;" class="col_chk">
-											<input id="chkall"  <%if(rentalJoinBean.getStatus().equals("반납")){%> type="hidden"<%} else{%> type="checkbox" value="<%=rentalJoinBean.getNo()%>" class="w3-check" name="rentalCheck" <%}%>"></th>
+											<td style="width: 25px;" class="col_chk">
+											<input id="chkall"  <%if(rentalJoinBean.getStatus().equals("반납")){%> type="hidden"<%} else{%> type="checkbox" value="<%=rentalJoinBean.getNo()%>" class="w3-check" name="rentalCheck" <%}%>"></td>
 <%-- 												<%if(wishBookJoinBean.getStatus().equals("Accept")){%> type="hidden"<%} else{%> type="checkbox" value="<%=wishBookJoinBean.getNo()%>" name="wishcheck" <%}%> --%>
-											 	<th class="admin-two"><%=rentalJoinBean.getNo()%></th>
-											 	<th><%=rentalJoinBean.getTitle()%></th>
-											 	<th><%=rentalJoinBean.getEmail()%></th>
-											 	<th class="admin-two"><%=rentalJoinBean.getStatus()%></th>
-											    <th ><%=rentalJoinBean.getRent_date()%></th>
-											    <th><%=rentalJoinBean.getDue_date()%></th>
-											    <th><%=rentalJoinBean.getReturn_date() %></th>
+											 	<td class="admin-two"><%=rentalJoinBean.getNo()%></td>
+											 	<td><%=rentalJoinBean.getTitle()%></td>
+											 	<td><%=rentalJoinBean.getEmail()%></td>
+											 	<td class="admin-two"><%=rentalJoinBean.getStatus()%></td>
+											    <td ><%=rentalJoinBean.getRent_date()%></td>
+											    <td><%=rentalJoinBean.getDue_date()%></td>
+											    <td><%=rentalJoinBean.getReturn_date() %></td>
 											    
 											   
 											    
@@ -134,11 +134,12 @@ request.setCharacterEncoding("UTF-8");
 											  
     </table><br>
 	
+									<input type="submit" value="변경" class="updateButton w3-button w3-right w3-black">
 									<select name="modify_type" class="w3-right" style="height: 39px;margin-right: 5px;font-size: 20px;">
 											<option value="대출중">대출중</option>
 											<option value="반납">반납</option>
 											<option value="분실/파손">분실/파손</option>
-										</select> <input type="submit" value="변경" class="updateButton">
+										</select> 
 	</form>
 	  	<div class="w3-center w3-padding-32 w3-xlarge">
     	<div class="w3-bar">
