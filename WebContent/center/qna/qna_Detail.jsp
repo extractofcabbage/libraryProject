@@ -126,8 +126,7 @@ function SirenFunction(idMyDiv){
 							<p>
 								<a href="qnaList.bo?page=<%=nowPage%>" class="w3-right" style="margin-left: 10px">목록</a>
 								<a href="qnaDeleteForm.bo?board_num=<%=article.getNo()%>&page=<%=nowPage%>" class="w3-right" style="margin-left: 10px">삭제</a> 
-								<a href="qnaModifyForm.bo?board_num=<%=article.getNo()%>&page=<%=nowPage%>" class="w3-right"
-									onclick="SirenFunction('SirenDiv<%=article.getNo()%>'); return false;">수정</a>
+								<a href="qnaModifyForm.bo?board_num=<%=article.getNo()%>&page=<%=nowPage%>" class="w3-right">수정</a>
 							</p>
 						</div>
 						<%
@@ -162,7 +161,7 @@ function SirenFunction(idMyDiv){
 							<div class="w3-row">
 								<div class="w3-col m2 text-center">
 									<img class="w3-circle"
-										src="../upload/<%=commentMemberList.get(i).getImage()%>"
+										src="<%=commentMemberList.get(i).getImage()%>"
 										style="width: 96px; height: 96px">
 								</div>
 								<div class="w3-col m10 w3-container">
@@ -186,7 +185,7 @@ function SirenFunction(idMyDiv){
 									<p><%=commentBeanList.get(i).getContent()%></p>
 									<div style="display: none;" id="SirenDiv<%=commentBeanList.get(i).getNo()%>">
 										<form action="qnaCommentModifyPro.bo?page=<%=nowPage %>" method="post">
-											<textarea id="modify_result_<%=commentBeanList.get(i).getNo()%>" class="w3-input w3-border book-comment-input" placeholder="내용을 입력해주세요."></textarea>
+											<textarea style="width: 100%; border: 1px solid grey;" rows="8" id="modify_result_<%=commentBeanList.get(i).getNo()%>" class="w3-input" placeholder="내용을 입력해주세요."></textarea>
 											<input type="hidden" name="comment_num" value="<%=commentBeanList.get(i).getNo()%>"> 
 											<input type="hidden" name="board_num" value="<%=article.getNo()%>">
 											<br>

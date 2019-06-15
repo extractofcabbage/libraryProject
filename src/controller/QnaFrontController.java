@@ -16,6 +16,7 @@ import action.NoticeListAction;
 import action.qna.QnaCommentDeleteProAction;
 import action.qna.QnaCommentModifyProAction;
 import action.qna.QnaCommentProAction;
+import action.qna.QnaDeleteFormAction;
 import action.qna.QnaDeleteProAction;
 import action.qna.QnaDetailAction;
 import action.qna.QnaDetailCommentModifyAction;
@@ -150,13 +151,19 @@ public class QnaFrontController extends HttpServlet {
 			HttpSession session = request.getSession();
 			MemberBean memberBean = (MemberBean) session.getAttribute("memberBean");
 			System.out.println("qnaDeleteForm.bo - memberBean : "+memberBean);
+			action = new QnaDeleteFormAction();
 			if (memberBean!=null) {
-				int board_num = Integer.parseInt(request.getParameter("board_num"));
-				System.out.println("qnaDeleteForm - board_num : " + board_num);
-				request.setAttribute("board_num", board_num);
-				request.setAttribute("page", request.getParameter("page"));
-				forward = new ActionForward();
-				forward.setPath("/center/qna/qna_Delete.jsp");
+//				int board_num = Integer.parseInt(request.getParameter("board_num"));
+//				System.out.println("qnaDeleteForm - board_num : " + board_num);
+//				request.setAttribute("board_num", board_num);
+//				request.setAttribute("page", request.getParameter("page"));
+//				forward = new ActionForward();
+//				forward.setPath("/center/qna/qna_Delete.jsp");
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}else {
 				System.out.println("memberBean이 Null");
 				response.setContentType("text/html;charset=UTF-8");
