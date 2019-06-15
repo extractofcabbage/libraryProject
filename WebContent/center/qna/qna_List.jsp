@@ -51,7 +51,7 @@
   	<!-- Header -->
   	<header id="portfolio">
     	<div class="w3-container">
-    		<h1><b>Q&A</b></h1>
+    		<h1><b><a href = "qnaList.bo">Q&A</a></b></h1>
 	
 			<!----- 도서 검색 input ----->
 			<form action = "qnaListSearch.bo" method="post">

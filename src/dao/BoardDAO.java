@@ -109,20 +109,23 @@ public class BoardDAO {
 		ArrayList beans = new ArrayList<>();
 		BoardBean boardBean = null;
 		MemberBean memberBean = null;
-//		String sql = "select * from board where board_type = 'qna' order by reg_date desc limit ?, ?";
-//		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date from board b, member m where b.member_no = m.no and b.board_type = 'qna' ";
-//		String sql = "select b.no, b.title, b.content, b.readcount, b.board_type, b.reg_date, b.member_no, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date from board b, member m where b.member_no = m.no and b.board_type = 'qna' ";
 		String sql = "select b.no, b.title, b.content, b.readcount, b.file, b.board_type, b.reg_date, b.member_no, m.email, m.password, m.name, m.gender, m.birth, m.phone, m.image, m.address1, m.address2, m.postcode, m.type, m.reg_date, count(c.no) comment from member m, board b left outer join board_comment c on b.no = c.board_no where b.member_no = m.no and b.board_type = 'qna' ";					
-//		String sql = "select * from board where board_type = 'qna' order by reg_date desc";
+//		String sql = "select * from member m, board b left outer join board_comment c on b.no = c.board_no where b.member_no = m.no and b.board_type = 'qna' ";
 		int startRow = (page-1)*10;
 		try {
 			String[] searches = keyword.split("\\s");
 			System.out.println("length 값 : " +searches.length);
 			int j=0;
 			while(j<searches.length) {
-				sql+=" and "+ option +" like ? ";
-				j++;
-				System.out.println("j값 : "+j);
+				if(option.equals("name")) {
+					sql+=" and m."+ option +" like ? ";
+					j++;
+					System.out.println("j값 : "+j);
+				}else {
+					sql+=" and b."+ option +" like ? ";
+					j++;
+					System.out.println("j값 : "+j);
+				}
 			}
 //			sql+=" order by b.reg_date desc limit ?,?";
 			sql+=" group by no order by b.reg_date desc limit ?,?";
@@ -134,12 +137,14 @@ public class BoardDAO {
 				System.out.println("i값 : " + i);
 			}
 			
-			System.out.println("pstmt sql : "+pstmt);
+			System.out.println("pstmt.setInt i값: "+i);
+			System.out.println("pstmt.setInt i+1값: "+(i+1));
 			System.out.println("startRow : " + startRow);
 			System.out.println("limit : "+limit);
-			System.out.println("for문 바깥 i값 : "+i);
 			pstmt.setInt(i, startRow);
 			pstmt.setInt(i+1, limit);
+			System.out.println("pstmt sql : "+pstmt);
+			System.out.println("for문 바깥 i값 : "+i);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				System.out.println("sql문 성공");
@@ -208,17 +213,24 @@ public class BoardDAO {
 	
 	public int selectListCount(String option, String keyword) {
 		int listCount = 0;
-		String sql = "select count(*) from board where "+ option +" like ?";
+//		String sql = "select * from member m, board b left outer join board_comment c on b.no = c.board_no where b.member_no = m.no and b.board_type = 'qna' ";
+//		String sql = "select count(*) from member m, board b left outer join board_comment c on b.no = c.board_no where b.member_no = m.no and b.board_type = 'qna' and "+ option +" like ?";
+		String sql = "select count(*) from member m, board b where b.member_no = m.no and b.board_type = 'qna' and "+ option +" like ? ";
 		try {			
 			String[] searches = keyword.split("\\s");
 			System.out.println("length 값 : " +searches.length);
 			int j=1;
 			while(j<searches.length) {
-				sql+=" and "+ option +" like ? ";
-				j++;
-				System.out.println("j값 : "+j);
+				if(option.equals("name")) {
+					sql+=" and m."+ option +" like ? ";
+					j++;
+					System.out.println("j값 : "+j);
+				}else {
+					sql+=" and b."+ option +" like ? ";
+					j++;
+					System.out.println("j값 : "+j);
+				}
 			}
-			sql+=" board_type = 'qna'";
 			pstmt = con.prepareStatement(sql);
 			
 			for(int i=1;i<=searches.length;i++) {
