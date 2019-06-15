@@ -17,4 +17,10 @@ td {
 .qna-count {
 	width: 90px;
 }
+.qna-title{
+	text-align: left!important;
+}
+.link-icon :hover{
+	cursor: pointer;
+}
 
