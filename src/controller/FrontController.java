@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.MainAction;
+import action.MainNoticeAction;
 import action.NoticeListAction;
 import vo.ActionForward;
 
@@ -49,10 +50,17 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} 
-		
 		else if (command.equals("/main.ma")) {
 			forward = new ActionForward();
 			forward.setPath("main/index.jsp");
+		}
+		else if (command.equals("/mainNotice.ma")) {
+			action = new MainNoticeAction();
+			try {
+				action.execute(request, response);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 		// -----------Main 끝 ----------------------------------
 

@@ -173,8 +173,6 @@
 		<!------------------------------ 메인 내용 ---------------------------------->
 
 <!-- ******* All JS Files ******* -->
-	<!-- jQuery js -->
-	<script src="${pageContext.request.contextPath}/scripts/jquery.min.js"></script>
 	<!-- Bootstrap js -->
 	<script src="${pageContext.request.contextPath}/scripts/bootstrap.min.js"></script>
 	<!-- All js -->

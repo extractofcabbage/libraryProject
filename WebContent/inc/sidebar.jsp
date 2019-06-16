@@ -99,17 +99,35 @@
   <!----------------------------------------------- 메뉴 --------------------------------------------------------------------->
   
   <!----------------------------------------------- 공지사항 --------------------------------------------------------------------->
+  <script>
+  	$.ajax({
+		url: "mainNotice.ma",
+  		async: true,
+  		type: 'GET',
+  		dataType: 'json',
+  		success: function(data) {
+			$.each(data, function(index, item){
+				$('.main-notice-content').append(
+						'<li><a href="#" class="w3-bar-item">' + item.content + '</a></li>');
+			});
+			
+			$(function(){
+				  $.simpleTicker($("#ticker-roll"),{'effectType':'roll'});
+			});
+  		},
+  		error: function() {
+  			alert("요청 실패");
+  		}
+  	});
+  </script>
   <div class="w3-bar-block">
   	<a href="#" class="w3-bar-item w3-button w3-padding w3-large" style="margin-top: 20px">공지사항</a>
   </div>
   <div class="w3-bar-block main-notice-space" id="ticker-roll">
   	<ul class="main-notice-content">
-  		<li><a href="#" class="w3-bar-item">안녕하슈 안녕하슈 안녕하슈 안녕하슈 안녕하슈 안녕하슈 안녕하슈 안녕하슈</a></li>
-  		<li><a href="#" class="w3-bar-item">안녕하슈 안녕하슈 안녕하슈</a></li>
-  		<li><a href="#" class="w3-bar-item">안녕하슈 안녕하슈</a></li>
-  		<li><a href="#" class="w3-bar-item">안녕하슈</a></li>
-  		<li><a href="#" class="w3-bar-item">안녕하냐고!</a></li>
+  		<li><a href="#" class="w3-bar-item">안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈</a></li>
   	</ul>
   </div>
+  
   <!----------------------------------------------- 공지사항 --------------------------------------------------------------------->
 </nav>

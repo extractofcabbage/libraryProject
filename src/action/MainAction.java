@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import svc.MainService;
 import vo.ActionForward;
+import vo.ReviewBean;
 import vo.book.BookBean;
 
 public class MainAction implements Action {
@@ -16,6 +17,7 @@ public class MainAction implements Action {
 		
 		MainService mainFormService = new MainService();
 		ArrayList<BookBean> bestBookList = mainFormService.getBestBookList();
+		ArrayList<ReviewBean> recentReviewList = mainFormService.getRecentReviewList();
 		
 		request.setAttribute("bestBookList", bestBookList);
 		

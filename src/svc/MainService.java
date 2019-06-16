@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import dao.MainDAO;
+import vo.ReviewBean;
 import vo.book.BookBean;
 
 public class MainService {
@@ -21,6 +22,19 @@ public class MainService {
 		close(con);
 		
 		return bestBookList;
+	}
+
+	public ArrayList<ReviewBean> getRecentReviewList() {
+		Connection con = getConnection();
+		
+		MainDAO mainDAO = MainDAO.getInstance();
+		mainDAO.setConnection(con);
+		
+		ArrayList<ReviewBean> recentReviewList = mainDAO.getRecentReviewList();
+		
+		close(con);
+		
+		return recentReviewList; 
 	}
 
 }
