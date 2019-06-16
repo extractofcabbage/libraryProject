@@ -60,7 +60,10 @@
 		<br> <br>
 
 		<div class="w3-container">
-
+		<div style="background: white;">
+		<h3>정말 삭제하시겠습니까?</h3>
+		<h4>삭제하시려면 로그인 비밀번호를 다시 한번 입력해주세요.</h4>
+		</div>
 			<form action="qnaDeletePro.bo?board_num=<%=board_num%>&page=<%=nowPage %>"
 									name="deleteForm" method="post">
 									<input type="hidden" name="page" value="<%=nowPage%>" />

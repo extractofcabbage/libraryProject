@@ -51,7 +51,7 @@
   	<!-- Header -->
   	<header id="portfolio">
     	<div class="w3-container">
-    		<h1><b>Q&A</b></h1>
+    		<h1><b><a href = "qnaList.bo">Q&A</a></b></h1>
 	
 			<!----- 도서 검색 input ----->
 			<form action = "qnaListSearch.bo" method="post">
@@ -84,9 +84,9 @@
 			if (articleList1 != null && listCount > 0) {
 				for (int i = 0; i < articleList1.size(); i++) {
 		%>
-      <tr class="w3-center">
+      <tr class="w3-center link-icon" onclick="location.href='qnaDetail.bo?board_num=<%=articleList1.get(i).getNo()%>&page=<%=nowPage%>'">
         <td class="qna-num"><%=articleList1.get(i).getNo()%></td>
-        <td><a href="qnaDetail.bo?board_num=<%=articleList1.get(i).getNo()%>&page=<%=nowPage%>"><%if(articleList1.get(i).getComment()>=1){%>[답변완료]&nbsp;<%} %><%=articleList1.get(i).getTitle()%></a></td>
+        <td class="qna-title"><%if(articleList1.get(i).getComment()>=1){%>[답변완료]&nbsp;<%} %><%=articleList1.get(i).getTitle()%></a></td>
         <td class="qna-writer"><%=articleList2.get(i).getName()%></td>
         <td class="qna-date"><%=articleList1.get(i).getReg_date()%></td>
         <td class="qna-count"><%=articleList1.get(i).getReadcount()%></td>
