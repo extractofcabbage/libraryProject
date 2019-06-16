@@ -48,10 +48,7 @@ public class BookFrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 
-		if (command.equals("/subPage.do")) {
-			forward = new ActionForward();
-			forward.setPath("/book/subPage.jsp");
-		} else if (command.equals("/bookList.do")) {
+		if (command.equals("/bookList.do")) {
 			action = new BookListAction();
 			try {
 				forward = action.execute(request, response);

@@ -192,29 +192,42 @@
 				</c:choose>
       	  </p>
       	  <br>
-          	<c:set var="favorCount" value="${book.favorCount}"/>
-	        	<c:choose>
-					<c:when test="${favorCount > 0}">
-						<span><button class="w3-button w3-padding-large w3-white w3-border w3-large" 
-						onclick="location.href='bookFavoritePro.do?isbn=${book.isbn}&favor=delete'"><b>관심 삭제 »</b></button></span>
-					</c:when>
-					<c:otherwise>
-						<span><button class="w3-button w3-padding-large w3-white w3-border w3-large" 
-						onclick="location.href='bookFavoritePro.do?isbn=${book.isbn}&favor=insert'"><b>관심 등록 »</b></button></span>
-					</c:otherwise>
-				</c:choose>
-	        	
-       		<c:set var="rentCount" value="${book.rentCount}"/>
-	        	<c:choose>
-					<c:when test="${rentCount > 0}">
-						<span><button class="w3-button w3-padding-large w3-white w3-border w3-large" 
-						onclick="location.href='bookRentPro.do?isbn=${book.isbn}'"><b>대출 신청 »</b></button></span>
-					</c:when>
-					<c:otherwise>
-						<span><button class="w3-button w3-padding-large w3-white w3-border w3-large"><b>대출 불가 »</b></button></span>
-					</c:otherwise>
-				</c:choose>
-			<span><button class="w3-button w3-padding-large w3-white w3-border w3-large" onclick="location.href='bookList.do'"><b>도서 목록 »</b></button></span>
+      	  
+      	  	<c:choose>
+				<c:when test="${memberNo > 0}">
+					
+					<c:set var="favorCount" value="${book.favorCount}"/>
+		        	<c:choose>
+						<c:when test="${favorCount > 0}">
+							<span><button class="w3-button w3-padding-large w3-white w3-border w3-large" 
+							onclick="location.href='bookFavoritePro.do?isbn=${book.isbn}&favor=delete'"><b>관심 삭제 »</b></button></span>
+						</c:when>
+						<c:otherwise>
+							<span><button class="w3-button w3-padding-large w3-white w3-border w3-large" 
+							onclick="location.href='bookFavoritePro.do?isbn=${book.isbn}&favor=insert'"><b>관심 등록 »</b></button></span>
+						</c:otherwise>
+					</c:choose>
+		        	
+	       			<c:set var="rentCount" value="${book.rentCount}"/>
+		        	<c:choose>
+						<c:when test="${rentCount > 0}">
+							<span><button class="w3-button w3-padding-large w3-white w3-border w3-large" 
+							onclick="location.href='bookRentPro.do?isbn=${book.isbn}'"><b>대출 신청 »</b></button></span>
+						</c:when>
+						<c:otherwise>
+							<span><button class="w3-button w3-padding-large w3-white w3-border w3-large"><b>대출 불가 »</b></button></span>
+						</c:otherwise>
+					</c:choose>
+				</c:when>				
+       		</c:choose>
+       		<c:choose>
+				<c:when test="${type eq 'list'}">
+					<span><button class="w3-button w3-padding-large w3-white w3-border w3-large" onclick="location.href='bookList.do'"><b>도서 목록 »</b></button></span>
+				</c:when>
+				<c:when test="${type eq 'best'}">
+					<span><button class="w3-button w3-padding-large w3-white w3-border w3-large" onclick="location.href='bookBestRent.do'"><b>대출 목록 »</b></button></span>
+				</c:when>
+			</c:choose>
           <hr>
         </div>
       </div>
@@ -226,8 +239,8 @@
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>책 소개</h2>
         <div class="w3-container">
           <h5 class="w3-opacity"><b>${description}</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${description}</h6>
-          <p>${description}</p>
+          <%-- <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${description}</h6> --%>
+          <%-- <p>${description}</p> --%>
           <hr>
         </div>
         <h2 class="w3-text-grey w3-padding-16" style="margin:0"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>한줄평</h2>
@@ -274,7 +287,9 @@
 				
 			</c:when>
 			<c:otherwise>
-				한줄평은 로그인한 회원만 등록할 수 있습니다.
+				<div class="w3-container">
+		          <h5 class="w3-opacity"><b>한줄평은 로그인한 회원만 등록할 수 있습니다.</b></h5>
+        		</div>
 			</c:otherwise>
 		</c:choose>
 		

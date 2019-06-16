@@ -23,6 +23,8 @@ public class BookRentProAction implements Action {
 		int memberNo = memberBean.getNo();
 		String isbn = request.getParameter("isbn");
 		
+		System.out.println("isbn: " + isbn);
+		
 		BookRentProService bookRentProService = new BookRentProService();
 		
 		int bookNo = bookRentProService.getRentableBookNo(isbn);
