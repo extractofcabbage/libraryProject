@@ -12,23 +12,15 @@ import vo.book.BookBean;
 public class BookBestRentService {
 
 	private Connection con;
-	private String year;
-	private String month;
 	private String category;
-	private int page;
-	private int limit;
 	private int memberNo;
 
 	public BookBestRentService() {
 
 	}
 
-	public BookBestRentService(String year, String month, String category, int page, int limit, int memberNo) {
-		this.year = year;
-		this.month = month;
+	public BookBestRentService(String category, int memberNo) {
 		this.category = category;
-		this.page = page;
-		this.limit = limit;
 		this.memberNo = memberNo;
 	}
 
@@ -86,9 +78,9 @@ public class BookBestRentService {
 		}*/
 		
 		if (category.isEmpty()) {
-			bookList = bookDAO.selectBookBestRentList(page, limit, memberNo);
+			bookList = bookDAO.selectBookBestRentList(memberNo);
 		} else { // 카테고리 검색
-			bookList = bookDAO.selectBookBestRentCategoryList(page, limit, category, memberNo);
+			bookList = bookDAO.selectBookBestRentCategoryList(category, memberNo);
 		}
 
 		// Connection 객체 반환

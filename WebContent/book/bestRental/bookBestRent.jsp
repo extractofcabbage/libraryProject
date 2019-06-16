@@ -40,7 +40,7 @@
   	<!-- Header -->
   	<header id="portfolio">
    	 	<div class="w3-container">
-  	 		<h1><b>베스트대출 (${pageInfo.listCount})</b></h1>
+  	 		<h1><b>베스트대출</b></h1>
     		<!-- <p class="w3-center w3-xxlarge bestbook-list-year">2019년</p> -->
   			<!----- 날짜 페이지 ----->
 <!--   			<div class="w3-center w3-large"> -->
@@ -92,7 +92,7 @@
   		
 	      		<%-- <a href="bookContent.do?isbn=${book.isbn}&page=${pageInfo.nowPage}"><img src="${book.image}" style="width: 100%" ></a> --%>
 	      		
-	      		<a href="bookContent.do?isbn=${book.isbn}&page=${pageInfo.nowPage}">
+	      		<a href="bookContent.do?isbn=${book.isbn}&type=best">
 	      		<c:choose>
 					<c:when test="${book.image != null}">
 						<img src="${book.image}" width="100%" height="280px">
@@ -105,7 +105,7 @@
 	      		</a>
 	      		
 	      		<div class="w3-container w3-blue w3-center w3-xlarge " style="width: 100%;">
-					<span>${status.count + (pageInfo.nowPage - 1) * 10}위 (${book.bestRentCount}회 대출)</span>
+					<span>${status.count}위 (${book.bestRentCount}회 대출)</span>
 	      		</div>
 	      		<!-- 평점 -->
 	      		<div class="w3-container w3-light-blue w3-center w3-medium" style="width: 100%;">
@@ -161,46 +161,7 @@
 	    	</div>
 	    </c:forEach>
   	</div>
-  	
-  <!-- Pagination -->
-  	<div class="w3-center w3-padding-32 w3-xlarge">
-    	<div class="w3-bar">
-    		<c:set var="nowPage" value="${pageInfo.nowPage}"/>
-    		<c:set var="startPage" value="${pageInfo.startPage}"/>
-    		<c:set var="endPage" value="${pageInfo.endPage}"/>
-    		<c:set var="maxPage" value="${pageInfo.maxPage}"/>
-		    <c:choose>
-				<c:when test="${nowPage <= 1}">
-					<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>		
-				</c:when>
-				<c:otherwise>
-					<a href="bookBestRent.do?page=${nowPage - 1}&category=${category}" class="w3-bar-item w3-button w3-hover-black">«</a>
-				</c:otherwise>
-			</c:choose>
-			
-			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1"> <!-- for문 -->
-				<c:choose>
-					<c:when test="${i == nowPage}">
-						<a href="#" class="w3-bar-item w3-black w3-button">${i}</a>		
-					</c:when>
-					<c:otherwise>
-						<a href="bookBestRent.do?page=${i}&category=${category}" class="w3-bar-item w3-button w3-hover-black">${i}</a>					
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			
-			 <c:choose>
-				<c:when test="${nowPage >= maxPage}">
-					<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>		
-				</c:when>
-				<c:otherwise>
-					<a href="bookBestRent.do?page=${nowPage + 1}&category=${category}" class="w3-bar-item w3-button w3-hover-black">»</a>
-				</c:otherwise>
-			</c:choose>
-    	</div>
-  	</div> 	
    <!------------------------------ 메인 내용 ---------------------------------->
-  
   
   
   	<!--------------- footer ---------------->

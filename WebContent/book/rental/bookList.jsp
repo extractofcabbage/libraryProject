@@ -18,6 +18,17 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/book_list.css">
 <!------------------------ append css ------------------------------>
 
+<script type="text/javascript">
+	function bookRent(isbn) {
+		var isRent = confirm("대출 신청하시겠습니까?");
+		if (isRent) {
+			location.href="bookRentPro.do?isbn=" + isbn;
+		} else {
+			window.close();			
+		}
+	}
+</script>
+
 </head>
 <body class="w3-light-grey">
 
@@ -95,7 +106,7 @@
 				</c:choose>
 	        	<div>
 	        		<p>
-	        			<a class="w3-large" href="bookContent.do?isbn=${book.isbn}&page=${pageInfo.nowPage}">
+	        			<a class="w3-large" href="bookContent.do?isbn=${book.isbn}&type=list&page=${pageInfo.nowPage}">
 	        				<b>제목</b>: ${book.title}<br> 
 			        		<b>저자</b>: ${book.author}<br>
 			      			<b>출판사</b>: ${book.publisher}<br> 
@@ -194,25 +205,32 @@
 	      		</div> 
 	      	</td>
 	        <td style="padding-top: 140px!important; width: 140px">
-	        	<c:set var="favorCount" value="${book.favorCount}"/>
 	        	<c:choose>
-					<c:when test="${favorCount > 0}">
-						<button class="w3-button w3-dark-grey w3-right booklist-td-btn" onclick="location.href='bookFavoritePro.do?isbn=${book.isbn}&favor=delete'">관심삭제<i class="fa fa-arrow-right"></i></button>
-					</c:when>
-					<c:otherwise>
-						<button class="w3-button w3-red w3-right booklist-td-btn" onclick="location.href='bookFavoritePro.do?isbn=${book.isbn}&favor=insert'">관심등록<i class="fa fa-arrow-right"></i></button>
-					</c:otherwise>
-				</c:choose>
+					<c:when test="${memberNo > 0}">
+						
+						<c:set var="favorCount" value="${book.favorCount}"/>
+	        			<c:choose>
+							<c:when test="${favorCount > 0}">
+								<button class="w3-button w3-dark-grey w3-right booklist-td-btn" onclick="location.href='bookFavoritePro.do?isbn=${book.isbn}&favor=delete'">관심삭제<i class="fa fa-arrow-right"></i></button>
+							</c:when>
+							<c:otherwise>
+								<button class="w3-button w3-red w3-right booklist-td-btn" onclick="location.href='bookFavoritePro.do?isbn=${book.isbn}&favor=insert'">관심등록<i class="fa fa-arrow-right"></i></button>
+							</c:otherwise>
+						</c:choose>
 	        	
-	        	<c:set var="rentCount" value="${book.rentCount}"/>
-	        	<c:choose>
-					<c:when test="${rentCount > 0}">
-						<button class="w3-button w3-blue w3-right booklist-td-btn" onclick="location.href='bookRentPro.do?isbn=${book.isbn}'">대출신청<i class="fa fa-arrow-right"></i></button>
+			        	<c:set var="rentCount" value="${book.rentCount}"/>
+			        	<c:choose>
+							<c:when test="${rentCount > 0}">
+								<%-- <button class="w3-button w3-blue w3-right booklist-td-btn" onclick="location.href='bookRentPro.do?isbn=${book.isbn}'">대출신청<i class="fa fa-arrow-right"></i></button> --%>
+								<button class="w3-button w3-blue w3-right booklist-td-btn" onclick="bookRent(${book.isbn})">대출신청<i class="fa fa-arrow-right"></i></button>
+							</c:when>
+							<c:otherwise>
+								<button class="w3-button w3-dark-grey w3-right booklist-td-btn">대출불가<i class="fa fa-arrow-right"></i></button>
+							</c:otherwise>
+						</c:choose>
+						
 					</c:when>
-					<c:otherwise>
-						<button class="w3-button w3-dark-grey w3-right booklist-td-btn">대출불가<i class="fa fa-arrow-right"></i></button>
-					</c:otherwise>
-				</c:choose>
+	        	</c:choose>
 	      	</td>
 	      </tr>
       </c:forEach>

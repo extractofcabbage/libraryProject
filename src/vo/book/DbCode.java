@@ -30,7 +30,7 @@ public class DbCode {
 	public static final String BOOK_STATUS_LST = "분실/파손";
 
 	/* rental TB status */
-	public static final String RENTAL_STATUS_REQ = "신청중";
+	public static final String RENTAL_STATUS_REQ = "신청"; // 2019-06-1 "신청중"에서 "신청"으로 코드 변경
 	public static final String RENTAL_STATUS_OUT = "대출중";
 	public static final String RENTAL_STATUS_RETURN = "반납";
 	public static final String RENTAL_STATUS_OVERDUE = "연체";

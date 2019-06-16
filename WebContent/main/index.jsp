@@ -102,11 +102,12 @@
   	 
   	<!-- 베스트 대여 -->
   	<div class="w3-card w3-pale-red center-book-space w3-left w3-padding" >
-  		<h3 class="w3-center"  style="margin: 10px 0 0 0"><b>베스트 대여</b></h3>
+  		<h3 class="w3-center"  style="margin: 10px 0 0 0"><b>베스트대출</b></h3>
     	<div class="rslides_container">
       		<ul class="rslides" id="slider1">
       			<c:forEach var="book" items="${bestBookList}" varStatus="status">
-        			<li><a href="bookContent.do?isbn=${book.isbn}&page=1"><img src="${book.image}" alt="베스트 대여" class="w3-card"></a>
+        			<%-- <li><a href="bookContent.do?isbn=${book.isbn}&page=1"><img src="${book.image}" alt="베스트 대여" class="w3-card"></a> --%>
+        			<li><a href="bookContent.do?isbn=${book.isbn}&type=best"><img src="${book.image}" alt="베스트 대여" class="w3-card"></a>
         				  <h4 class="w3-center" style="margin: 0">${status.count }위(${book.rentCount}회)</h4>
         			</li>
         		</c:forEach>

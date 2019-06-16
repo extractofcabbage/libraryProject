@@ -156,20 +156,30 @@ public class BookDAO {
 
 		ArrayList<BookBean> bookList = new ArrayList<BookBean>();
 		
-		String sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
-				"from book " + 
-				"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
-				"on book.isbn = comment.isbn " + 
-				"left join (select isbn, member_no from favor_book) as favor " + 
-				"on book.isbn = favor.isbn and favor.member_no = ? " + 
-				"group by book.isbn order by book.no limit ?, ?";
+		String sql = "";
+		if (memberNo != 0) {
+			sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
+					"from book " + 
+					"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
+					"on book.isbn = comment.isbn " + 
+					"left join (select isbn, member_no from favor_book) as favor " + 
+					"on book.isbn = favor.isbn and favor.member_no = " + memberNo +  
+					" group by book.isbn order by book.no limit ?, ?";
+		} else {
+			sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
+					"from book " + 
+					"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
+					"on book.isbn = comment.isbn " + 
+					"left join (select isbn, member_no from favor_book) as favor " + 
+					"on book.isbn = favor.isbn " + 
+					"group by book.isbn order by book.no limit ?, ?";
+		}
 
 		try {
 			pstmt = con.prepareStatement(sql);
 			int startRow = (page - 1) * 10;
-			pstmt.setInt(1, memberNo);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, limit);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, limit);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BookBean bookBean = new BookBean();
@@ -218,23 +228,33 @@ public class BookDAO {
 			searchCondition = "book." + searchType + " LIKE '%" + searchWord + "%' ";
 		}
 
-		String sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
-				"from book " + 
-				"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
-				"on book.isbn = comment.isbn " + 
-				"left join (select isbn, member_no from favor_book) as favor " + 
-				"on book.isbn = favor.isbn and favor.member_no = ? " +
-				"WHERE " + searchCondition +
-				"group by book.isbn order by book.no limit ?, ?";
-
+		String sql = "";
+		if (memberNo != 0) {
+			sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
+					"from book " + 
+					"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
+					"on book.isbn = comment.isbn " + 
+					"left join (select isbn, member_no from favor_book) as favor " + 
+					"on book.isbn = favor.isbn and favor.member_no = " + memberNo + 
+					" WHERE " + searchCondition +
+					"group by book.isbn order by book.no limit ?, ?";	
+		} else {
+			sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
+					"from book " + 
+					"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
+					"on book.isbn = comment.isbn " + 
+					"left join (select isbn, member_no from favor_book) as favor " + 
+					"on book.isbn = favor.isbn " +
+					"WHERE " + searchCondition +
+					"group by book.isbn order by book.no limit ?, ?";
+		}
 
 		try {
 			pstmt = con.prepareStatement(sql);
 			int startRow = (page - 1) * 10;
-			pstmt.setInt(1, memberNo);
 			//pstmt.setString(2, "%" + searchWord + "%");
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, limit);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, limit);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BookBean bookBean = new BookBean();
@@ -274,22 +294,33 @@ public class BookDAO {
 
 		ArrayList<BookBean> bookList = new ArrayList<BookBean>();
 
-		String sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
-				"from book " + 
-				"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
-				"on book.isbn = comment.isbn " + 
-				"left join (select isbn, member_no from favor_book) as favor " + 
-				"on book.isbn = favor.isbn and favor.member_no = ? " +
-				"WHERE book.category = ? " + 
-				"group by book.isbn order by book.no limit ?, ?";
-
+		String sql = "";
+		if (memberNo != 0) {
+			sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
+					"from book " + 
+					"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
+					"on book.isbn = comment.isbn " + 
+					"left join (select isbn, member_no from favor_book) as favor " + 
+					"on book.isbn = favor.isbn and favor.member_no = " + memberNo + 
+					" WHERE book.category = ? " + 
+					"group by book.isbn order by book.no limit ?, ?";
+		} else {
+			sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
+					"from book " + 
+					"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
+					"on book.isbn = comment.isbn " + 
+					"left join (select isbn, member_no from favor_book) as favor " + 
+					"on book.isbn = favor.isbn " +
+					"WHERE book.category = ? " + 
+					"group by book.isbn order by book.no limit ?, ?";
+		}
+		
 		try {
 			pstmt = con.prepareStatement(sql);
 			int startRow = (page - 1) * 10;
-			pstmt.setInt(1, memberNo);
-			pstmt.setString(2, category);
-			pstmt.setInt(3, startRow);
-			pstmt.setInt(4, limit);
+			pstmt.setString(1, category);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, limit);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BookBean bookBean = new BookBean();
@@ -338,23 +369,35 @@ public class BookDAO {
 			searchCondition = "book." + searchType + " LIKE '%" + searchWord + "%' ";
 		}
 
-		String sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
-				"from book " + 
-				"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
-				"on book.isbn = comment.isbn " + 
-				"left join (select isbn, member_no from favor_book) as favor " + 
-				"on book.isbn = favor.isbn and favor.member_no = ? " +
-				"WHERE " + searchCondition +
-				"AND book.category = ? " + 
-				"group by book.isbn order by book.no limit ?, ?";
+		String sql = "";
+		if (memberNo != 0) {
+			sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
+					"from book " + 
+					"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
+					"on book.isbn = comment.isbn " + 
+					"left join (select isbn, member_no from favor_book) as favor " + 
+					"on book.isbn = favor.isbn and favor.member_no = " + memberNo + 
+					" WHERE " + searchCondition +
+					"AND book.category = ? " + 
+					"group by book.isbn order by book.no limit ?, ?";			
+		} else {
+			sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
+					"from book " + 
+					"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
+					"on book.isbn = comment.isbn " + 
+					"left join (select isbn, member_no from favor_book) as favor " + 
+					"on book.isbn = favor.isbn " +
+					"WHERE " + searchCondition +
+					"AND book.category = ? " + 
+					"group by book.isbn order by book.no limit ?, ?";
+		}
 
 		try {
 			pstmt = con.prepareStatement(sql);
 			int startRow = (page - 1) * 10;
-			pstmt.setInt(1, memberNo);
-			pstmt.setString(2, category);
-			pstmt.setInt(3, startRow);
-			pstmt.setInt(4, limit);
+			pstmt.setString(1, category);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, limit);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BookBean bookBean = new BookBean();
@@ -394,19 +437,30 @@ public class BookDAO {
 
 		BookBean bookBean = null;
 
-		String sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
-				"from book " + 
-				"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
-				"on book.isbn = comment.isbn " + 
-				"left join (select isbn, member_no from favor_book) as favor " + 
-				"on book.isbn = favor.isbn and favor.member_no = ? " + 
-				"where book.isbn = ? " + 
-				"group by book.isbn order by book.no";
+		String sql = "";
+		if (memberNo != 0) {
+			sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
+					"from book " + 
+					"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
+					"on book.isbn = comment.isbn " + 
+					"left join (select isbn, member_no from favor_book) as favor " + 
+					"on book.isbn = favor.isbn and favor.member_no = " + memberNo +  
+					" where book.isbn = ? " + 
+					"group by book.isbn order by book.no";
+		} else {
+			sql = "select book.*, sum(Case when book.status = '" + DbCode.BOOK_STATUS_IN + "' then 1 else 0 end) as rentCount, IFNULL(comment.grade, 0) AS averageGrade, sum(Case when favor.isbn then 1 else 0 end) as favorCount " + 
+					"from book " + 
+					"left join (select isbn, ROUND(AVG(grade), 2) AS grade from book_comment group by isbn) as comment " + 
+					"on book.isbn = comment.isbn " + 
+					"left join (select isbn, member_no from favor_book) as favor " + 
+					"on book.isbn = favor.isbn " + 
+					"where book.isbn = ? " + 
+					"group by book.isbn order by book.no";
+		}
 
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, memberNo);
-			pstmt.setString(2, isbn);
+			pstmt.setString(1, isbn);
 			rs = pstmt.executeQuery();
 			if (rs.first()) {
 				bookBean = new BookBean();
@@ -690,7 +744,7 @@ public class BookDAO {
 		return listCount;
 	}
 
-	public ArrayList<BookBean> selectBookBestRentList(int page, int limit, int memberNo) {
+	public ArrayList<BookBean> selectBookBestRentList(int memberNo) {
 
 		ArrayList<BookBean> bookList = new ArrayList<BookBean>();
 
@@ -702,14 +756,11 @@ public class BookDAO {
 				"on book.isbn = comment.isbn " + 
 				"left join (select isbn, member_no from favor_book) as favor " + 
 				"on book.isbn = favor.isbn and favor.member_no = ? " + 
-				"group by book.isbn order by count(*) desc limit ?, ?";
+				"group by book.isbn order by count(*) desc limit 0, 10";
 
 		try {
 			pstmt = con.prepareStatement(sql);
-			int startRow = (page - 1) * 10;
 			pstmt.setInt(1, memberNo);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, limit);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BookBean bookBean = new BookBean();
@@ -746,7 +797,7 @@ public class BookDAO {
 		return bookList;
 	}
 
-	public ArrayList<BookBean> selectBookBestRentCategoryList(int page, int limit, String category, int memberNo) {
+	public ArrayList<BookBean> selectBookBestRentCategoryList(String category, int memberNo) {
 
 		ArrayList<BookBean> bookList = new ArrayList<BookBean>();
 
@@ -759,15 +810,12 @@ public class BookDAO {
 				"left join (select isbn, member_no from favor_book) as favor " + 
 				"on book.isbn = favor.isbn and favor.member_no = ? " + 
 				"WHERE book.category = ? " + 
-				"group by book.isbn order by count(*) desc limit ?, ?";
+				"group by book.isbn order by count(*) desc limit 0, 10";
 
 		try {
 			pstmt = con.prepareStatement(sql);
-			int startRow = (page - 1) * 10;
 			pstmt.setInt(1, memberNo);
 			pstmt.setString(2, category);
-			pstmt.setInt(3, startRow);
-			pstmt.setInt(4, limit);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BookBean bookBean = new BookBean();

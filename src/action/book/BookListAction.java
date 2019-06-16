@@ -1,6 +1,5 @@
 package action.book;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +17,11 @@ public class BookListAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		int memberNo = 0;
+		
 		//int memberNo = Integer.parseInt(String.valueOf(request.getSession().getAttribute("memberNo")));
 		MemberBean memberBean = (MemberBean)request.getSession().getAttribute("memberBean");
-		if(memberBean == null) {
+		/*if(memberBean == null) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
@@ -29,9 +30,12 @@ public class BookListAction implements Action {
 			out.println("</script>");
 			
 			return null;
-		} 
-		int memberNo = memberBean.getNo();
+		}*/
 		
+		if (memberBean != null) {
+			memberNo = memberBean.getNo();	
+		}
+
 		ArrayList<BookBean> bookList = new ArrayList<BookBean>();
 		String searchType = "";
 		String searchWord = "";
@@ -81,6 +85,9 @@ public class BookListAction implements Action {
 		request.setAttribute("searchType", searchType);
 		request.setAttribute("searchWord", searchWord);
 		request.setAttribute("category", category);
+		
+		// 로그인 유무 확인을 위한 memberNo 추가
+		request.setAttribute("memberNo", memberNo);
 		
 
 		// ActionForward 객체를 사용하여 board 폴더의 qna_board_list.jsp 페이지로 이동 처리 => Dispatch 방식 포워딩
