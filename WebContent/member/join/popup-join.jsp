@@ -126,7 +126,7 @@
       			<hr>
       			<span>프로필</span><br>
       			<img id="imgadsrc" style="width:60px; height: 60px; margin-top: 8px;">
-      			<input type="text" id="imgad" name="imgad">
+      			<input type="hidden" id="imgad" name="imgad" >
       			
       			<input type="email" placeholder="이메일" name="email" id="email" required class="join-input"  style="width:70%">
       			<input type="button" value="중복검사" onclick="emailCheck()" class="join-button" style="width:87px; height: 48px;"><br>

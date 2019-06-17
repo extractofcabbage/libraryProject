@@ -44,6 +44,8 @@ public class JoinProAction implements Action {
 		memberBean.setAddress1(multi.getParameter("address1"));
 		memberBean.setAddress2(multi.getParameter("address2"));
 		memberBean.setPostcode(Integer.parseInt(multi.getParameter("postcode")));
+		
+		System.out.println("회원가입시이미지 :"+memberBean.getImage());
 
 		JoinProService joinProService = new JoinProService();
 

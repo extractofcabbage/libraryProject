@@ -82,7 +82,7 @@ public class MemberDAO {
 			pstmt.setString(4, memberBean.getGender());
 			pstmt.setString(5, memberBean.getBirth());
 			pstmt.setString(6, memberBean.getPhone());
-			if(memberBean.getImage()==null) {
+			if(memberBean.getImage().equals("")) {
 				pstmt.setString(7, standard_imgaddress);
 			}
 			else {
