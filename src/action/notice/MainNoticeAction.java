@@ -1,4 +1,4 @@
-package action;
+package action.notice;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 
+import action.Action;
 import svc.MainNoticeService;
 import vo.ActionForward;
 import vo.BoardBean;

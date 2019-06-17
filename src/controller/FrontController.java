@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.MainAction;
-import action.MainNoticeAction;
-import action.NoticeListAction;
+import action.notice.MainNoticeAction;
+import action.notice.NoticeListAction;
 import vo.ActionForward;
 
 @WebServlet("*.ma")
