@@ -11,11 +11,29 @@
 <jsp:include page="../inc/common-append.jsp" />
 <!------------------- CSS/JS ---------------------->
 
+<!------------------------ append css ------------------------------>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css">
+<!------------------------ append css ------------------------------>
+
 <script>
-function passChangeInput() {
-	alert("안녕1");
-	$('tr:eq(1) td:eq(1)').html('ood');
+function passChangeInputDisplay() {
+	$(".passChangeInput").css('display', 'block');
+	$(".passChangeBtn").css('display', 'none');
 }
+function passChangeBtnDisplay() {
+	$(".passChangeInput").css('display', 'none');
+	$(".passChangeBtn").css('display', 'block');
+}
+
+function passChangeSubmit() {
+
+		alert("aaa");
+	  $('#alertPass').fadeIn(200).delay(2000).fadeOut(200);
+	  $('#newPass').fadeIn(200).delay(2000).fadeOut(200);
+	  
+}
+
+	
 </script>
 </head>
 <body class="w3-light-grey">
@@ -59,29 +77,48 @@ function passChangeInput() {
         <div class="w3-container">
           <table class="w3-table w3-striped w3-bordered w3-border">
           	<tr>
-          		<td>이메일</td><td>변정훈@변정훈.com</td>
+          		<td class="info-td-left">이메일</td><td>변정훈@변정훈.com</td>
           	</tr>
           	<tr>
-          		<td>비밀번호</td>
-          		<td>●●●●●●●● &nbsp; 
-          			<input type="button" class="w3-button w3-dark-grey w3-round-medium" style="padding:5px 10px;" value="변경" onclick="passChangeInput()">
+          		<td class="info-td-left">비밀번호</td>
+          		<td>
+          			<div class="passChangeInput">
+          				<div class="tooltip">
+          					<input type="text" placeholder="현재 비밀번호" class="info-input"><br>
+          					<span class="tooltiptext" id="recentPass">현재 비밀번호를 입력해주세요.</span>
+          					<span class="tooltiptext" id="alertPass">비밀번호가 다릅니다. 다시 입력해주세요.</span>
+          				</div>
+          				<div  class="tooltip">
+          					<input type="text" placeholder="신규 비밀번호" class="info-input"><br>
+          					<span class="tooltiptext" id="newPass">유효한 새로운 비밀번호를 입력해주세요</span>
+          				</div>
+          				<span style="opacity: 0.6">비밀번호를 형식에 맞게 적어주세요.</span><br>
+          				<input type="text" placeholder="비밀번호 확인" class="info-input"><br>
+          				<span style="opacity: 0.6">비밀번호를 다시 한번 입력해주세요.</span><br>
+          				<input type="button" value="변경" class="w3-button w3-dark-grey w3-round-medium" onclick="passChangeSubmit()">
+          				<input type="button" value="취소" class="w3-button w3-dark-grey w3-round-medium" onclick="passChangeBtnDisplay()"><br>
+          			</div>
+          			<div class="passChangeBtn">
+          				●●●●●●●● &nbsp; 
+          				<input type="button" class="w3-button w3-dark-grey w3-round-medium" value="변경" onclick="passChangeInputDisplay()">
+          			</div>
           		</td>
           	</tr>
           	<tr>
-          		<td>이름</td><td>변정훈</td>
+          		<td class="info-td-left">이름</td><td>변정훈</td>
           	</tr>
           	<tr>
-          		<td>성별</td><td>남자</td>
+          		<td class="info-td-left">성별</td><td>남자</td>
           	</tr>
           	<tr>
-          		<td>생년월일</td><td>1992.11.06</td>
+          		<td class="info-td-left">생년월일</td><td>1992.11.06</td>
           	</tr>
           	<tr>
-          		<td>가입일자</td><td>05.18</td>
+          		<td class="info-td-left">가입일자</td><td>05.18</td>
           	</tr>
           	<tr>
-          		<td>탈퇴신청</td>
-          		<td><input type="button" class="w3-button w3-dark-grey w3-round-medium" style="padding:5px 10px;" value="탈퇴"></td>
+          		<td class="info-td-left">탈퇴신청</td>
+          		<td><input type="button" class="w3-button w3-dark-grey w3-round-medium" value="탈퇴"></td>
           	</tr>
           </table>
           <br><br>
