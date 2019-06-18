@@ -69,7 +69,7 @@ public class MemberDAO {
 	}
 	public int insertMember(MemberBean memberBean) {
 		int insertCount=0;
-		String standard_imgaddress="http://blogfiles.naver.net/MjAxODEwMTJfMTI5/MDAxNTM5MjczODkzNDQ2.BtzkPkx7yq7CEbX2o0B4drmGYNv163YSa0hEJyFgrSYg.uD_iixqh1YxgKuLSgskCewOnEV-7JZVaiFZSBHcVG70g.PNG.box182/%B9%AB%C1%A6671.png";
+		String standard_imgaddress="./images/memberStandardimg/standardimg.png";
 		try {
 			
 			String sql = "insert into member values(null,?,?,?,?,?,?,?,?,?,?,?,now())";

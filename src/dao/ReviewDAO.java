@@ -332,6 +332,7 @@ public class ReviewDAO {
 					reviewBean.setReadcount(rs.getInt("readcount"));
 					reviewBean.setFile(rs.getString("file"));
 					reviewBean.setReg_date(rs.getDate("reg_date"));
+					reviewBean.setImage(rs.getString("image"));
 				}
 				sql = "select * from member where no= ?";
 				pstmt = con.prepareStatement(sql);
