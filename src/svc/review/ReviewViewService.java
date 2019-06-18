@@ -9,13 +9,13 @@ import static db.JdbcUtil.*;
 public class ReviewViewService {
 	public ReviewBean getArticle(int no) throws Exception{
 		System.out.println("ReviewViewService");
-		ReviewBean boardBean = null;
+		ReviewBean reviewBean = null;
 		Connection con = getConnection();
 		
 		ReviewDAO reviewDAO = ReviewDAO.getinstance();
 		reviewDAO.setConnection(con);
 		
-		boardBean = reviewDAO.getViewArticle(no);
+		reviewBean = reviewDAO.getViewArticle(no);
 		
 		int updateCount = reviewDAO.updateReadcount(no);
 		
@@ -27,6 +27,6 @@ public class ReviewViewService {
 		
 		close(con);
 		
-		return boardBean;
+		return reviewBean;
 	}
 }

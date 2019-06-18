@@ -142,7 +142,7 @@ function SirenFunction(idMyDiv){
 								<textarea id="textarea" class="w3-input w3-border book-comment-input" placeholder="내용을 입력해주세요."></textarea>
 								<textarea hidden="hidden" id="result" name="comment_content"></textarea>
 								<span>
-									<button type="submit" class="w3-button w3-padding-large w3-white w3-border w3-large" style="vertical-align: top; height: 79px" onclick="comment()">
+									<button type="submit" class="w3-button w3-padding w3-white w3-border w3-large" style="vertical-align: top; height: 68px" onclick="comment()">
 										<b>등록</b>
 									</button>
 								</span>
@@ -158,7 +158,7 @@ function SirenFunction(idMyDiv){
 							<%
 								for (int i = 0; i < commentBeanList.size(); i++) {
 							%>
-							<div class="w3-row">
+							<div class="w3-row" >
 								<div class="w3-col m2 text-center">
 									<img class="w3-circle"
 										src="<%=commentMemberList.get(i).getImage()%>"
@@ -196,9 +196,9 @@ function SirenFunction(idMyDiv){
 											<input type="button" onclick="SirenFunction('<%=commentBeanList.get(i).getNo()%>'); return false;" value="취소">
 										</form>
 									</div>
-									<br>
 								</div>
 							</div>
+							<hr>
 							<%
 								}
 							%>

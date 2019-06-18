@@ -16,8 +16,9 @@ public class ReviewListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("ReviewListAction 도착");
 		// TODO Auto-generated method stub
-		ArrayList<ReviewBean> articleList = new ArrayList<ReviewBean>();
+		ArrayList articleList = new ArrayList();
 		
 		int page = 1;
 		int limit = 10;
@@ -31,7 +32,7 @@ public class ReviewListAction implements Action {
 		int listCount =	reviewListService.getListCount();
 		
 		articleList = reviewListService.getArticleList(page, limit);
-		
+		System.out.println("articleList :: > " + articleList);
 		int maxPage = (int)((double)listCount / limit + 0.95);
 		int startPage = (((int)((double)page / 10+0.9))-1)*10+1;
 		int endPage = startPage + 10 - 1;
@@ -55,7 +56,7 @@ public class ReviewListAction implements Action {
 		// => 기존 boardList.bo 주소를 변경하지 않고 바로 jsp 페이지로 이동하기 위해서
 		ActionForward forward = new ActionForward();
 		forward.setPath("review/review_list.jsp");
-		
+//		forward.setPath("review/aa.jsp");
 		return forward;
 	}
 

@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import action.review.ReviewListAction;
 import action.review.ReviewUpdateAction;
 import action.review.ReviewUpdateProAction;
 import action.review.ReviewViewAction;
+import action.review.ReviewWriteFormAction;
 import action.review.ReviewWriteProAction;
 import vo.ActionForward;
 
@@ -42,24 +44,34 @@ public class ReviewFrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 		if (command.equals("/reviewList.rv")) {
+			System.out.println("ReviewFrontController - reviewList.rv");
 			action = new ReviewListAction();
-
+//			ArrayList articleList = (ArrayList) request.getAttribute("articleList");
 			try {
 				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//			request.setAttribute("articleList", articleList);
+
+		} else if (command.equals("/reviewWrite.rv")) {
+			System.out.println("write");
+			action = new ReviewWriteFormAction();
+			
+			try {
+				forward = action.execute(request, response); 
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-		} else if (command.equals("/reviewWrite.rv")) {
-			System.out.println("write");
-			forward = new ActionForward();
-			forward.setPath("review/review_write.jsp");
+
 		} else if (command.equals("/reviewWritePro.rv")) {
 			System.out.println("Controller - reviewWritePro.rv");
 			action = new ReviewWriteProAction();
-
+			
 			try {
 				forward = action.execute(request, response);
 
@@ -89,7 +101,7 @@ public class ReviewFrontController extends HttpServlet {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
-		}else if (command.equals("/reviewUpdatePro.rv")) {
+		} else if (command.equals("/reviewUpdatePro.rv")) {
 			action = new ReviewUpdateProAction();
 
 			try {
@@ -98,7 +110,7 @@ public class ReviewFrontController extends HttpServlet {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
-		}else if(command.equals("/reviewDelete.rv")) {
+		} else if (command.equals("/reviewDelete.rv")) {
 			action = new ReviewDeleteAction();
 			try {
 				forward = action.execute(request, response);
@@ -107,7 +119,7 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		// -----------review 끝----------------------------- 
+		// -----------review 끝-----------------------------
 
 		// ----------------------------------------------------------------------------
 		if (forward != null) {

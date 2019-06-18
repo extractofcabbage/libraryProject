@@ -1,20 +1,40 @@
+<%@page import="vo.book.BookBean"%>
+<%@page import="vo.MemberBean"%>
 <%@page import="vo.PageInfo"%>
 <%@page import="vo.ReviewBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <% --%>
-<!--  	request.setCharacterEncoding("UTF-8"); -->
-<!--  	String email = (String) session.getAttribute("email"); -->
-<!--  	ArrayList<ReviewBean> articleList = (ArrayList<ReviewBean>) request.getAttribute("articleList"); -->
-<!--  	PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo"); -->
+<%
+ 	request.setCharacterEncoding("UTF-8");
+//  	MemberBean memberBean = (MemberBean)session.getAttribute("memberBean");
+ 	
+ 	ArrayList articleList = (ArrayList) request.getAttribute("articleList");
+ 	ArrayList<ReviewBean> reviewList = new ArrayList<ReviewBean>();
+ 	ArrayList<MemberBean> memberList = new ArrayList<MemberBean>();
+ 	ArrayList<BookBean> bookList = new ArrayList<BookBean>();
+ 	
+ 	for (int i = 0 ; i < articleList.size() ; ) {
+ 		ReviewBean rb = new ReviewBean();
+ 		MemberBean mb = new MemberBean();
+ 		BookBean bb = new BookBean();
+ 		rb = (ReviewBean)articleList.get(i++);
+ 		mb = (MemberBean)articleList.get(i++);
+ 		bb = (BookBean)articleList.get(i++);
+ 		reviewList.add(rb);
+ 		memberList.add(mb);
+ 		bookList.add(bb);
+ 	}
 
-<!--  	int listCount = pageInfo.getListCount(); -->
-<!--  	int nowPage = pageInfo.getPage(); -->
-<!--  	int maxPage = pageInfo.getMaxPage(); -->
-<!-- 	int startPage = pageInfo.getStartPage(); -->
-<!--  	int endPage = pageInfo.getEndPage(); -->
-<%-- %>     --%>
+ 	PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
+
+ 	int listCount = pageInfo.getListCount();
+ 	int nowPage = pageInfo.getPage();
+ 	int maxPage = pageInfo.getMaxPage();
+	int startPage = pageInfo.getStartPage();
+ 	int endPage = pageInfo.getEndPage();
+ 	
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,77 +106,41 @@
   
    <div class="w3-container">
     <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white w3-card book-list-table">
+    						<%
+								if (articleList != null && listCount > 0) {
+							%>
+							<%
+								for (int i = 0; i < reviewList.size(); i++) {
+							%>
       <tr>
         <td>
-        	<span class="w3-left w3-xxlarge" style="margin-right: 20px;"><b>1</b></span>
+        	<span class="w3-left w3-xxlarge" style="margin-right: 20px;"><b><%=reviewList.get(i).getNo()%></b></span>
         	<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" class="w3-left" style="margin-left: 5px;">
         	<div>
-        		<h4 class="w3-text-teal"><b>목이 너무 깁니다 다 입력할 수가 업어요오오오오오오오오오오오오오오오오오오오오오오오오오오오오오</b></h4>
+        		<h4 class="w3-text-teal"><b><a
+									href="reviewView.rv?no=<%=reviewList.get(i).getNo()%>&page=<%=nowPage%>"><%=reviewList.get(i).getTitle()%></a></b></h4>
         		<h4 class="review-list-writer"><img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" class="w3-circle" style="width:50px; margin:0">
-        			&nbsp;&nbsp;자전차왕 엄북동
-        			<span class="w3-opacity">&nbsp;&nbsp;Sep 29, 2014, 9:12 PM</span>
-        			<span class=review-list-commentlike><i class="far fa-comment-dots"></i>(5) <i class="far fa-thumbs-up"></i>(5)</span>
+        			&nbsp;&nbsp;<%=memberList.get(i).getName() %>
+        			<span class="w3-opacity">&nbsp;&nbsp;<%=reviewList.get(i).getReg_date()%></span>
+        			<span class=review-list-commentlike><i class="far fa-comment-dots"></i>(5)코멘트값 <i class="far fa-thumbs-up"></i>(5)좋아요값</span>
+        			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 조회수
+        			(<%=reviewList.get(i).getReadcount()%>)
         		</h4>
 				<a class="w3-left review-list-content">
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
+					<%=reviewList.get(i).getContent()%>
 				</a>
-			</div>
-      	</td>
-      </tr>
-      		
-      <tr>
-        <td>
-        	<span class="w3-left w3-xxlarge" style="margin-right: 20px;"><b>1</b></span>
-        	<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" class="w3-left" style="margin-left: 5px;">
-        	<div>
-        		<h4 class="w3-text-teal"><b>목이 너무 깁니다 다 입력할 수가 업어요오오오오오오오오오오오오오오오오오오오오오오오오오오오오오</b></h4>
-        		<h4 class="review-list-writer"><img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" class="w3-circle" style="width:50px; margin:0">
-        			&nbsp;&nbsp;자전차왕 엄북동
-        			<span class="w3-opacity">&nbsp;&nbsp;Sep 29, 2014, 9:12 PM</span>
-        			<span class=review-list-commentlike><i class="far fa-comment-dots"></i>(5) <i class="far fa-thumbs-up"></i>(5)</span>
-        		</h4>
-				<a class="w3-left review-list-content">
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-				</a>
+				
+				
+				
 			</div>
       	</td>
       </tr>
       
+      						<%
+								}
+							%>
+      
       <tr>
-        <td>
-        	<span class="w3-left w3-xxlarge" style="margin-right: 20px;"><b>1</b></span>
-        	<img src="./sample-img/sampleimg.jpg" class="w3-left" style="margin-left: 5px;">
-        	<div>
-        		<h4 class="w3-text-teal"><b>목이 너무 깁니다 다 입력할 수가 업어요오오오오오오오오오오오오오오오오오오오오오오오오오오오오오</b></h4>
-        		<h4 class="review-list-writer"><img src="./sample-img/hahaha.gif" class="w3-circle" style="width:50px; margin:0">
-        			&nbsp;&nbsp;자전차왕 엄북동
-        			<span class="w3-opacity">&nbsp;&nbsp;Sep 29, 2014, 9:12 PM</span>
-        			<span class=review-list-commentlike><i class="far fa-comment-dots"></i>(5) <i class="far fa-thumbs-up"></i>(5)</span>
-        		</h4>
-				<a class="w3-left review-list-content">
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-					오늘 술한잔 했습니다. 영화가 잘안되도 좋습니다. 열심히 연기하였습니다. 자전차왕 엄북동 이거하나만 기억해주십쇼.......
-				</a>
-			</div>
-      	</td>
-      </tr>
       
     </table><br>
   </div>
@@ -164,12 +148,53 @@
   	<!-- Pagination -->
   	<div class="w3-center w3-padding-32 w3-xlarge">
     	<div class="w3-bar">
-      		<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-      		<a href="#" class="w3-bar-item w3-black w3-button">1</a>
-      		<a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-      		<a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-      		<a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-      		<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+						<%
+							if (nowPage <= 1) {
+						%>
+						 « &nbsp;
+						<%
+							} else {
+						%>
+						<a href="reviewList.rv?page=<%=nowPage - 1%>">«</a>&nbsp;
+						<%
+							}
+						%>
+
+						<%
+							for (int i = startPage; i <= endPage; i++) {
+									if (i == nowPage) {
+						%>
+						[<%=i%>]
+						<%
+							} else {
+						%>
+						<a href="reviewList.rv?page=<%=i%>">[<%=i%>]
+						</a>&nbsp;
+						<%
+							}
+						%>
+						<%
+							}
+						%>
+
+						<%
+							if (nowPage >= maxPage) {
+						%>
+						»
+						<%
+							} else {
+						%>
+						<a href="reviewList.rv?page=<%=nowPage + 1%>">»</a>
+						<%
+							}
+						%>
+					<%
+						} else {
+					%>
+					<section id="emptyArea">등록된 글이 없습니다</section>
+					<%
+						}
+					%>
     	</div>
   	</div>  	
     <!------------------------------ 메인 내용 ---------------------------------->

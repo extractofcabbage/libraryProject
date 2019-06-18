@@ -12,7 +12,7 @@ import vo.ReviewBean;
 
 public class ReviewWriteProService {
 	public int checkMemberNoArticle(String email) throws Exception {
-System.out.println("ReviewWriteProService - checkMemberNoArticle");
+		System.out.println("ReviewWriteProService - checkMemberNoArticle");
 		Connection con = getConnection();
 		ReviewDAO reviewDAO = ReviewDAO.getinstance();
 		reviewDAO.setConnection(con);
@@ -43,6 +43,7 @@ System.out.println("ReviewWriteProService - checkMemberNoArticle");
 		if (insertCount > 0) {
 			commit(con);
 			isWriteSuccess = true;
+			System.out.println("commit 진짜성공");
 		} else {
 			rollback(con);
 		}

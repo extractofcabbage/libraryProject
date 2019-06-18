@@ -40,7 +40,7 @@
 .book-comment-input {
 	width: 85%; 
 	display: inline-block;
-	font-size: 20px;
+	font-size: 17px;
 }
 /********** 오버레이 **********/
 .book-list {
@@ -73,7 +73,8 @@
 
 /********** 리뷰 *************/
 .review-content {
-	padding:10px 40px;
+	padding: 17px 100px 17px 150px;
+	font-size: 17px;
 }
 .review-list-writer {
 	margin: 0;

@@ -8,7 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
+import vo.MemberBean;
 import vo.ReviewBean;
+import vo.book.BookBean;
+import vo.book.RentBean;
 
 public class ReviewDAO {
 	private static ReviewDAO instance;
@@ -33,7 +37,6 @@ public class ReviewDAO {
 	
 	// ------------- checkMemberNo -----------------------------------
 		public int checkMemberNo(String email) {
-			System.out.println("ReviewDAO - checkMemberNo");
 			int checkMemberNo = 0;
 			String sql = "select no from member where email=?";
 
@@ -57,7 +60,6 @@ public class ReviewDAO {
 		}
 		//------------------ checkMemberType -------------------
 		public int checkMemberType(int checkMemberNo) {
-			System.out.println("ReviewDAO - checkMemberType");
 			int checkMemberType = 0;
 			String temp;
 			String sql = "select type from member where no=?";
@@ -89,18 +91,17 @@ public class ReviewDAO {
 		public boolean isWriter(int no, String email) {
 
 			boolean isWriter = false;
-			int board_member_no = 0;
 			int member_no=0;
-			String sql = "SELECT member_no FROM board WHERE no=?";
+			String sql = "SELECT member_no FROM review WHERE no=?";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, no);
 				rs = pstmt.executeQuery();
 				
-				if(rs.next()) {
-					board_member_no = rs.getInt(1);
-				}
+//				if(rs.next()) {
+//					board_member_no = rs.getInt(1);
+//				}
 				
 				sql = "select no from member where email=?";
 				pstmt = con.prepareStatement(sql);
@@ -110,9 +111,9 @@ public class ReviewDAO {
 				if(rs.next()) {
 					member_no = rs.getInt(1);
 				}
-				if(board_member_no == member_no) {
-					isWriter = true;
-				}
+//				if(board_member_no == member_no) {
+//					isWriter = true;
+//				}
 				
 			} catch (SQLException e) {
 				System.out.println("isWriter() 실패! : " + e.getMessage());
@@ -129,7 +130,7 @@ public class ReviewDAO {
 			
 			// BoardBean 객체의 board_num 에 해당하는 레코드를 수정
 			// => 글제목(board_subject), 글내용(content) 수정
-			String sql = "UPDATE board SET title=?,content=?,file=? WHERE no=?";
+			String sql = "UPDATE review SET title=?,content=?,file=? WHERE no=?";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
@@ -153,8 +154,9 @@ public class ReviewDAO {
 			int no = 0;
 			int insertCount = 0;
 
-			String sql = "select max(no) from board";
-
+			String sql = "select max(no) from review";
+			
+			
 			try {
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
@@ -162,16 +164,17 @@ public class ReviewDAO {
 				if (rs.next()) {
 					no = rs.getInt(1) + 1;
 				}
-				sql = "insert into board values(?,?,?,?,?,?,now(),?)";
+				sql = "insert into review(no,title,content,readcount,file,ispublic,reg_date,rental_no) values(null,?,?,0,?,?,now(),?)";
 
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, no);
-				pstmt.setString(2, reviewBean.getTitle());
-				pstmt.setString(3, reviewBean.getContent());
-				pstmt.setInt(4, 0);
-				pstmt.setString(5, reviewBean.getFile());
-				pstmt.setString(6, type);
-				pstmt.setInt(7, reviewBean.getMember_no());
+				pstmt.setString(1, reviewBean.getTitle());
+				pstmt.setString(2, reviewBean.getContent());
+				pstmt.setString(3, reviewBean.getFile());
+				pstmt.setString(4, reviewBean.getIspublic());
+				pstmt.setInt(5, reviewBean.getRental_no());
+				//대여한 책 번호를 넘겨줘야함
+				
+				System.out.println(pstmt);
 				
 				
 				insertCount = pstmt.executeUpdate();
@@ -187,14 +190,14 @@ public class ReviewDAO {
 			return insertCount;
 		}
 		//-------------selectCount---------------------------
-		public int selectCount(String type) {
+		public int selectCount() {
+			System.out.println("ReviewDAO - selectCount()");
 			int listCount = 0;
-			String sql = "select count(*) from board where board_type=?";
+			String sql = "select count(*) from review";
 			try {
 				
 
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, type);
 				rs = pstmt.executeQuery();
 
 				if (rs.next()) {
@@ -212,47 +215,89 @@ public class ReviewDAO {
 
 		// ------------selectArticleList ---------------------------
 
-		public ArrayList<ReviewBean> selectArticleList(int page, int limit,String board_type,String member_type) {
-			ArrayList<ReviewBean> articleList = new ArrayList<ReviewBean>();
+		public ArrayList selectArticleList(int page, int limit) {
+			ArrayList articleList = new ArrayList();
 			ReviewBean reviewBean = null;
-			String email = null;
+			MemberBean memberBean = null;
+			BookBean bookBean = null;
 			int startRow = (page - 1) * 10; // 읽기 시작할 row 번호
-			String sql = "select email from member where type=?";
+//			String sql = "select email from member where type=?";
 
 			// => 참조글번호 내림차순 & 답글순서번호 오름차순 정렬
 			// => 지정 row 번호부터 10개 조회
 
 			try {
+//				pstmt = con.prepareStatement(sql);
+//				pstmt.setString(1, member_type);
+//				rs = pstmt.executeQuery();
+//				
+//				if(rs.next()) {
+//					email = rs.getString(1);
+//				}
+				
+				String sql = "select * " + 
+						" from review v, rental r, member m, book b " + 
+						" where v.rental_no = r.no " + 
+						" and m.no = r.member_no " + 
+						" and b.no = r.book_no ORDER BY v.reg_date DESC LIMIT ?,? ";
+				
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, member_type);
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()) {
-					email = rs.getString(1);
-				}
-				
-				sql = "SELECT * FROM board where board_type = ? ORDER BY no DESC LIMIT ?,10";
-				
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1,board_type);
-				pstmt.setInt(2, startRow);
+//				pstmt.setString(1,board_type);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, limit);
 				rs = pstmt.executeQuery();
 
 				while (rs.next()) {
 					// 1개 게시물 레코드 읽어와서 BoardBean 객체에 저장
 					reviewBean = new ReviewBean();
 
-					reviewBean.setNo(rs.getInt("no"));
-					reviewBean.setTitle(rs.getString("title"));
-					reviewBean.setContent(rs.getString("content"));
-					reviewBean.setReadcount(rs.getInt("readcount"));
-					reviewBean.setFile(rs.getString("file"));
-					reviewBean.setBoard_type(rs.getString("board_type"));
-					reviewBean.setReg_date(rs.getDate("reg_date"));
-					reviewBean.setMember_no(rs.getInt("member_no"));
-					reviewBean.setWriter(email);
-				
+					reviewBean.setNo(rs.getInt("v.no"));
+					reviewBean.setTitle(rs.getString("v.title"));
+					reviewBean.setContent(rs.getString("v.content"));
+					reviewBean.setReadcount(rs.getInt("v.readcount"));
+					reviewBean.setFile(rs.getString("v.file"));
+					reviewBean.setReg_date(rs.getDate("v.reg_date"));
+					reviewBean.setIspublic(rs.getString("v.ispublic"));
+					reviewBean.setRental_no(rs.getInt("v.rental_no"));
+					
+					memberBean = new MemberBean();
+					
+					memberBean.setAddress1(rs.getString("m.address1"));
+					memberBean.setAddress2(rs.getString("m.address2"));
+					memberBean.setBirth(rs.getString("m.birth"));
+					memberBean.setEmail(rs.getString("m.email"));
+					memberBean.setGender(rs.getString("m.gender"));
+					memberBean.setImage(rs.getString("m.image"));
+					memberBean.setName(rs.getString("m.name"));
+					memberBean.setNo(rs.getInt("m.no"));
+					memberBean.setPassword(rs.getString("m.password"));
+					memberBean.setPhone(rs.getString("m.phone"));
+					memberBean.setPostcode(rs.getInt("m.postcode"));
+					memberBean.setReg_date(rs.getDate("m.reg_date"));
+					memberBean.setType(rs.getString("m.type"));
+					
+					bookBean = new BookBean();
+					
+					bookBean.setNo(rs.getInt("b.no"));
+					bookBean.setTitle(rs.getString("b.title"));
+					bookBean.setAuthor(rs.getString("b.author"));
+					bookBean.setPublisher(rs.getString("b.publisher"));
+					bookBean.setPublish_date(rs.getDate("b.publish_date"));
+					bookBean.setPrice(rs.getInt("b.price"));
+					bookBean.setIsbn(rs.getString("b.isbn"));
+					bookBean.setImage(rs.getString("b.image"));
+					bookBean.setStatus(rs.getString("b.status"));
+					bookBean.setKeyword1(rs.getString("b.keyword1"));
+					bookBean.setKeyword2(rs.getString("b.keyword2"));
+					bookBean.setKeyword3(rs.getString("b.keyword3"));
+					bookBean.setCategory(rs.getString("b.category"));
+					bookBean.setRent_code(rs.getString("b.rent_code"));
+					bookBean.setBar_code(rs.getString("b.bar_code"));
+					bookBean.setReg_date(rs.getTimestamp("b.reg_date"));
+					
 					articleList.add(reviewBean); // ArrayList 객체에 레코드 단위로 저장
+					articleList.add(memberBean);
+					articleList.add(bookBean);
 				}
 			} catch (SQLException e) {
 //				e.printStackTrace();
@@ -269,9 +314,9 @@ public class ReviewDAO {
 		
 		public ReviewBean getViewArticle(int no) {
 			System.out.println("getViewArticle");
-			ReviewBean boardBean = null;
+			ReviewBean reviewBean = null;
 			
-			String sql = "SELECT * FROM board WHERE no=?";
+			String sql = "SELECT * FROM review WHERE no=?";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
@@ -279,23 +324,27 @@ public class ReviewDAO {
 				rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
-					boardBean = new ReviewBean();
+					reviewBean = new ReviewBean();
 					
-					boardBean.setNo(rs.getInt("no"));
-					boardBean.setTitle(rs.getString("title"));
-					boardBean.setContent(rs.getString("content"));
-					boardBean.setReadcount(rs.getInt("readcount"));
-					boardBean.setFile(rs.getString("file"));
-					boardBean.setBoard_type(rs.getString("board_type"));
-					boardBean.setReg_date(rs.getDate("reg_date"));
-					boardBean.setMember_no(rs.getInt("member_no"));
+					reviewBean.setNo(rs.getInt("no"));
+					reviewBean.setTitle(rs.getString("title"));
+					reviewBean.setContent(rs.getString("content"));
+					reviewBean.setReadcount(rs.getInt("readcount"));
+					reviewBean.setFile(rs.getString("file"));
+					reviewBean.setReg_date(rs.getDate("reg_date"));
 				}
-				sql = "select email from member where no= ?";
+				sql = "select * from member where no= ?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, boardBean.getMember_no());
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
-					boardBean.setWriter(rs.getString(1));
+					reviewBean.setContent(rs.getString("content"));
+					reviewBean.setFile(rs.getString("file"));
+					reviewBean.setIspublic(rs.getString("ispublic"));
+					reviewBean.setNo(rs.getInt("no"));
+					reviewBean.setReadcount(rs.getInt("readcount"));
+					reviewBean.setReg_date(rs.getDate("reg_date"));
+					reviewBean.setRental_no(rs.getInt("rental_no"));
+					reviewBean.setTitle(rs.getString("title"));
 				}
 				
 			} catch (SQLException e) {
@@ -306,13 +355,13 @@ public class ReviewDAO {
 				close(pstmt);
 			}
 					
-			return boardBean;
+			return reviewBean;
 		}
 		public int updateReadcount(int no) {
 			int updateCount = 0;
 			
 			// board_num 에 해당하는 레코드의 board_readcount 값을 1 증가시키기
-			String sql = "UPDATE board SET readcount=readcount+1 WHERE no=?";
+			String sql = "UPDATE review SET readcount=readcount+1 WHERE no=?";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
@@ -332,7 +381,7 @@ public class ReviewDAO {
 			int deleteCount = 0;
 			
 			// board_num 에 해당하는 레코드를 삭제
-			String sql = "DELETE FROM board WHERE no=?";
+			String sql = "DELETE FROM review WHERE no=?";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
@@ -345,5 +394,39 @@ public class ReviewDAO {
 			}
 			
 			return deleteCount;
+		}
+
+		public ArrayList getRentalBookList(int member_no) {
+			ArrayList bookList = new ArrayList();
+			BookBean bookBean = null;
+			String sql = "select *  " + 
+					"from rental r, book b " + 
+					"where member_no = ? " + 
+					"and r.status not in('신청중') " + 
+					"and r.no not in(select r.no from review v, rental r " + 
+					"where v.rental_no = r.no " + 
+					"and member_no = ?) " + 
+					"and r.book_no = b.no ";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, member_no);
+				pstmt.setInt(2, member_no);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					bookBean = new BookBean();
+					bookBean.setImage(rs.getString("image"));;
+					bookBean.setIsbn(rs.getString("isbn"));
+					bookList.add(bookBean);
+									}
+			} catch (SQLException e) {
+				System.out.println("getRentalBookList() 실패! : " + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			} 
+			
+			return bookList;
 		}
 }

@@ -12,14 +12,14 @@ import vo.ReviewBean;
 
 public class ReviewListService {
 	public int getListCount() throws Exception{
+		System.out.println("ReviewListService - getListCount");
 		int listCount = 0;
-		String type = "review";
 		Connection con = getConnection();
 		
 		ReviewDAO reviewDAO = ReviewDAO.getinstance();
 		reviewDAO.setConnection(con);
 		
-		listCount = reviewDAO.selectCount(type);
+		listCount = reviewDAO.selectCount();
 		
 		System.out.println("게시물 갯수 : " + listCount);
 		
@@ -28,16 +28,17 @@ public class ReviewListService {
 		return listCount;
 	}
 	
-	public ArrayList<ReviewBean> getArticleList(int page,int limit) throws Exception{
-		ArrayList<ReviewBean> articleList = null;
-		String board_type = "review";
-		String member_type = "승인";
+	public ArrayList getArticleList(int page,int limit) throws Exception{
+		System.out.println("ReviewListService - getArticleList");
+		ArrayList articleList = null;
+//		String board_type = "review";
+//		String member_type = "승인";
 		Connection con = getConnection();
 		
 		ReviewDAO reviewDAO = ReviewDAO.getinstance();
 		reviewDAO.setConnection(con);
 		
-		articleList = reviewDAO.selectArticleList(page, limit,board_type,member_type);
+		articleList = reviewDAO.selectArticleList(page, limit);
 		
 		close(con);
 		

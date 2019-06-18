@@ -1,12 +1,5 @@
-<%@page import="vo.ReviewBean"%>
-<%@page import="vo.BoardBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	request.setCharacterEncoding("UTF-8");
-	ReviewBean reviewBean = (ReviewBean) request.getAttribute("article");
-	String nowPage = (String) request.getAttribute("page");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,8 +77,8 @@
 	<div class="w3-col m11">
       <div class="w3-container w3-card w3-white">
         <div class="w3-center" style="margin-top: 30px">
-          <h3><%=reviewBean.getTitle() %></h3>
-          <h5><span class="w3-opacity">by<br>May 2, 2016 &nbsp;&nbsp;&nbsp; 조회수 10</span></h5>
+          <h3>TITLE HEADING</h3>
+          <h5><span class="w3-opacity">by 작성자<br>May 2, 2016 &nbsp;&nbsp;&nbsp; 조회수 10</span></h5>
         </div>
         <div class="review-content w3-justify w3-margin">
         

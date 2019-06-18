@@ -62,20 +62,19 @@ MemberBean memberBean = (MemberBean)session.getAttribute("memberBean");
 					    <!-- 글내용 넣는곳 -->
 					    
 					    <!-- 이미지 넣는곳 -->
+					    <%if(article.getFile() != null) {%>
 					    <p class="w3-center">
 					    	 <img src="./images/notice/<%=article.getFile() %>" class="w3-margin"> 
 					   <%--  <p><%=article.getFile() %> --%>
 					    </p>
+					    <%} %>
 					    <!-- 이미지 넣는곳 -->
 					    
        					<p>
-		  					<a href="noticeList.bo?no=<%=article.getNo()%>&page=<%=nowPage %>" class="w3-right">목록</a>
+		  					<a href="noticeList.bo?no=<%=article.getNo()%>&page=<%=nowPage %>" class="w3-right" style="margin-left: 10px">목록</a>
        					<%if(memberBean!=null){%>
        					<% if(memberBean.getType().equals("관리자")){%>
 		  					 <a href="noticeDeleteForm.bo?no=<%=article.getNo()%>&page=<%=nowPage %>" class="w3-right" style="margin-left: 10px">삭제</a>
-		  					 &nbsp;&nbsp; 
-		  				
-		  					
 		  					<a href="noticeModifyForm.bo?no=<%=article.getNo()%>&page=<%=nowPage %>" class="w3-right"style="margin-left: 10px">수정</a>
 		  				<%} %>
 		  				<%} %>

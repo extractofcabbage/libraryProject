@@ -74,11 +74,9 @@
     		<a href="qnaList.bo" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  Q&A</a>
     		<a href="faq.bo" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  FAQ</a>
     	</div>
-   	<a href="#" class="w3-bar-item w3-button w3-padding main-menu"><i class="fas fa-wrench"></i>  내 서재</a>
+   	<a href="#" class="w3-bar-item w3-button w3-padding main-menu"><i class="fas fa-user"></i>  나의 서재</a>
     	<div class="sub-menu" style="margin-left: 20px">
-    		<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  공지사항</a>
-    		<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  Q&A</a>
-    		<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  FAQ</a>
+    		<a href="myInfo.my" class="w3-bar-item w3-button w3-padding"><i class="fas fa-angle-right"></i>  나의 정보 보기</a>
     	</div>		
     	
     	<%if(memberBean!=null&&memberBean.getType().equals("관리자")){%>

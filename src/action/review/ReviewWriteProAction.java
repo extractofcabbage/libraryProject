@@ -1,6 +1,7 @@
 package action.review;
 
 import java.io.PrintWriter;
+import java.sql.Date;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import svc.review.ReviewWriteProService;
 import vo.ActionForward;
 import vo.ReviewBean;
+import vo.MemberBean;
 import action.Action;
 
 public class ReviewWriteProAction implements Action {
@@ -34,15 +36,17 @@ public class ReviewWriteProAction implements Action {
 		MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "UTF-8", new DefaultFileRenamePolicy());
 		System.out.println("2");
 		HttpSession session = request.getSession();
-		String email = (String) session.getAttribute("email");
-
+		MemberBean memberBean = (MemberBean) session.getAttribute("memberBean");
+		String email = memberBean.getEmail();
+		String name = memberBean.getName();
+		System.out.println(name);
 		boardBean = new ReviewBean();
 		System.out.println("3");
 		ReviewWriteProService reviewWriteProService = new ReviewWriteProService();
 		System.out.println("4");
 		int checkMemberNo = reviewWriteProService.checkMemberNoArticle(email);
 		System.out.println("5");
-		int checkMemberType = reviewWriteProService.checkMemberTypeArticle(checkMemberNo);
+//		int checkMemberType = reviewWriteProService.checkMemberTypeArticle(checkMemberNo);
 		System.out.println("6");
 //		if (checkMemberType == 0) {
 //			response.setContentType("text/html;charset=UTF-8");
@@ -51,27 +55,33 @@ public class ReviewWriteProAction implements Action {
 //			out.println("alert('미승인 상태 입니다.')");
 //			out.println("history.back()");
 //			out.println("</script>");
-//		} else {			
-			boardBean.setTitle(multi.getParameter("subject"));
+//		} else {	
+		
+//		no,readcount,rental_no,member_no,book_no;
+//		private String title,content,file,ispublic;
+//		private Date reg_date;
+			boardBean.setTitle(multi.getParameter("title"));
 			boardBean.setContent(multi.getParameter("content"));
 			boardBean.setFile(multi.getOriginalFileName((String) multi.getFileNames().nextElement()));
-			boardBean.setMember_no(checkMemberNo);
+			boardBean.setIspublic(multi.getParameter("ispublic"));
+			boardBean.setRental_no(Integer.parseInt(multi.getParameter("rental_no")));
+//			boardBean.setMember_no(checkMemberNo);
 
 			boolean isInsertSuccess = reviewWriteProService.InsertArticle(boardBean);
 
-			if (!isInsertSuccess) {
-				response.setContentType("text/html;charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('글등록 실패')");
-				out.println("history.back()");
-				out.println("</script>");
-
-			} else {
+//			if (!isInsertSuccess) {
+//				response.setContentType("text/html;charset=UTF-8");
+//				PrintWriter out = response.getWriter();
+//				out.println("<script>");
+//				out.println("alert('글등록 실패')");
+//				out.println("history.back()");
+//				out.println("</script>");
+//
+//			} else {
 				forward = new ActionForward();
 				forward.setPath("reviewList.rv");
 				forward.setRedirect(true);
-			}
+//			}
 //		}
 		return forward;
 	}

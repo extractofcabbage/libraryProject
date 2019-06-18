@@ -3,15 +3,11 @@ package vo;
 import java.sql.Date;
 
 public class ReviewBean {
-	private int no,readcount,member_no;
-	private String title,content,file,board_type,writer;
-	public String getWriter() {
-		return writer;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
+	private int no,readcount,rental_no;
+	private String title,content,file,ispublic;
 	private Date reg_date;
+	private String image;
+	
 	public int getNo() {
 		return no;
 	}
@@ -24,11 +20,11 @@ public class ReviewBean {
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
-	public int getMember_no() {
-		return member_no;
+	public int getRental_no() {
+		return rental_no;
 	}
-	public void setMember_no(int member_no) {
-		this.member_no = member_no;
+	public void setRental_no(int rental_no) {
+		this.rental_no = rental_no;
 	}
 	public String getTitle() {
 		return title;
@@ -48,11 +44,11 @@ public class ReviewBean {
 	public void setFile(String file) {
 		this.file = file;
 	}
-	public String getBoard_type() {
-		return board_type;
+	public String getIspublic() {
+		return ispublic;
 	}
-	public void setBoard_type(String board_type) {
-		this.board_type = board_type;
+	public void setIspublic(String ispublic) {
+		this.ispublic = ispublic;
 	}
 	public Date getReg_date() {
 		return reg_date;
@@ -60,4 +56,12 @@ public class ReviewBean {
 	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
 	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 }

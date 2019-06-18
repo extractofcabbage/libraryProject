@@ -26,10 +26,18 @@ function passChangeBtnDisplay() {
 }
 
 function passChangeSubmit() {
-
-		alert("aaa");
-	  $('#alertPass').fadeIn(200).delay(2000).fadeOut(200);
-	  $('#newPass').fadeIn(200).delay(2000).fadeOut(200);
+	if($('#nowPass').val() == "") {
+		$('#nowPassText').fadeIn(200).delay(2000).fadeOut(200);
+		return null;
+	} 
+	else if($('#newPass').val() == "" || $('#newPass').val().length < 6 || $('#newPass').val().length > 16) {
+		$('#newPassText').fadeIn(200).delay(2000).fadeOut(200);
+		return null;
+	}
+	else if($('#repeatPass').val() != $('#newPass').val()) {
+		$('#repeatPassText').fadeIn(200).delay(2000).fadeOut(200);
+		return null;
+	}
 	  
 }
 
@@ -77,24 +85,27 @@ function passChangeSubmit() {
         <div class="w3-container">
           <table class="w3-table w3-striped w3-bordered w3-border">
           	<tr>
-          		<td class="info-td-left">이메일</td><td>변정훈@변정훈.com</td>
+          		<td class="info-td-left">이메일</td><td>${memberBean.email }</td>
           	</tr>
           	<tr>
           		<td class="info-td-left">비밀번호</td>
           		<td>
           			<div class="passChangeInput">
           				<div class="tooltip">
-          					<input type="text" placeholder="현재 비밀번호" class="info-input"><br>
-          					<span class="tooltiptext" id="recentPass">현재 비밀번호를 입력해주세요.</span>
-          					<span class="tooltiptext" id="alertPass">비밀번호가 다릅니다. 다시 입력해주세요.</span>
+          					<input type="password" name="nowPass" id="nowPass" placeholder="현재 비밀번호" class="info-input"><br>
+          					<span class="tooltiptext" id="nowPassText">현재 비밀번호를 입력해주세요.</span>
+          					<span class="tooltiptext" id="alertPassText">비밀번호가 다릅니다. 다시 입력해주세요.</span>
           				</div>
           				<div  class="tooltip">
-          					<input type="text" placeholder="신규 비밀번호" class="info-input"><br>
-          					<span class="tooltiptext" id="newPass">유효한 새로운 비밀번호를 입력해주세요</span>
+          					<input type="password" name="newPass" id="newPass" placeholder="신규 비밀번호" class="info-input"><br>
+          					<span class="tooltiptext" id="newPassText">유효한 새로운 비밀번호를 입력해주세요</span>
           				</div>
-          				<span style="opacity: 0.6">비밀번호를 형식에 맞게 적어주세요.</span><br>
-          				<input type="text" placeholder="비밀번호 확인" class="info-input"><br>
-          				<span style="opacity: 0.6">비밀번호를 다시 한번 입력해주세요.</span><br>
+          				<span style="opacity: 0.6">비밀번호를 형식에 맞게 6자이상 16자 이하로 적어주세요.</span><br>
+          				<div  class="tooltip">
+          					<input type="password" name="repeatPass" id="repeatPass" placeholder="비밀번호 확인" class="info-input"><br>
+          					<span class="tooltiptext" id="repeatPassText">비밀번호가 일치하지 않습니다. 다시 입력해주세요.</span>
+          				</div>
+          				<span style="opacity: 0.6">비밀번호를 다시 한번 입력해주세요.</span><br><br>
           				<input type="button" value="변경" class="w3-button w3-dark-grey w3-round-medium" onclick="passChangeSubmit()">
           				<input type="button" value="취소" class="w3-button w3-dark-grey w3-round-medium" onclick="passChangeBtnDisplay()"><br>
           			</div>
@@ -105,7 +116,7 @@ function passChangeSubmit() {
           		</td>
           	</tr>
           	<tr>
-          		<td class="info-td-left">이름</td><td>변정훈</td>
+          		<td class="info-td-left">이름</td><td>${memberBean.name }</td>
           	</tr>
           	<tr>
           		<td class="info-td-left">성별</td><td>남자</td>

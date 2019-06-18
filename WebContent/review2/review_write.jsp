@@ -1,14 +1,5 @@
-<%@page import="vo.book.BookBean"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="vo.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	MemberBean memberBean = (MemberBean)session.getAttribute("memberBean");
-	String email = memberBean.getEmail();
-	String name = memberBean.getName();
-	ArrayList bookList = (ArrayList)request.getAttribute("bookList");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,20 +38,26 @@
      		<div class="review-write-slideshow-container">
 
      			<!-- 읽은 책 목록 4개단위로 뜰 수 있도록 구현해주세요~ -->
-     			<%
-     				for(int i = 0;i<bookList.size();i++){
-     					BookBean book = (BookBean)bookList.get(i);
-     				
-     			%>
      			<div class="review-write-mySlides review-write-fade">
-     				<img src="<%=book.getImage() %>" width="170px" height="240px" class="review-write-img-shake" onclick="function(<%=i%>)">
+     				<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" width="170px" height="240px" class="review-write-img-shake">
+  					<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" width="170px" height="240px" class="review-write-img-shake">
+  					<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" width="170px" height="240px" class="review-write-img-shake">
+  					<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" width="170px" height="240px" class="review-write-img-shake">
 				</div>
-				<input type="hidden"name="isbn<%=i %>"value="<%=book.getIsbn() %>">
-				<%
-				}
-     			%>
-				
-     			
+
+				<div class="review-write-mySlides review-write-fade">
+  					<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" width="170px" height="240px" class="review-write-img-shake">
+ 			 		<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" width="170px" height="240px" class="review-write-img-shake">
+  					<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" width="170px" height="240px" class="review-write-img-shake">
+  					<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" width="170px" height="240px" class="review-write-img-shake">
+				</div>
+
+				<div class="review-write-mySlides review-write-fade">
+  					<img src="./sample-img/hahaha.gif" width="170px" height="240px" class="review-write-img-shake" >
+  					<img src="./sample-img/jjangoo.gif" width="170px" height="240px" class="review-write-img-shake">
+  					<img src="./sample-img/hahaha.gif" width="170px" height="240px" class="review-write-img-shake">
+  					<img src="./sample-img/jjangoo.gif" width="170px" height="240px" class="review-write-img-shake">
+				</div>
 
 
 				<a class="review-write-prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -78,19 +75,11 @@
 			<div style="text-align: center">리뷰를 쓰실 책을 선택해주세요</div>
      
      		<!-- 글쓰기 시작 -->
-     		<input type="text" id="name" name="name" class="review-write-text" value = "<%=name%>">
-    		<input type="text" id="fname" name="title" class="review-write-text" placeholder="제목을 입력해주세요.">
-<%--     		<input type="hidden" name="email" value="<%=memberBean.getEmail()%>"> --%>
-<!-- 			책번호랑 렌탈번호 하드코딩 -->
-			<input type="hidden"name="book_no"value=1>
-			<input type="hidden"name="rental_no"value=12>
-<!-- 			책번호랑 렌탈번호 하드코딩 -->			
-			<input type="radio"name="ispublic"value="공개"checked="checked">공개 
-			<input type="radio"name="ispublic"value="비공개">비공개 
+    		<input type="text" id="fname" name="firstname" class="review-write-text" placeholder="제목을 입력해주세요.">
 	
-    		<textarea id="subject" name="content" class="review-write-text" placeholder="내용을 입력해주세요." style="height: 500px"></textarea>
+    		<textarea id="subject" name="subject" class="review-write-text" placeholder="내용을 입력해주세요." style="height: 500px"></textarea>
 			
-			<input type="file" name="file" class="review-write-text">
+			<input type="file" class="review-write-text">
 			
 			<div style="text-align: center">
     			<input type="submit" value="글쓰기" class="review-write-btn">
@@ -98,14 +87,11 @@
 			</div>
   
       		<div class="clearfix"></div>
-<%--       		<input type="hidden"name="isbn"value="<%=book.getIsbn() %>"> --%>
   		</form>
 	</div>
 
 
 <script>
-
-
 
 var slideIndex = 1;
 showSlides(slideIndex);
