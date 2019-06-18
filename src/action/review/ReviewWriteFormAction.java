@@ -2,6 +2,7 @@ package action.review;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,9 +36,8 @@ public class ReviewWriteFormAction implements Action {
 		}
 		
 		int member_no = memberBean.getNo();
-		
 		ReviewWriteFormService reviewWriteFormService = new ReviewWriteFormService();
-		ArrayList<BookBean> bookList = reviewWriteFormService.getRentalBookList(member_no);
+		ArrayList<HashMap<String, String>> bookList = reviewWriteFormService.getRentalBookList(member_no);
 		
 		request.setAttribute("bookList", bookList);
 		ActionForward forward = new ActionForward();

@@ -1,14 +1,8 @@
-<%@page import="vo.book.BookBean"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="vo.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	MemberBean memberBean = (MemberBean)session.getAttribute("memberBean");
-	String email = memberBean.getEmail();
-	String name = memberBean.getName();
-	ArrayList bookList = (ArrayList)request.getAttribute("bookList");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +16,7 @@
 
 <!------------------------ append css ------------------------------>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/write.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/check.css">
 <!------------------------ append css ------------------------------>
 
 </head>
@@ -46,23 +41,29 @@
  		<form class="review-write-animate" action="reviewWritePro.rv" enctype="multipart/form-data" method="post">
      		<div class="review-write-slideshow-container">
 
-     			<!-- 읽은 책 목록 4개단위로 뜰 수 있도록 구현해주세요~ -->
      			<%
-     				for(int i = 0;i<bookList.size();i++){
-     					BookBean book = (BookBean)bookList.get(i);
-     				
+     				ArrayList<HashMap<String, String>> bookList = (ArrayList<HashMap<String, String>>)request.getAttribute("bookList");
+     				HashMap<String, String> book = null;
      			%>
-     			<div class="review-write-mySlides review-write-fade">
-     				<img src="<%=book.getImage() %>" width="170px" height="240px" class="review-write-img-shake" onclick="function(<%=i%>)">
-				</div>
-				<input type="hidden"name="isbn<%=i %>"value="<%=book.getIsbn() %>">
-				<%
-				}
-     			%>
-				
-     			
-
-
+     				<div class="review-write-mySlides review-write-fade">
+     					<% 
+     						for(int i=0; i<bookList.size(); i++) {
+     							book = bookList.get(i);
+     							if(i%3 != 0 || i==0) {
+     							%>
+     								<img src="<%=book.get("image") %>" width="170px" height="240px" class="review-write-img-shake" 
+     									onclick='rentalNoInput(<%=book.get("rental_no") %>)'>
+     							<%} else {%>
+     							</div>
+     							<div class="review-write-mySlides review-write-fade">
+     								<img src="<%=book.get("image") %>" width="170px" height="240px" class="review-write-img-shake"
+     									onclick='rentalNoInput(<%=book.get("rental_no") %>)'>
+     							<%
+     							}
+     						}
+     					%>
+					</div>
+		
 				<a class="review-write-prev" onclick="plusSlides(-1)">&#10094;</a>
 				<a class="review-write-next" onclick="plusSlides(1)">&#10095;</a>
 
@@ -70,15 +71,16 @@
 			<br>
 
 			<div style="text-align:center">
-  				<span class="review-write-dot" onclick="currentSlide(1)"></span> 
-  				<span class="review-write-dot" onclick="currentSlide(2)"></span> 
-  				<span class="review-write-dot" onclick="currentSlide(3)"></span> 
+				<%for(int i=0; i<bookList.size(); i+=3) { %>
+  					<span class="review-write-dot" onclick="currentSlide(<%=i/3 + 1%>)"></span>
+  				<%} %> 
 			</div>
 			
 			<div style="text-align: center">리뷰를 쓰실 책을 선택해주세요</div>
      
      		<!-- 글쓰기 시작 -->
-     		<input type="text" id="name" name="name" class="review-write-text" value = "<%=name%>">
+     		<input type="hidden" id="rentalNo" name="rentalNo">
+     		<input type="text" id="name" name="name" class="review-write-text" value = "${memberBean.name }">
     		<input type="text" id="fname" name="title" class="review-write-text" placeholder="제목을 입력해주세요.">
 <%--     		<input type="hidden" name="email" value="<%=memberBean.getEmail()%>"> --%>
 <!-- 			책번호랑 렌탈번호 하드코딩 -->
@@ -90,22 +92,17 @@
 	
     		<textarea id="subject" name="content" class="review-write-text" placeholder="내용을 입력해주세요." style="height: 500px"></textarea>
 			
-			<input type="file" name="file" class="review-write-text">
-			
 			<div style="text-align: center">
     			<input type="submit" value="글쓰기" class="review-write-btn">
     			<input type="button" value="취소" class="review-write-btn" >
 			</div>
-  
+  			
       		<div class="clearfix"></div>
 <%--       		<input type="hidden"name="isbn"value="<%=book.getIsbn() %>"> --%>
   		</form>
 	</div>
 
-
 <script>
-
-
 
 var slideIndex = 1;
 showSlides(slideIndex);
@@ -133,6 +130,15 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";  
   dots[slideIndex-1].className += " review-write-active";
 }
+
+function rentalNoInput(no) {
+	$('#rentalNo').val(no);
+}
+
+$("img").click(function(){
+	$(".review-write-mySlides > img").css("border", "none");
+	$(this).css("border", "1px solid #2196F3");
+});
 
 </script>
     <!------------------------------ 메인 내용 ---------------------------------->

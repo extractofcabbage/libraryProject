@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import jdk.nashorn.internal.ir.RuntimeNode.Request;
 import vo.MemberBean;
@@ -397,31 +398,26 @@ public class ReviewDAO {
 			return deleteCount;
 		}
 
-		public ArrayList<BookBean> getRentalBookList(int member_no) {
-			ArrayList<BookBean> bookList = null;
-			BookBean bookBean = null;
-			String sql = "select *  " + 
-					"from rental r, book b " + 
-					"where member_no = ? " + 
-					"and r.status not in('신청중') " + 
-					"and r.no not in(select r.no from review v, rental r " + 
-					"where v.rental_no = r.no " + 
-					"and member_no = ?) " + 
-					"and r.book_no = b.no ";
+		public ArrayList<HashMap<String, String>> getRentalBookList(int member_no) {
+			ArrayList<HashMap<String, String>> bookList = null;
+			HashMap<String, String> book = null;
+			String sql = "SELECT r.no, b.image FROM "
+					+ "(SELECT no, book_no FROM rental WHERE rental.no NOT IN (SELECT rental_no FROM review) AND member_no = ?) r "
+					+ "JOIN book b ON (r.book_no = b.no) GROUP BY isbn ORDER BY r.no";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, member_no);
-				pstmt.setInt(2, member_no);
 				rs = pstmt.executeQuery();
-				bookList = new ArrayList<BookBean>();
+				bookList = new ArrayList<HashMap<String, String>>();
 				
 				while(rs.next()) {
-					bookBean = new BookBean();
-					bookBean.setImage(rs.getString("image"));;
-					bookBean.setIsbn(rs.getString("isbn"));
-					bookList.add(bookBean);
-									}
+					book = new HashMap<String, String>();
+					book.put("rental_no", rs.getInt("no") + "");
+					book.put("image", rs.getString("image"));
+					
+					bookList.add(book);
+				}
 			} catch (SQLException e) {
 				System.out.println("getRentalBookList() 실패! : " + e.getMessage());
 			} finally {
