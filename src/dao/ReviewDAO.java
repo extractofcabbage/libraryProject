@@ -397,8 +397,8 @@ public class ReviewDAO {
 			return deleteCount;
 		}
 
-		public ArrayList getRentalBookList(int member_no) {
-			ArrayList bookList = new ArrayList();
+		public ArrayList<BookBean> getRentalBookList(int member_no) {
+			ArrayList<BookBean> bookList = null;
 			BookBean bookBean = null;
 			String sql = "select *  " + 
 					"from rental r, book b " + 
@@ -414,6 +414,7 @@ public class ReviewDAO {
 				pstmt.setInt(1, member_no);
 				pstmt.setInt(2, member_no);
 				rs = pstmt.executeQuery();
+				bookList = new ArrayList<BookBean>();
 				
 				while(rs.next()) {
 					bookBean = new BookBean();

@@ -8,12 +8,14 @@ import java.util.ArrayList;
 
 import dao.ReviewDAO;
 import vo.ReviewBean;
+import vo.book.BookBean;
 
 public class ReviewWriteFormService {
 
-	public ArrayList getRentalBookList(int member_no) {
+	public ArrayList<BookBean> getRentalBookList(int member_no) {
 		System.out.println("ReviewWriteFormService - getRentalBookList()");
-		ArrayList bookList = null;
+		ArrayList<BookBean> bookList = null;
+		
 		Connection con = getConnection();
 		
 		ReviewDAO reviewDAO = ReviewDAO.getinstance();

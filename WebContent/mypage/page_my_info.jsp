@@ -119,13 +119,13 @@ function passChangeSubmit() {
           		<td class="info-td-left">이름</td><td>${memberBean.name }</td>
           	</tr>
           	<tr>
-          		<td class="info-td-left">성별</td><td>남자</td>
+          		<td class="info-td-left">성별</td><td>${memberBean.gender }</td>
           	</tr>
           	<tr>
-          		<td class="info-td-left">생년월일</td><td>1992.11.06</td>
+          		<td class="info-td-left">생년월일</td><td>${memberBean.birth }</td>
           	</tr>
           	<tr>
-          		<td class="info-td-left">가입일자</td><td>05.18</td>
+          		<td class="info-td-left">가입일자</td><td>${memberBean.reg_date }</td>
           	</tr>
           	<tr>
           		<td class="info-td-left">탈퇴신청</td>
