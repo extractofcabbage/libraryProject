@@ -10,21 +10,21 @@
 //  	MemberBean memberBean = (MemberBean)session.getAttribute("memberBean");
  	
  	ArrayList articleList = (ArrayList) request.getAttribute("articleList");
- 	ArrayList<ReviewBean> reviewList = new ArrayList<ReviewBean>();
- 	ArrayList<MemberBean> memberList = new ArrayList<MemberBean>();
- 	ArrayList<BookBean> bookList = new ArrayList<BookBean>();
+ 	ArrayList<ReviewBean> reviewList = (ArrayList)articleList.get(0);
+ 	ArrayList<MemberBean> memberList = (ArrayList)articleList.get(1);
+ 	ArrayList<BookBean> bookList = (ArrayList)articleList.get(2);
  	
- 	for (int i = 0 ; i < articleList.size() ; ) {
- 		ReviewBean rb = new ReviewBean();
- 		MemberBean mb = new MemberBean();
- 		BookBean bb = new BookBean();
- 		rb = (ReviewBean)articleList.get(i++);
- 		mb = (MemberBean)articleList.get(i++);
- 		bb = (BookBean)articleList.get(i++);
- 		reviewList.add(rb);
- 		memberList.add(mb);
- 		bookList.add(bb);
- 	}
+//  	for (int i = 0 ; i < articleList.size() ; ) {
+//  		ReviewBean rb = new ReviewBean();
+//  		MemberBean mb = new MemberBean();
+//  		BookBean bb = new BookBean();
+//  		rb = (ReviewBean)articleList.get(i++);
+//  		mb = (MemberBean)articleList.get(i++);
+//  		bb = (BookBean)articleList.get(i++);
+//  		reviewList.add(rb);
+//  		memberList.add(mb);
+//  		bookList.add(bb);
+//  	}
 
  	PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
 
@@ -75,32 +75,43 @@
     		<h1><b>리뷰 목록</b></h1>
 	
 			<!----- 도서 검색 input ----->
-			<form>
-				<select class="category-select">
-  					<option value="volvo">Volvo</option>
-  					<option value="saab">Saab</option>
-  					<option value="mercedes">Mercedes</option>
-  					<option value="audi">Audi</option>
+			<form method="post">
+				<select name = "option" class="category-select">
+  					<option value="v.title">제목</option>
+  					<option value="b.title">책이름</option>
+  					<option value="m.name">작성자</option>
 				</select>    
-    			<input type="text" name="search" placeholder="검색어를 입력해주세요." class="common-search" style="width:70%">
+    			<input type="text" name="keyword" placeholder="검색어를 입력해주세요." class="common-search" style="width:70%">
     			<button type="submit" class="common-search-button"><i class="fa fa-search"></i></button>
     		</form>
    			<!----- 도서 검색 input ----->
     
     		<br>
     		<br>
-    		<div class="w3-section w3-bottombar w3-padding-16">
-      			<span class="w3-margin-right w3-xlarge">카테고리 : </span> 
-      			<button class="w3-button w3-black">ALL</button>
-      			<button class="w3-button w3-white">프로그래밍</button>
-      			<button class="w3-button w3-white">네트워크</button>
-      			<button class="w3-button w3-white">서버</button>
-      			<button class="w3-button w3-white">웹&디자인</button>
-      			<button class="w3-button w3-white">오라클</button>
-      			<button class="w3-button w3-white">IT&자격증</button>
-      			<button class="w3-button w3-white">자기계발</button>
-      			<button class="w3-button w3-white">기타</button>
-    		</div>
+    		<!----- 카테고리 ----->
+<!-- 			<div class="w3-section w3-bottombar w3-padding-16"> -->
+<!--       			<span class="w3-margin-right w3-xlarge">카테고리: </span>  -->
+<%--       			<c:set var="category" value="${category}"/> --%>
+<%--       			<button <c:choose><c:when test="${category eq '' }">class="w3-button w3-black"</c:when><c:otherwise>class="w3-button w3-white"</c:otherwise></c:choose>  --%>
+<%--       			onclick="location.href='reviewList.rv?searchType=${searchType}&searchWord=${searchWord}'">전체</button> --%>
+<%--       			<button <c:choose><c:when test="${category eq 'A'}">class="w3-button w3-black"</c:when><c:otherwise>class="w3-button w3-white"</c:otherwise></c:choose>  --%>
+<%--       			onclick="location.href='reviewList.rv?category=A&searchType=${searchType}&searchWord=${searchWord}'">${DbCode.BOOK_CATEGORY_A}</button> --%>
+<%--       			<button <c:choose><c:when test="${category eq 'B'}">class="w3-button w3-black"</c:when><c:otherwise>class="w3-button w3-white"</c:otherwise></c:choose>  --%>
+<%--       			onclick="location.href='reviewList.rv?category=B&searchType=${searchType}&searchWord=${searchWord}'">${DbCode.BOOK_CATEGORY_B}</button> --%>
+<%--       			<button <c:choose><c:when test="${category eq 'C'}">class="w3-button w3-black"</c:when><c:otherwise>class="w3-button w3-white"</c:otherwise></c:choose>  --%>
+<%--       			onclick="location.href='reviewList.rv?category=C&searchType=${searchType}&searchWord=${searchWord}'">${DbCode.BOOK_CATEGORY_C}</button> --%>
+<%--       			<button <c:choose><c:when test="${category eq 'D'}">class="w3-button w3-black"</c:when><c:otherwise>class="w3-button w3-white"</c:otherwise></c:choose>  --%>
+<%--       			onclick="location.href='reviewList.rv?category=D&searchType=${searchType}&searchWord=${searchWord}'">${DbCode.BOOK_CATEGORY_D}</button> --%>
+<%--       			<button <c:choose><c:when test="${category eq 'E'}">class="w3-button w3-black"</c:when><c:otherwise>class="w3-button w3-white"</c:otherwise></c:choose>  --%>
+<%--       			onclick="location.href='reviewList.rv?category=E&searchType=${searchType}&searchWord=${searchWord}'">${DbCode.BOOK_CATEGORY_E}</button> --%>
+<%--       			<button <c:choose><c:when test="${category eq 'F'}">class="w3-button w3-black"</c:when><c:otherwise>class="w3-button w3-white"</c:otherwise></c:choose>  --%>
+<%--       			onclick="location.href='reviewList.rv?category=F&searchType=${searchType}&searchWord=${searchWord}'">${DbCode.BOOK_CATEGORY_F}</button> --%>
+<%--       			<button <c:choose><c:when test="${category eq 'G'}">class="w3-button w3-black"</c:when><c:otherwise>class="w3-button w3-white"</c:otherwise></c:choose>  --%>
+<%--       			onclick="location.href='reviewList.rv?category=G&searchType=${searchType}&searchWord=${searchWord}'">${DbCode.BOOK_CATEGORY_G}</button> --%>
+<%--       			<button <c:choose><c:when test="${category eq 'H'}">class="w3-button w3-black"</c:when><c:otherwise>class="w3-button w3-white"</c:otherwise></c:choose>  --%>
+<%--       			onclick="location.href='reviewList.rv?category=H&searchType=${searchType}&searchWord=${searchWord}'">${DbCode.BOOK_CATEGORY_H}</button> --%>
+<!--     		</div> -->
+    		<!----- 카테고리 ----->
     	</div>
   </header>
   
@@ -115,11 +126,11 @@
       <tr>
         <td>
         	<span class="w3-left w3-xxlarge" style="margin-right: 20px;"><b><%=reviewList.get(i).getNo()%></b></span>
-        	<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" class="w3-left" style="margin-left: 5px;">
+        	<img src="<%=bookList.get(i).getImage() %>" class="w3-left" style="margin-left: 5px;" title="<%=bookList.get(i).getTitle() %>">
         	<div>
         		<h4 class="w3-text-teal"><b><a
 									href="reviewView.rv?no=<%=reviewList.get(i).getNo()%>&page=<%=nowPage%>"><%=reviewList.get(i).getTitle()%></a></b></h4>
-        		<h4 class="review-list-writer"><img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" class="w3-circle" style="width:50px; margin:0">
+        		<h4 class="review-list-writer"><img src="<%=memberList.get(i).getImage()%>" class="w3-circle" style="width:50px; margin:0">
         			&nbsp;&nbsp;<%=memberList.get(i).getName() %>
         			<span class="w3-opacity">&nbsp;&nbsp;<%=reviewList.get(i).getReg_date()%></span>
         			<span class=review-list-commentlike><i class="far fa-comment-dots"></i>(5)코멘트값 <i class="far fa-thumbs-up"></i>(5)좋아요값</span>

@@ -186,7 +186,7 @@ public class ReviewDAO {
 		public int selectCount() {
 			System.out.println("ReviewDAO - selectCount()");
 			int listCount = 0;
-			String sql = "select count(*) from review";
+			String sql = "select count(*) from review where ispublic ='공개'";
 			try {
 				
 
@@ -205,11 +205,37 @@ public class ReviewDAO {
 			}
 			return listCount;
 		}
+		public int selectCount(String option, String keyword) {
+			System.out.println("ReviewDAO - selectCount(keyword)");
+			int listCount = 0;
+			String sql = "select count(*) from review v, rental r, member m, book b where v.rental_no = r.no and m.no = r.member_no and b.no = r.book_no and v.ispublic = '공개' and "+option+" like '%"+keyword+"%' ";
+			try {
+				
 
+				pstmt = con.prepareStatement(sql);
+				System.out.println("검색 selectCount 쿼리 : "+pstmt);
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					listCount = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				System.out.println("selectCount : 실패" + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return listCount;
+		}
 		// ------------selectArticleList ---------------------------
 
 		public ArrayList selectArticleList(int page, int limit) {
-			ArrayList articleList = new ArrayList();
+			ArrayList<Object> articleList = new ArrayList<Object>();
+			ArrayList<ReviewBean> reviewList = new ArrayList<ReviewBean>();
+			ArrayList<MemberBean> memberList = new ArrayList<MemberBean>();
+			ArrayList<BookBean> bookList = new ArrayList<BookBean>();
+			
 			ReviewBean reviewBean = null;
 			MemberBean memberBean = null;
 			BookBean bookBean = null;
@@ -232,9 +258,10 @@ public class ReviewDAO {
 						" from review v, rental r, member m, book b " + 
 						" where v.rental_no = r.no " + 
 						" and m.no = r.member_no " + 
-						" and b.no = r.book_no ORDER BY v.reg_date DESC LIMIT ?,? ";
+						" and b.no = r.book_no and v.ispublic = '공개' ORDER BY v.reg_date DESC LIMIT ?,? ";
 				
 				pstmt = con.prepareStatement(sql);
+				System.out.println("selectArticleList 검색 쿼리 : "+pstmt);
 //				pstmt.setString(1,board_type);
 				pstmt.setInt(1, startRow);
 				pstmt.setInt(2, limit);
@@ -243,7 +270,7 @@ public class ReviewDAO {
 				while (rs.next()) {
 					// 1개 게시물 레코드 읽어와서 BoardBean 객체에 저장
 					reviewBean = new ReviewBean();
-
+					
 					reviewBean.setNo(rs.getInt("v.no"));
 					reviewBean.setTitle(rs.getString("v.title"));
 					reviewBean.setContent(rs.getString("v.content"));
@@ -288,10 +315,116 @@ public class ReviewDAO {
 					bookBean.setBar_code(rs.getString("b.bar_code"));
 					bookBean.setReg_date(rs.getTimestamp("b.reg_date"));
 					
-					articleList.add(reviewBean); // ArrayList 객체에 레코드 단위로 저장
-					articleList.add(memberBean);
-					articleList.add(bookBean);
+					reviewList.add(reviewBean);
+					memberList.add(memberBean);
+					bookList.add(bookBean);
+//					articleList.add(reviewBean); // ArrayList 객체에 레코드 단위로 저장
+//					articleList.add(memberBean);
+//					articleList.add(bookBean);
 				}
+				articleList.add(reviewList);
+				articleList.add(memberList);
+				articleList.add(bookList);
+				
+			} catch (SQLException e) {
+//				e.printStackTrace();
+				System.out.println("selectArticleList() 실패! : " + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+
+			return articleList;
+		}
+		
+		public ArrayList selectArticleList(int page, int limit, String option, String keyword) {
+			ArrayList<Object> articleList = new ArrayList<Object>();
+			ArrayList<ReviewBean> reviewList = new ArrayList<ReviewBean>();
+			ArrayList<MemberBean> memberList = new ArrayList<MemberBean>();
+			ArrayList<BookBean> bookList = new ArrayList<BookBean>();
+			
+			ReviewBean reviewBean = null;
+			MemberBean memberBean = null;
+			BookBean bookBean = null;
+			int startRow = (page - 1) * 10; // 읽기 시작할 row 번호
+//			String sql = "select email from member where type=?";
+
+			// => 참조글번호 내림차순 & 답글순서번호 오름차순 정렬
+			// => 지정 row 번호부터 10개 조회
+
+			try {
+				String sql = "select * " + 
+						" from review v, rental r, member m, book b " + 
+						" where v.rental_no = r.no " + 
+						" and m.no = r.member_no " + 
+						" and b.no = r.book_no and v.ispublic = '공개' " +
+						" and "+option+" like '%"+keyword+"%' "+
+						" ORDER BY v.reg_date DESC LIMIT ?,? ";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, limit);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					// 1개 게시물 레코드 읽어와서 BoardBean 객체에 저장
+					reviewBean = new ReviewBean();
+					
+					reviewBean.setNo(rs.getInt("v.no"));
+					reviewBean.setTitle(rs.getString("v.title"));
+					reviewBean.setContent(rs.getString("v.content"));
+					reviewBean.setReadcount(rs.getInt("v.readcount"));
+					reviewBean.setFile(rs.getString("v.file"));
+					reviewBean.setReg_date(rs.getDate("v.reg_date"));
+					reviewBean.setIspublic(rs.getString("v.ispublic"));
+					reviewBean.setRental_no(rs.getInt("v.rental_no"));
+					
+					memberBean = new MemberBean();
+					
+					memberBean.setAddress1(rs.getString("m.address1"));
+					memberBean.setAddress2(rs.getString("m.address2"));
+					memberBean.setBirth(rs.getString("m.birth"));
+					memberBean.setEmail(rs.getString("m.email"));
+					memberBean.setGender(rs.getString("m.gender"));
+					memberBean.setImage(rs.getString("m.image"));
+					memberBean.setName(rs.getString("m.name"));
+					memberBean.setNo(rs.getInt("m.no"));
+					memberBean.setPassword(rs.getString("m.password"));
+					memberBean.setPhone(rs.getString("m.phone"));
+					memberBean.setPostcode(rs.getInt("m.postcode"));
+					memberBean.setReg_date(rs.getDate("m.reg_date"));
+					memberBean.setType(rs.getString("m.type"));
+					
+					bookBean = new BookBean();
+					
+					bookBean.setNo(rs.getInt("b.no"));
+					bookBean.setTitle(rs.getString("b.title"));
+					bookBean.setAuthor(rs.getString("b.author"));
+					bookBean.setPublisher(rs.getString("b.publisher"));
+					bookBean.setPublish_date(rs.getDate("b.publish_date"));
+					bookBean.setPrice(rs.getInt("b.price"));
+					bookBean.setIsbn(rs.getString("b.isbn"));
+					bookBean.setImage(rs.getString("b.image"));
+					bookBean.setStatus(rs.getString("b.status"));
+					bookBean.setKeyword1(rs.getString("b.keyword1"));
+					bookBean.setKeyword2(rs.getString("b.keyword2"));
+					bookBean.setKeyword3(rs.getString("b.keyword3"));
+					bookBean.setCategory(rs.getString("b.category"));
+					bookBean.setRent_code(rs.getString("b.rent_code"));
+					bookBean.setBar_code(rs.getString("b.bar_code"));
+					bookBean.setReg_date(rs.getTimestamp("b.reg_date"));
+					
+					reviewList.add(reviewBean);
+					memberList.add(memberBean);
+					bookList.add(bookBean);
+//					articleList.add(reviewBean); // ArrayList 객체에 레코드 단위로 저장
+//					articleList.add(memberBean);
+//					articleList.add(bookBean);
+				}
+				articleList.add(reviewList);
+				articleList.add(memberList);
+				articleList.add(bookList);
+				
 			} catch (SQLException e) {
 //				e.printStackTrace();
 				System.out.println("selectArticleList() 실패! : " + e.getMessage());
@@ -419,5 +552,9 @@ public class ReviewDAO {
 			
 			return bookList;
 		}
+
+
+
+
 
 }

@@ -42,7 +42,6 @@ public class BookListAction implements Action {
 		String category = "";
 		int page = 1;
 		int limit = 10;
-
 		if (request.getParameter("searchType") != null) {
 			searchType = request.getParameter("searchType");
 		}
