@@ -37,16 +37,11 @@ function comment_modify(id){
 
 //댓글창 보이게/숨기게
 function SirenFunction(idMyDiv){
-	
+	//<br>을 엔터로
 	var str = document.getElementById("modify_textarea_"+idMyDiv).value;
-//     window.alert(str)
-// 	str = str.replace("<br>","\r\n");
-// 	str = str.replace("/&lt;<br>/g","\r\n");
 	str = str.split("<br>").join("\r\n")
-// 	str = str.replace("/(?:\<br\>)/gm","\r\n");
-// 	str = str.replace("<br>","현욱");
-// 	window.alert(str)
 	document.getElementById("modify_result_"+idMyDiv).value = str;
+	//<br>을 엔터로
 	var objDiv = document.getElementById('SirenDiv'+idMyDiv);
 	if(objDiv.style.display=="block"){ objDiv.style.display = "none"; }
 	else{ objDiv.style.display = "block"; }
