@@ -81,6 +81,7 @@ public class ReviewFrontController extends HttpServlet {
 			}
 
 		} else if (command.equals("/reviewView.rv")) {
+			System.out.println("Controller - reviewView.rv");
 			action = new ReviewViewAction();
 
 			try {
