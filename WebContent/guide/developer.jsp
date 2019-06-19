@@ -130,14 +130,15 @@
 					</div>
 
 					<div class="single-team-slide">
-						<img src="${pageContext.request.contextPath}/images/developer/6.jpg" alt="">
+						<img src="${pageContext.request.contextPath}/images/developer/KMS.jpg" height="230px" width="230px">
 						<!-- Overlay Effect -->
 						<div class="overlay-effect">
 							<h6>DEVELOPER</h6>
 							<h4>김민섭</h4>
-							<p>가진 밝은 되려니와, 청춘에서만 청춘의 노년에게서 그들은 것이다. 오아이스도 눈에 설레는 끓는 위하여 뭇
-								얼마나 것은 그들의 것이다. 두손을 인간에 웅대한 같이, 예수는 철환하였는가? 무엇을 가치를 없으면, 얼음
-								유소년에게서 얼마나 교향악이다. 보이는 천지는 어디 교향악이다.</p>
+							<p>생년월일 : 1990.09.26</p>
+							<p>맡은역할 : 관리자페이지(대출관리,도서관리,회원관리,희망도서관리)</p>
+							<p>연락처 : 010-6626-7552</p>
+							
 						</div>
 					</div>
 
