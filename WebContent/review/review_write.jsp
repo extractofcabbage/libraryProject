@@ -78,7 +78,7 @@
 			<div style="text-align: center">리뷰를 쓰실 책을 선택해주세요</div>
      
      		<!-- 글쓰기 시작 -->
-     		<input type="text" id="name" name="name" class="review-write-text" value = "<%=name%>">
+     		<input type="text" id="name" name="name" class="review-write-text" value = "<%=%>">
     		<input type="text" id="fname" name="title" class="review-write-text" placeholder="제목을 입력해주세요.">
 <%--     		<input type="hidden" name="email" value="<%=memberBean.getEmail()%>"> --%>
 <!-- 			책번호랑 렌탈번호 하드코딩 -->
