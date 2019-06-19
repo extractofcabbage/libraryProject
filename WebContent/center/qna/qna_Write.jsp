@@ -23,6 +23,15 @@
 	String email = memberBean.getEmail();
 	String name = memberBean.getName();
 %>
+<script type="text/javascript">
+//작성시 엔터키 가능
+function enterToBr(){
+	var str = document.getElementById("textarea").value;
+	str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+	document.getElementById("result").value = str;
+// 	str = str.replace('\r\n', '<br>');
+}
+</script>
 </head>
 <body class="w3-light-grey">
 
@@ -79,7 +88,7 @@
 					</tr>
 					<tr>
 						<td class="w3-red w3-large" style="font-weight: bold;"><label for="board_content">내용</label></td>
-						<td class="qnaWrite_width"><textarea style="width: 100%" id="board_content" name="board_content" cols="40" rows="15" required="required"></textarea></td>
+						<td class="qnaWrite_width"><textarea id="textarea" style="width: 100%" id="board_content" cols="40" rows="15" required="required"></textarea><textarea id="result" name="board_content" hidden="hidden"></textarea> </td>
 					</tr>
 <!-- 					<tr> -->
 <!-- 						<td class="td_left"><label for="board_file">파일 첨부</label></td> -->
@@ -88,7 +97,7 @@
 				</table>
 				<div id="commentsbtn">
 					<input name="reset" type="button" value="취소" onclick="history.back()" class="write-btn w3-right">
-					<input name="submit" type="submit" value="확인" class="write-btn w3-right"> &nbsp; 
+					<input name="submit" type="submit" onclick="enterToBr()" value="확인" class="write-btn w3-right"> &nbsp; 
 				</div>
 			</form>
 			<br>

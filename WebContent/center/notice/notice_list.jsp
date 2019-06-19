@@ -69,8 +69,8 @@
 				<form>
 					<select class="category-select">
 						<option value="subject">제목</option>
-						<option value="author">저자</option>
-						<option value="isbn">ISBN</option>
+<!-- 						<option value="author">저자</option> -->
+<!-- 						<option value="isbn">ISBN</option> -->
 					</select> <input type="text" name="search" placeholder="검색어를 입력해주세요."
 						class="common-search" style="width: 40%;">
 					<button type="submit" name="search_button"

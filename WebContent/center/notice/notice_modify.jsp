@@ -19,6 +19,22 @@
 <!------------------------ append css ------------------------------>
 <link rel="stylesheet" href="./css/write.css">
 <!------------------------ append css ------------------------------>
+<script type="text/javascript">
+//<br>을 엔터로
+$(document).ready(function(){
+	var str = document.getElementById("notice_content_original").value;
+	str = str.split("<br>").join("\r\n")
+	document.getElementById("notice_content").value = str;
+});
+
+//작성시 엔터키 가능
+function enterToBr(){
+	var str = document.getElementById("notice_content").value;
+	str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+	document.getElementById("notice_content_original").value = str;
+// 	str = str.replace('\r\n', '<br>');
+}
+</script>
 </head>
 <body class="w3-light-grey">
 
@@ -66,9 +82,7 @@
 				</tr>
 				<tr>
 					<!-- <td class="td_left"><label for="board_content">내용</label></td> -->
-					<td class="td_right">
-						<textarea id="notice_content" name="content" cols="150" rows="15" placeholder="내용을 입력하세요" class="review-write-text" required="required" 
-							><%=article.getContent() %></textarea>
+					<td class="td_right"><textarea id="notice_content" cols="150" rows="15" placeholder="내용을 입력하세요" class="review-write-text" required="required"></textarea><textarea id="notice_content_original" name="content" hidden="hidden"><%=article.getContent()%></textarea>
 					</td>
 				</tr>
 				
@@ -79,7 +93,7 @@
 				</tr>
 			</table>
 				<div style="text-align: center">
-				<input type="submit" value="수정" class="review-write-btn">&nbsp;&nbsp;
+				<input type="submit" onclick="enterToBr()" value="수정" class="review-write-btn">&nbsp;&nbsp;
 				<input type="reset" value="뒤로" class="review-write-btn" onclick="javascript:history.back()">
 			    </div>
 			    <div class="clearfix"></div>
