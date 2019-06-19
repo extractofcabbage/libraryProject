@@ -66,10 +66,23 @@ function passChangeSubmit() {
 		});
 		
 	}
-	  
 }
 
+function memberDelete() {
+	var isDelete = confirm("탈퇴하시겠습니까?");
+	if(isDelete) {
+		location.href='myInfoDelete.my';
+	} else {
+		window.close();
+	}
+}
+
+function profilChange() {
+	var profilImg = $("#profilImg").attr("src");
 	
+	window.open("myInfoProfilForm.my?profilImg=" + profilImg, "",
+	"width=460,height=500");
+}
 </script>
 </head>
 <body class="w3-light-grey">
@@ -94,17 +107,19 @@ function passChangeSubmit() {
 	</div>
 		
   	<!-- The Grid -->
-  <div class="w3-row-padding">
-<!-- Left Column -->
-    <div class="w3-col m2">
-      <div class="w3-white w3-text-grey w3-card-4">
-        <div class="w3-display-container">
-          <img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" style="width: 100%" alt="Avatar">
-        </div>
-     </div><br>
-
-    <!-- End Left Column -->
-    </div>
+  	<div class="w3-row-padding">
+  
+		<div class="w3-col m3">
+      		<div class="w3-card w3-round w3-white">
+        		<div class="w3-container">
+         			<h4 class="w3-center">프로필 사진</h4>
+         			<p class="w3-center"><img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" class="w3-circle" style="width:150px;height:150px;" alt="Avatar" id="profilImg"></p>
+         			<hr>
+         			<p class="w3-center"><button class="changeBtn" onclick="profilChange()">프로필 사진 변경하기</button></p>
+        		</div>
+      		</div>
+      		<br>
+      	</div>
     
     <!-- Right Column -->
     <div class="w3-twothird">
@@ -157,7 +172,7 @@ function passChangeSubmit() {
           	</tr>
           	<tr>
           		<td class="info-td-left">탈퇴신청</td>
-          		<td><input type="button" class="w3-button w3-dark-grey w3-round-medium" value="탈퇴" onclick="location.href='myInfoDelete.my'"></td>
+          		<td><input type="button" class="w3-button w3-dark-grey w3-round-medium" value="탈퇴" onclick="memberDelete()"></td>
           	</tr>
           </table>
           <br><br>

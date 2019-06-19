@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import db.AES256Cipher;
+import static db.JdbcUtil.*;
 
 public class MyDAO {
 	
@@ -41,9 +42,29 @@ public class MyDAO {
 			updateCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
 		return updateCount;
+	}
+
+	public int deleteMember(int memberNo) {
+		int deleteCount = 0;
+		
+		String sql = "DELETE FROM member WHERE no=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return deleteCount;
 	}
 	
 	

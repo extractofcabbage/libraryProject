@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import action.my.MyInfoDeleteAction;
 import action.my.MyInfoPassChangeAction;
 import vo.ActionForward;
 import vo.MemberBean;
@@ -69,6 +70,22 @@ public class MyFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		// 회원정보 - 삭제
+		else if(command.equals("/myInfoDelete.my")) {
+			action = new MyInfoDeleteAction(); 
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		}
+		// 회원정보 - 프로필 이미지 변경
+		else if(command.equals("/myInfoProfilForm.my")) {
+			forward = new ActionForward();
+			forward.setPath("./mypage/page_my_profil.jsp");
+		}
+		
 		
 		if(forward != null) {
 			if(forward.isRedirect()) {
@@ -78,7 +95,5 @@ public class MyFrontController extends HttpServlet{
 				dispatcher.forward(request, response);
 			}
 		}
-				
 	}
-	
 }
