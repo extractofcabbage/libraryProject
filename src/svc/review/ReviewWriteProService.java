@@ -11,6 +11,11 @@ import dao.ReviewDAO;
 import vo.ReviewBean;
 
 public class ReviewWriteProService {
+	
+	Connection con;
+	ReviewDAO reviewDAO;
+	
+	
 	public int checkMemberNoArticle(String email) throws Exception {
 		System.out.println("ReviewWriteProService - checkMemberNoArticle");
 		Connection con = getConnection();
@@ -31,14 +36,13 @@ public class ReviewWriteProService {
 		return checkMemberType;
 	}
 
-	public boolean InsertArticle(ReviewBean boardBean) throws Exception {
+	public boolean insertArticle(ReviewBean reviewBean) throws Exception {
 		System.out.println("ReviewWriteProService - InsertArticle");
 		boolean isWriteSuccess = false;
 		Connection con = getConnection();
 		ReviewDAO reviewDAO = ReviewDAO.getinstance();
 		reviewDAO.setConnection(con);
-		String type = "review";
-		int insertCount = reviewDAO.insertArticle(boardBean, type);
+		int insertCount = reviewDAO.insertArticle(reviewBean);
 
 		if (insertCount > 0) {
 			commit(con);
@@ -50,4 +54,6 @@ public class ReviewWriteProService {
 		close(con);
 		return isWriteSuccess;
 	}
+
+
 }

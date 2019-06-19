@@ -25,6 +25,22 @@
 	String name = memberBean.getName();
 	int nowPage = Integer.parseInt(request.getAttribute("page")+"");
 %>
+<script type="text/javascript">
+//<br>을 엔터로
+$(document).ready(function(){
+	var str = document.getElementById("board_content_original").value;
+	str = str.split("<br>").join("\r\n")
+	document.getElementById("board_content").value = str;
+});
+
+//작성시 엔터키 가능
+function enterToBr(){
+	var str = document.getElementById("board_content").value;
+	str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+	document.getElementById("board_content_original").value = str;
+// 	str = str.replace('\r\n', '<br>');
+}
+</script>
 </head>
 <body class="w3-light-grey">
 
@@ -108,7 +124,9 @@
 					<tr>
 						<td class="td_left"><label for="board_content">내용</label></td>
 						<td class="td_right" colspan="3"><textarea id="board_content"
-								name="board_content" cols="40" rows="15" required="required"><%=article.getContent()%></textarea></td>
+								cols="40" rows="15" required="required"></textarea>
+								<textarea id="board_content_original"
+								name="board_content" hidden="hidden"><%=article.getContent()%></textarea></td>
 					</tr>
 <!-- 					<tr> -->
 <!-- 						<td class="td_left"><label for="board_file">파일 첨부</label></td> -->
@@ -117,7 +135,7 @@
 <!-- 					</tr> -->
 				</table>
 				<div>
-					<input name="submit" type="submit" value="수정완료">
+					<input name="submit" onclick="enterToBr()" type="submit" value="수정완료">
 					&nbsp; <input name="reset" type="button" value="취소" onclick="history.back()">
 				</div>
 			</form>

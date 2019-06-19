@@ -43,6 +43,7 @@ public class ReviewFrontController extends HttpServlet {
 
 		Action action = null;
 		ActionForward forward = null;
+		
 		if (command.equals("/reviewList.rv")) {
 			System.out.println("ReviewFrontController - reviewList.rv");
 			action = new ReviewListAction();
@@ -58,20 +59,19 @@ public class ReviewFrontController extends HttpServlet {
 		} else if (command.equals("/reviewWrite.rv")) {
 			System.out.println("write");
 			action = new ReviewWriteFormAction();
-			
+
 			try {
-				forward = action.execute(request, response); 
+				forward = action.execute(request, response);
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-
 		} else if (command.equals("/reviewWritePro.rv")) {
 			System.out.println("Controller - reviewWritePro.rv");
 			action = new ReviewWriteProAction();
-			
+
 			try {
 				forward = action.execute(request, response);
 

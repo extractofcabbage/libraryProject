@@ -6,7 +6,7 @@ public class ReviewBean {
 	private int no,readcount,rental_no;
 	private String title,content,file,ispublic;
 	private Date reg_date;
-	private String image,writer,isbn;
+	private String image, writer, isbn;
 	
 	public int getNo() {
 		return no;
@@ -16,18 +16,6 @@ public class ReviewBean {
 	}
 	public int getReadcount() {
 		return readcount;
-	}
-	public String getWriter() {
-		return writer;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-	public String getIsbn() {
-		return isbn;
-	}
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
 	}
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
@@ -73,6 +61,18 @@ public class ReviewBean {
 	}
 	public void setImage(String image) {
 		this.image = image;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public String getIsbn() {
+		return isbn;
+	}
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 	
 	

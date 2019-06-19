@@ -5,22 +5,24 @@ import static db.JdbcUtil.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dao.ReviewDAO;
 import vo.ReviewBean;
+import vo.book.BookBean;
 
 public class ReviewWriteFormService {
 
-	public ArrayList getRentalBookList(int member_no) {
+	public ArrayList<HashMap<String, String>> getRentalBookList(int member_no) {
 		System.out.println("ReviewWriteFormService - getRentalBookList()");
-		ArrayList bookList = null;
+		ArrayList<HashMap<String, String>> bookList = null;
+		
 		Connection con = getConnection();
 		
 		ReviewDAO reviewDAO = ReviewDAO.getinstance();
 		reviewDAO.setConnection(con);
 		
 		bookList = reviewDAO.getRentalBookList(member_no);
-		
 				
 		close(con);
 		
