@@ -38,7 +38,7 @@
   	<div class="w3-clear"></div>
   	<!------------------------------ 메인 내용 ---------------------------------->
   	<div class="review-write-container" style="margin-top: 40px">
- 		<form class="review-write-animate" action="reviewWritePro.rv" enctype="multipart/form-data" method="post">
+ 		<form class="review-write-animate" action="reviewWritePro.rv" method="post" id="reviewSubmit">
      		<div class="review-write-slideshow-container">
 
      			<%
@@ -80,21 +80,16 @@
      
      		<!-- 글쓰기 시작 -->
      		<input type="hidden" id="rentalNo" name="rentalNo">
-     		<input type="text" id="name" name="name" class="review-write-text" value = "${memberBean.name }">
-    		<input type="text" id="fname" name="title" class="review-write-text" placeholder="제목을 입력해주세요.">
-<%--     		<input type="hidden" name="email" value="<%=memberBean.getEmail()%>"> --%>
-<!-- 			책번호랑 렌탈번호 하드코딩 -->
-			<input type="hidden"name="book_no"value=1>
-			<input type="hidden"name="rental_no"value=12>
-<!-- 			책번호랑 렌탈번호 하드코딩 -->			
-			<input type="radio"name="ispublic"value="공개"checked="checked">공개 
-			<input type="radio"name="ispublic"value="비공개">비공개 
-	
-    		<textarea id="subject" name="content" class="review-write-text" placeholder="내용을 입력해주세요." style="height: 500px"></textarea>
+     		<input type="text" name="name" class="review-write-text" value = "${memberBean.name }" readonly="readonly">
+    		<input type="text" name="title" class="review-write-text" placeholder="제목을 입력해주세요." required="required">
+			<input type="radio"name="isPublic" value="공개" checked="checked">공개 
+			<input type="radio"name="isPublic" value="비공개">비공개 
+    		<textarea name="content" class="review-write-text" placeholder="내용을 입력해주세요." style="height: 500px"></textarea>
 			
 			<div style="text-align: center">
     			<input type="submit" value="글쓰기" class="review-write-btn">
-    			<input type="button" value="취소" class="review-write-btn" >
+    			<input type="reset" value="다시쓰기" class="review-write-btn">
+    			<input type="button" value="취소" class="review-write-btn" onclick="location.href='reviewList.rv'">
 			</div>
   			
       		<div class="clearfix"></div>
@@ -138,6 +133,13 @@ function rentalNoInput(no) {
 $("img").click(function(){
 	$(".review-write-mySlides > img").css("border", "none");
 	$(this).css("border", "1px solid #2196F3");
+});
+
+$("#reviewSubmit").submit(function(){
+	if($("#rentalNo").val() == "") {
+		alert("리뷰를 쓰실 책을 선택해주세욧!");
+		return false;
+	} 
 });
 
 </script>

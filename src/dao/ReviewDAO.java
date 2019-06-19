@@ -151,20 +151,12 @@ public class ReviewDAO {
 		}
 		
 		//---------------- insertArticle ---------------------
-		public int insertArticle(ReviewBean reviewBean,String type) {
-			int no = 0;
+		public int insertArticle(ReviewBean reviewBean) {
 			int insertCount = 0;
 
-			String sql = "select max(no) from review";
-			
+			String sql="";	
 			
 			try {
-				pstmt = con.prepareStatement(sql);
-				rs = pstmt.executeQuery();
-
-				if (rs.next()) {
-					no = rs.getInt(1) + 1;
-				}
 				sql = "insert into review(no,title,content,readcount,file,ispublic,reg_date,rental_no) values(null,?,?,0,?,?,now(),?)";
 
 				pstmt = con.prepareStatement(sql);
@@ -427,4 +419,5 @@ public class ReviewDAO {
 			
 			return bookList;
 		}
+
 }
