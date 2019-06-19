@@ -9,11 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
 import vo.MemberBean;
 import vo.ReviewBean;
 import vo.book.BookBean;
-import vo.book.RentBean;
 
 public class ReviewDAO {
 	private static ReviewDAO instance;
@@ -441,6 +439,7 @@ public class ReviewDAO {
 		public ReviewBean getViewArticle(int no) {
 			System.out.println("getViewArticle");
 			ReviewBean reviewBean = null;
+			BookBean bookBean = null;
 			
 			String sql = "SELECT * FROM review WHERE no=?";
 			
