@@ -441,7 +441,6 @@ public class ReviewDAO {
 		public ReviewBean getViewArticle(int no) {
 			System.out.println("getViewArticle");
 			ReviewBean reviewBean = null;
-			BookBean bookBean = null;
 			
 			String sql = "SELECT * FROM review WHERE no=?";
 			
@@ -460,7 +459,6 @@ public class ReviewDAO {
 					reviewBean.setFile(rs.getString("file"));
 					reviewBean.setReg_date(rs.getDate("reg_date"));
 					reviewBean.setImage(rs.getString("image"));
-<<<<<<< HEAD
 					reviewBean.setWriter(rs.getString("writer"));
 					reviewBean.setIsbn(rs.getString("isbn"));
 					
@@ -483,8 +481,6 @@ public class ReviewDAO {
 					bookBean.setBar_code(rs.getString("b.bar_code"));
 					bookBean.setReg_date(rs.getTimestamp("b.reg_date"));
 					
-=======
->>>>>>> refs/remotes/origin/master
 				}
 				sql = "select * from member where no= ?";
 				pstmt = con.prepareStatement(sql);
