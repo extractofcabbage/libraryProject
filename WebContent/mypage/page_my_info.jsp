@@ -23,20 +23,48 @@ function passChangeInputDisplay() {
 function passChangeBtnDisplay() {
 	$(".passChangeInput").css('display', 'none');
 	$(".passChangeBtn").css('display', 'block');
+	$("#nowPass").val("");
+	$("#newPass").val("");
+	$("#repeatPass").val("");
 }
 
 function passChangeSubmit() {
-	if($('#nowPass').val() == "") {
+	var nowPass = $('#nowPass').val();
+	var newPass= $('#newPass').val();
+	var repeatPass = $('#repeatPass').val();
+	var memberNo = ${memberBean.no};
+	
+	if(nowPass == "") {
 		$('#nowPassText').fadeIn(200).delay(2000).fadeOut(200);
 		return null;
 	} 
-	else if($('#newPass').val() == "" || $('#newPass').val().length < 6 || $('#newPass').val().length > 16) {
+	else if(newPass == "" || newPass.length < 6 || newPass.length > 16) {
 		$('#newPassText').fadeIn(200).delay(2000).fadeOut(200);
 		return null;
 	}
-	else if($('#repeatPass').val() != $('#newPass').val()) {
+	else if(repeatPass != newPass) {
 		$('#repeatPassText').fadeIn(200).delay(2000).fadeOut(200);
 		return null;
+	} 
+	else {
+		
+	$.ajax({
+			type : "POST",
+			url : "myInfoPassChange.my",
+			data : { "nowPass" : nowPass, "newPass" : newPass, "memberNo" : memberNo },
+			success : function(data) {
+				if(data == 1) {
+					alert("비밀번호 변경 성공! ㅇ_<");
+					passChangeBtnDisplay()
+				} else {
+					$("#alertPassText").fadeIn(200).delay(2000).fadeOut(200);
+				}
+			},
+			error : function() {
+				alert("잘못된 접근입니다.");
+			}
+		});
+		
 	}
 	  
 }
@@ -129,7 +157,7 @@ function passChangeSubmit() {
           	</tr>
           	<tr>
           		<td class="info-td-left">탈퇴신청</td>
-          		<td><input type="button" class="w3-button w3-dark-grey w3-round-medium" value="탈퇴"></td>
+          		<td><input type="button" class="w3-button w3-dark-grey w3-round-medium" value="탈퇴" onclick="location.href='myInfoDelete.my'"></td>
           	</tr>
           </table>
           <br><br>
