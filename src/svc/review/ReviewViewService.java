@@ -3,6 +3,7 @@ package svc.review;
 import java.sql.Connection;
 
 import dao.ReviewDAO;
+import vo.MemberBean;
 import vo.ReviewBean;
 import vo.book.BookBean;
 
@@ -13,7 +14,6 @@ public class ReviewViewService {
 		System.out.println("ReviewViewService  도착");
 		Connection con = getConnection();
 		ReviewBean reviewBean = null;
-		BookBean bookBean = null;
 		
 		ReviewDAO reviewDAO = ReviewDAO.getinstance();
 		reviewDAO.setConnection(con);
@@ -32,4 +32,50 @@ public class ReviewViewService {
 		
 		return reviewBean;
 	}
+	
+	public BookBean getBook(int no) throws Exception {
+		System.out.println("BookViewServiece 도착");
+		Connection con = getConnection();
+		BookBean bookBean = null;
+		
+		ReviewDAO reviewDAO = ReviewDAO.getinstance();
+		reviewDAO.setConnection(con);
+		
+		bookBean = reviewDAO.getViewBook(no);
+		
+		int updateCount = reviewDAO.updateReadcount(no);
+		
+		if(updateCount == 1) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return bookBean;
+	}
+	
+//	public MemberBean getMember(int no) throws Exception {
+//		System.out.println("BookViewServiece 도착");
+//		Connection con = getConnection();
+////		MemberBean memberBean = null;
+//		
+//		ReviewDAO reviewDAO = ReviewDAO.getinstance();
+//		reviewDAO.setConnection(con);
+//		
+////		memberBean = reviewDAO.getViewMember(no);
+//		
+//		int updateCount = reviewDAO.updateReadcount(no);
+//		
+//		if(updateCount == 1) {
+//			commit(con);
+//		}else {
+//			rollback(con);
+//		}
+//		
+//		close(con);
+//		
+//		return memberBean;
+//	}
 }

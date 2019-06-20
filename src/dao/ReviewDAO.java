@@ -435,13 +435,22 @@ public class ReviewDAO {
 		}
 		
 		//----------------- getViewArticle -------------------
-		
-		public ReviewBean getViewArticle(int no) {
-			System.out.println("getViewArticle");
+		public BookBean getViewBook(int no) {
+			System.out.println("getViewBook");
+			ArrayList<Object> articleList = new ArrayList<Object>();
+			ArrayList<ReviewBean> reviewList = new ArrayList<ReviewBean>();
+			ArrayList<MemberBean> memberList = new ArrayList<MemberBean>();
+			ArrayList<BookBean> bookList = new ArrayList<BookBean>();
+			
 			ReviewBean reviewBean = null;
+			MemberBean memberBean = null;
 			BookBean bookBean = null;
 			
-			String sql = "SELECT * FROM review WHERE no=?";
+			String sql = "select * " + 
+					" from review v, rental r, member m, book b " + 
+					" where v.rental_no = r.no " + 
+					" and m.no = r.member_no " + " and v.no = ?" +
+					" and b.no = r.book_no and v.ispublic = '공개'";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
@@ -451,15 +460,14 @@ public class ReviewDAO {
 				if(rs.next()) {
 					reviewBean = new ReviewBean();
 					
-					reviewBean.setNo(rs.getInt("no"));
-					reviewBean.setTitle(rs.getString("title"));
-					reviewBean.setContent(rs.getString("content"));
-					reviewBean.setReadcount(rs.getInt("readcount"));
-					reviewBean.setFile(rs.getString("file"));
-					reviewBean.setReg_date(rs.getDate("reg_date"));
-					reviewBean.setImage(rs.getString("image"));
-					reviewBean.setWriter(rs.getString("writer"));
-					reviewBean.setIsbn(rs.getString("isbn"));
+					reviewBean.setNo(rs.getInt("v.no"));
+					reviewBean.setTitle(rs.getString("v.title"));
+					reviewBean.setContent(rs.getString("v.content"));
+					reviewBean.setReadcount(rs.getInt("v.readcount"));
+					reviewBean.setFile(rs.getString("v.file"));
+					reviewBean.setReg_date(rs.getDate("v.reg_date"));
+					reviewBean.setIspublic(rs.getString("v.ispublic"));
+					reviewBean.setRental_no(rs.getInt("v.rental_no"));
 					
 					bookBean = new BookBean();
 					
@@ -480,22 +488,68 @@ public class ReviewDAO {
 					bookBean.setBar_code(rs.getString("b.bar_code"));
 					bookBean.setReg_date(rs.getTimestamp("b.reg_date"));
 					
+					memberBean = new MemberBean();
+					
+					memberBean.setAddress1(rs.getString("m.address1"));
+					memberBean.setAddress2(rs.getString("m.address2"));
+					memberBean.setBirth(rs.getString("m.birth"));
+					memberBean.setEmail(rs.getString("m.email"));
+					memberBean.setGender(rs.getString("m.gender"));
+					memberBean.setImage(rs.getString("m.image"));
+					memberBean.setName(rs.getString("m.name"));
+					memberBean.setNo(rs.getInt("m.no"));
+					memberBean.setPassword(rs.getString("m.password"));
+					memberBean.setPhone(rs.getString("m.phone"));
+					memberBean.setPostcode(rs.getInt("m.postcode"));
+					memberBean.setReg_date(rs.getDate("m.reg_date"));
+					memberBean.setType(rs.getString("m.type"));
+					
+					reviewList.add(reviewBean);
+					memberList.add(memberBean);
+					bookList.add(bookBean);
 				}
-				sql = "select * from member where no= ?";
+				articleList.add(reviewList);
+				articleList.add(memberList);
+				articleList.add(bookList);
+				
+			} catch (SQLException e) {
+//				e.printStackTrace();
+				System.out.println("getViewBook() 실패! : " + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			return bookBean;
+		}
+		
+		
+		public ReviewBean getViewArticle(int no) {
+			System.out.println("getViewArticle");
+			ReviewBean reviewBean = null;
+			
+			String sql = "SELECT * FROM review WHERE no=?";
+			
+			try {
 				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, no);
 				rs = pstmt.executeQuery();
+				
 				if(rs.next()) {
-					reviewBean.setContent(rs.getString("content"));
-					reviewBean.setFile(rs.getString("file"));
-					reviewBean.setIspublic(rs.getString("ispublic"));
+					reviewBean = new ReviewBean();
+					
 					reviewBean.setNo(rs.getInt("no"));
-					reviewBean.setReadcount(rs.getInt("readcount"));
-					reviewBean.setReg_date(rs.getDate("reg_date"));
-					reviewBean.setRental_no(rs.getInt("rental_no"));
 					reviewBean.setTitle(rs.getString("title"));
-					reviewBean.setImage(rs.getString("image"));
-					reviewBean.setWriter(rs.getString("writer"));
-					reviewBean.setIsbn(rs.getString("isbn"));
+					reviewBean.setContent(rs.getString("content"));
+					reviewBean.setReadcount(rs.getInt("readcount"));
+					reviewBean.setFile(rs.getString("file"));
+					reviewBean.setReg_date(rs.getDate("reg_date"));
+//					reviewBean.setImage(rs.getString("image"));
+//					reviewBean.setWriter(rs.getString("writer"));
+//					reviewBean.setIsbn(rs.getString("isbn"));
+					
+					
+					
 				}
 				
 			} catch (SQLException e) {
@@ -508,6 +562,46 @@ public class ReviewDAO {
 					
 			return reviewBean;
 		}
+		
+//		public MemberBean getViewMember(int no) {
+//			System.out.println("getViewMember");
+//			MemberBean memberBean = null;
+//			
+//			String sql = "SELECT * FROM member m WHERE no=?";
+//			
+//			try {
+//				pstmt = con.prepareStatement(sql);
+//				pstmt.setInt(1, no);
+//				rs = pstmt.executeQuery();
+//				
+//				if(rs.next()) {
+//					
+//					memberBean.setAddress1(rs.getString("m.address1"));
+//					memberBean.setAddress2(rs.getString("m.address2"));
+//					memberBean.setBirth(rs.getString("m.birth"));
+//					memberBean.setEmail(rs.getString("m.email"));
+//					memberBean.setGender(rs.getString("m.gender"));
+//					memberBean.setImage(rs.getString("m.image"));
+//					memberBean.setName(rs.getString("m.name"));
+//					memberBean.setNo(rs.getInt("m.no"));
+//					memberBean.setPassword(rs.getString("m.password"));
+//					memberBean.setPhone(rs.getString("m.phone"));
+//					memberBean.setPostcode(rs.getInt("m.postcode"));
+//					memberBean.setReg_date(rs.getDate("m.reg_date"));
+//					memberBean.setType(rs.getString("m.type"));
+//				}
+//				
+//			} catch (SQLException e) {
+////				e.printStackTrace();
+//				System.out.println("getViewMember() 실패! : " + e.getMessage());
+//			} finally {
+//				close(rs);
+//				close(pstmt);
+//			}
+//					
+//			return memberBean;
+//		}
+		
 		public int updateReadcount(int no) {
 			int updateCount = 0;
 			

@@ -133,7 +133,6 @@
         		<h4 class="review-list-writer"><img src="<%=memberList.get(i).getImage()%>" class="w3-circle" style="width:50px; margin:0">
         			&nbsp;&nbsp;<%=memberList.get(i).getName() %>
         			<span class="w3-opacity">&nbsp;&nbsp;<%=reviewList.get(i).getReg_date()%></span>
-        			<span class=review-list-commentlike><i class="far fa-comment-dots"></i>(5)코멘트값 <i class="far fa-thumbs-up"></i>(5)좋아요값</span>
         			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 조회수
         			(<%=reviewList.get(i).getReadcount()%>)
         		</h4>
