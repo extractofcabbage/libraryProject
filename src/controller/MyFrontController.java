@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,10 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
-import action.my.MyInfoAction;
+import action.my.MyInfoDeleteAction;
+import action.my.MyInfoPassChangeAction;
 import vo.ActionForward;
+import vo.MemberBean;
 
 @WebServlet("*.my")
 public class MyFrontController extends HttpServlet{
@@ -41,16 +45,47 @@ public class MyFrontController extends HttpServlet{
 		
 		// 회원정보
 		if(command.equals("/myInfo.my")) {
-//			action = new MyInfoAction();
-//			
-//			try {
-//				forward = action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-			forward = new ActionForward();
-			forward.setPath("/mypage/page_my_info.jsp");
+			HttpSession session = request.getSession();
+			MemberBean memberBean = (MemberBean)session.getAttribute("memberBean");
+			
+			if(memberBean == null) {
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('로그인 후 이용해주세욧!')");
+				out.println("history.back()");
+				out.println("</script>");
+			} else {
+				forward = new ActionForward();
+				forward.setPath("/mypage/page_my_info.jsp");
+			}
 		}
+		// 회원정보 - 비밀번호 체크
+		else if(command.equals("/myInfoPassChange.my")) {
+			action = new MyInfoPassChangeAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// 회원정보 - 삭제
+		else if(command.equals("/myInfoDelete.my")) {
+			action = new MyInfoDeleteAction(); 
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		}
+		// 회원정보 - 프로필 이미지 변경
+		else if(command.equals("/myInfoProfilForm.my")) {
+			forward = new ActionForward();
+			forward.setPath("./mypage/page_my_profil.jsp");
+		}
+		
 		
 		if(forward != null) {
 			if(forward.isRedirect()) {
@@ -60,7 +95,5 @@ public class MyFrontController extends HttpServlet{
 				dispatcher.forward(request, response);
 			}
 		}
-				
 	}
-	
 }

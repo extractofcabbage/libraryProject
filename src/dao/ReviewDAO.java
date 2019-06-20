@@ -640,17 +640,20 @@ public class ReviewDAO {
 			
 			return deleteCount;
 		}
-
+		
+		// 읽은 책 리스트 (리뷰 쓴 거 제외)
 		public ArrayList<HashMap<String, String>> getRentalBookList(int member_no) {
 			ArrayList<HashMap<String, String>> bookList = null;
 			HashMap<String, String> book = null;
-			String sql = "SELECT r.no, b.image FROM "
-					+ "(SELECT no, book_no FROM rental WHERE rental.no NOT IN (SELECT rental_no FROM review) AND member_no = ?) r "
-					+ "JOIN book b ON (r.book_no = b.no) GROUP BY isbn ORDER BY r.no";
+			String sql = "SELECT rental.no, book.image FROM rental "
+					+ "JOIN book on rental.book_no = book.no WHERE rental.member_no=? AND isbn NOT IN "
+					+ "(SELECT book.isbn FROM review JOIN (SELECT no, book_no FROM rental WHERE member_no = ?) r ON review.rental_no=r.no "
+					+ "JOIN book ON r.book_no = book.no) GROUP BY book.isbn";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, member_no);
+				pstmt.setInt(2, member_no);
 				rs = pstmt.executeQuery();
 				bookList = new ArrayList<HashMap<String, String>>();
 				

@@ -80,14 +80,13 @@
 
 					<!-- Single Team Slide -->
 					<div class="single-team-slide">
-						<img src="${pageContext.request.contextPath}/images/developer/2.jpg" alt="">
+						<img width="230px" style="transform: rotate(90deg)" src="${pageContext.request.contextPath}/images/developer/이현욱.jpg" alt="">
 						<!-- Overlay Effect -->
 						<div class="overlay-effect">
 							<h6>DEVELOPER</h6>
 							<h4>이현욱</h4>
-							<p>긴지라 얼음과 돋고, 인도하겠다는 창공에 그와 찬미를 방지하는 황금시대다. 인간에 영원히 이것이야말로
-								얼음 품으며, 그리하였는가? 보내는 착목한는 위하여, 동산에는 투명하되 맺어, 심장의 수 것이다. 피어나기 전인
-								천하를 청춘 얼음과 새 교향악이다. 창공에 가치를 평화스러운 끓는다. 못하다 청춘 희망의 있는가?</p>
+							<p>맡은 부분 : QNA페이지<br>
+							하고싶은 말 : 너무 힘들어요</p>
 						</div>
 					</div>
 
@@ -105,27 +104,24 @@
 					</div>
 
 					<div class="single-team-slide">
-						<img src="${pageContext.request.contextPath}/images/developer/4.jpg" alt="">
+						<img src="${pageContext.request.contextPath}/images/developer/손희목.jpg" alt="">
 						<!-- Overlay Effect -->
 						<div class="overlay-effect">
 							<h6>DEVELOPER</h6>
 							<h4>손희목</h4>
-							<p>무엇을 살았으며, 가치를 황금시대를 듣는다. 인간의 이상은 거선의 칼이다. 것은 희망의 위하여 만천하의
-								구할 든 청춘에서만 그들을 봄바람이다. 방황하였으며, 설레는 뜨고, 눈이 원질이 기쁘며, 황금시대를 풀밭에 피가
-								위하여서. 관현악이며, 동력은 이것은 주며, 가슴에 꾸며 아니다. 아니더면, 피부가 이상이 현저하게 원대하고,
-								고행을 피어나기 미인을 사막이다.</p>
+							<p>맡은 부분 : 도서 검색<br>
+하고싶은 말 : JAVA가 더 재밌다...</p>
 						</div>
 					</div>
 
 					<div class="single-team-slide">
-						<img src="${pageContext.request.contextPath}/images/developer/5.jpg" alt="">
+						<img src="${pageContext.request.contextPath}/images/developer/이영신.jpg" alt="">
 						<!-- Overlay Effect -->
 						<div class="overlay-effect">
 							<h6>DEVELOPER</h6>
 							<h4>이영신</h4>
-							<p>있을 인생에 심장의 것은 이것이다. 그것을 일월과 듣기만 풍부하게 두손을 작고 청춘 노년에게서 인생을
-								쓸쓸하랴? 미묘한 바이며, 않는 듣기만 피어나는 실로 아름다우냐? 피어나기 있음으로써 되려니와, 그리하였는가?
-								미인을 주는 청춘의 돋고, 끓는 바이며, 위하여서.</p>
+							<p>맡은 부분 : 회원가입 및 로그인<br>
+							하고 싶은말 : 장사가 더 쉬웠어용</p>
 						</div>
 					</div>
 

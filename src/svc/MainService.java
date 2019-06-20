@@ -37,4 +37,15 @@ public class MainService {
 		return recentReviewList; 
 	}
 
+	public void updateOverdue() {
+		Connection con=getConnection();
+		MainDAO mainDAO=MainDAO.getInstance();
+		mainDAO.setConnection(con);
+		mainDAO.updateOverude_DAO();
+		
+		commit(con);
+		close(con);
+		
+	}
+
 }
