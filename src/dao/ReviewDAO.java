@@ -87,11 +87,10 @@ public class ReviewDAO {
 			return checkMemberType;
 		}
 		// -------------------- isWriter -------------------------------
-		public boolean isWriter(int no, String email) {
+		public boolean isArticleReviewWriter(int no) {
 
 			boolean isWriter = false;
-			int member_no=0;
-			String sql = "SELECT member_no FROM review WHERE no=?";
+			String sql = "SELECT * FROM review WHERE no=?";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
@@ -99,18 +98,18 @@ public class ReviewDAO {
 				rs = pstmt.executeQuery();
 				
 //				if(rs.next()) {
-//					board_member_no = rs.getInt(1);
+//					writer_no = rs.getInt("member_no");
 //				}
-				
-				sql = "select no from member where email=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, email);
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()) {
-					member_no = rs.getInt(1);
-				}
-//				if(board_member_no == member_no) {
+//				
+//				sql = "select * from member where no=?";
+//				pstmt = con.prepareStatement(sql);
+//				pstmt.setInt(1, no);
+//				rs = pstmt.executeQuery();
+//				
+//				if(rs.next()) {
+//					session_no = rs.getInt("no");
+//				}
+//				if(session_no == writer_no) {
 //					isWriter = true;
 //				}
 				
@@ -129,14 +128,13 @@ public class ReviewDAO {
 			
 			// BoardBean 객체의 board_num 에 해당하는 레코드를 수정
 			// => 글제목(board_subject), 글내용(content) 수정
-			String sql = "UPDATE review SET title=?,content=?,file=? WHERE no=?";
+			String sql = "UPDATE review SET title=?,content=? WHERE no=?";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, reviewBean.getTitle());
 				pstmt.setString(2, reviewBean.getContent());
-				pstmt.setString(3, reviewBean.getFile());
-				pstmt.setInt(4, reviewBean.getNo());
+				pstmt.setInt(3, reviewBean.getNo());
 				updateCount = pstmt.executeUpdate();
 				
 			} catch (SQLException e) {
@@ -527,6 +525,7 @@ public class ReviewDAO {
 		public ReviewBean getViewArticle(int no) {
 			System.out.println("getViewArticle");
 			ReviewBean reviewBean = null;
+//			MemberBean memberBean = null;
 			
 			String sql = "SELECT * FROM review WHERE no=?";
 			
@@ -563,49 +562,10 @@ public class ReviewDAO {
 			return reviewBean;
 		}
 		
-//		public MemberBean getViewMember(int no) {
-//			System.out.println("getViewMember");
-//			MemberBean memberBean = null;
-//			
-//			String sql = "SELECT * FROM member m WHERE no=?";
-//			
-//			try {
-//				pstmt = con.prepareStatement(sql);
-//				pstmt.setInt(1, no);
-//				rs = pstmt.executeQuery();
-//				
-//				if(rs.next()) {
-//					
-//					memberBean.setAddress1(rs.getString("m.address1"));
-//					memberBean.setAddress2(rs.getString("m.address2"));
-//					memberBean.setBirth(rs.getString("m.birth"));
-//					memberBean.setEmail(rs.getString("m.email"));
-//					memberBean.setGender(rs.getString("m.gender"));
-//					memberBean.setImage(rs.getString("m.image"));
-//					memberBean.setName(rs.getString("m.name"));
-//					memberBean.setNo(rs.getInt("m.no"));
-//					memberBean.setPassword(rs.getString("m.password"));
-//					memberBean.setPhone(rs.getString("m.phone"));
-//					memberBean.setPostcode(rs.getInt("m.postcode"));
-//					memberBean.setReg_date(rs.getDate("m.reg_date"));
-//					memberBean.setType(rs.getString("m.type"));
-//				}
-//				
-//			} catch (SQLException e) {
-////				e.printStackTrace();
-//				System.out.println("getViewMember() 실패! : " + e.getMessage());
-//			} finally {
-//				close(rs);
-//				close(pstmt);
-//			}
-//					
-//			return memberBean;
-//		}
 		
 		public int updateReadcount(int no) {
 			int updateCount = 0;
 			
-			// board_num 에 해당하는 레코드의 board_readcount 값을 1 증가시키기
 			String sql = "UPDATE review SET readcount=readcount+1 WHERE no=?";
 			
 			try {

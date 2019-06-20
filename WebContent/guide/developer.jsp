@@ -151,14 +151,13 @@
 					</div>
 
 					<div class="single-team-slide">
-						<img src="${pageContext.request.contextPath}/images/developer/8.jpg" alt="">
+						<img src="${pageContext.request.contextPath}/images/developer/KakaoTalk_20190620_141449829.jpg" height="280px" width="230px">
 						<!-- Overlay Effect -->
 						<div class="overlay-effect">
 							<h6>DEVELOPER</h6>
 							<h4>이상호</h4>
-							<p>봄바람을 싹이 그들의 우리의 가는 그림자는 위하여서. 무엇을 끝에 이상은 크고 소리다.이것은 피어나기
-								이상의 위하여 사막이다. 군영과 이것이야말로 기쁘며, 방지하는 바이며, 행복스럽고 무엇을 미묘한 교향악이다.
-								방지하는 기쁘며, 구할 것은 인생에 그들은 이것이다. 불어 구하기 이상의 힘차게 따뜻한 풀밭에 힘있다.</p>
+							<p>맡은 부분 : 리뷰게시판<br>
+							하고 싶은말 : 수고하셨습니다.</p>
 						</div>
 					</div>
 

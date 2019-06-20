@@ -56,26 +56,4 @@ public class ReviewViewService {
 		return bookBean;
 	}
 	
-//	public MemberBean getMember(int no) throws Exception {
-//		System.out.println("BookViewServiece 도착");
-//		Connection con = getConnection();
-////		MemberBean memberBean = null;
-//		
-//		ReviewDAO reviewDAO = ReviewDAO.getinstance();
-//		reviewDAO.setConnection(con);
-//		
-////		memberBean = reviewDAO.getViewMember(no);
-//		
-//		int updateCount = reviewDAO.updateReadcount(no);
-//		
-//		if(updateCount == 1) {
-//			commit(con);
-//		}else {
-//			rollback(con);
-//		}
-//		
-//		close(con);
-//		
-//		return memberBean;
-//	}
 }

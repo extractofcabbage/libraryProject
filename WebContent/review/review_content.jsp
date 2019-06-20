@@ -104,8 +104,9 @@
 							   
 		  	
 		<a href="reviewList.rv?page=<%=nowPage%>" class="w3-right" style="margin-left: 10px">목록</a>
-<%-- 		<a href="reviewDeleteForm.rv?board_num=<%=article.getNo()%>&page=<%=nowPage%>" class="w3-right" style="margin-left: 10px">삭제</a>  --%>
-<%-- 		<a href="reviewModifyForm.rv?board_num=<%=article.getNo()%>&page=<%=nowPage%>" class="w3-right">수정</a> --%>
+		
+<%-- 		<a href="reviewDeleteForm.rv?review_num=<%=reviewBean.getNo()%>&page=<%=nowPage%>" class="w3-right" style="margin-left: 10px">삭제</a>  --%>
+<%-- 		<a href="reviewUpdateForm.rv?review_num=<%=reviewBean.getNo()%>&page=<%=nowPage%>" class="w3-right">수정</a> --%>
 		  </p>
         </div>
         					
