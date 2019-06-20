@@ -113,7 +113,7 @@ function profilChange() {
       		<div class="w3-card w3-round w3-white">
         		<div class="w3-container">
          			<h4 class="w3-center">프로필 사진</h4>
-         			<p class="w3-center"><img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" class="w3-circle" style="width:150px;height:150px;" alt="Avatar" id="profilImg"></p>
+         			<p class="w3-center"><img src="${pageContext.request.contextPath}/images/member/${memberBean.image}" class="w3-circle" style="width:150px;height:150px;" alt="Avatar" id="profilImg"></p>
          			<hr>
          			<p class="w3-center"><button class="changeBtn" onclick="profilChange()">프로필 사진 변경하기</button></p>
         		</div>

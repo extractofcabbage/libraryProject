@@ -20,6 +20,7 @@ public class MainAction implements Action {
 		ArrayList<ReviewBean> recentReviewList = mainFormService.getRecentReviewList();
 		
 		request.setAttribute("bestBookList", bestBookList);
+		request.setAttribute("recentReviewList", recentReviewList);
 		
 		ActionForward  forward = new ActionForward();
 		forward.setPath("main.ma");

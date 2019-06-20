@@ -29,8 +29,12 @@
     
 <%} else { %>
     
-    <div class="w3-col s4"> 
+    <div class="w3-col s4">
+      <%if(memberBean.getImage().contains("standardimg.png")) {%>
       <img src="<%=memberBean.getImage() %>" class="w3-circle w3-margin-right" style="width:60px; height: 60px; margin-top: 8px;">
+      <%} else {%>
+      <img src="${pageContext.request.contextPath}/images/member/<%=memberBean.getImage() %>" class="w3-circle w3-margin-right" style="width:60px; height: 60px; margin-top: 8px;">	
+      <%} %>
     </div>
     <div class="w3-col s8 w3-bar">
       <span><a href="#"><strong class="w3-xxlarge"><%=memberBean.getName() %></strong></a></span>
@@ -106,7 +110,7 @@
   		success: function(data) {
 			$.each(data, function(index, item){
 				$('.main-notice-content').append(
-						'<li><a href="#" class="w3-bar-item">' + item.content + '</a></li>');
+						'<li><a href="noticeDetail.bo?no=' + item.no + '&page=1" class="w3-bar-item">' + item.content + '</a></li>');
 			});
 			
 			$(function(){
@@ -119,11 +123,10 @@
   	});
   </script>
   <div class="w3-bar-block">
-  	<a href="#" class="w3-bar-item w3-button w3-padding w3-large" style="margin-top: 20px">공지사항</a>
+  	<a href="noticeList.bo" class="w3-bar-item w3-button w3-padding w3-large" style="margin-top: 20px">공지사항</a>
   </div>
   <div class="w3-bar-block main-notice-space" id="ticker-roll">
   	<ul class="main-notice-content">
-  		<li><a href="#" class="w3-bar-item">안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈안녕하슈</a></li>
   	</ul>
   </div>
   

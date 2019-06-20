@@ -68,31 +68,44 @@ public class MainDAO {
 	// 최신 리뷰 5개
 	public ArrayList<ReviewBean> getRecentReviewList() {
 		ArrayList<ReviewBean> recentReviewList = null;
+		String content = "";
 		
-		String sql = "SELECT review.no, review.title, review.content, book.isbn, book.image "
-				+ "FROM review join book on review.isbn=book.isbn ORDER BY review.reg_date DESC LIMIT 0, 5";
+		String sql = "SELECT review.no, review.title, review.content, book.image FROM review "
+				+ "JOIN rental ON review.rental_no = rental.no "
+				+ "JOIN book ON rental.book_no = book.no "
+				+ "ORDER BY review.reg_date DESC LIMIT 0, 5";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			recentReviewList = new ArrayList<ReviewBean>();
+			
 			while(rs.next()) {
 				ReviewBean reviewBean = new ReviewBean();
+				
 				reviewBean.setNo(rs.getInt("no"));
 				reviewBean.setTitle(rs.getString("title"));
 				
-				if(rs.getString("content").length() > 100) {
-					String content = rs.getString("content").substring(0, 100) + "...";
+				content = rs.getString("content");
+				if(content.length() > 100) {
+					content = rs.getString("content").substring(0, 100) + "...";
 					reviewBean.setContent("content");
 				} else {
-					reviewBean.setContent(rs.getString("content"));
+					reviewBean.setContent(content);
 				}
+				
+				reviewBean.setImage(rs.getString("image"));
+				
+				recentReviewList.add(reviewBean);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
 		
-		return null;
+		return recentReviewList;
 	}
 
 	public JSONArray getRecentNoticeList() {

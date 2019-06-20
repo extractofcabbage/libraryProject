@@ -66,6 +66,25 @@ public class MyDAO {
 		
 		return deleteCount;
 	}
+
+	public int updateProfilImage(int member_no, String image) {
+		int updateCount = 0;
+		
+		String sql = "UPDATE member SET image=? WHERE no=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, image);
+			pstmt.setInt(2, member_no);
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return updateCount;
+	}
 	
 	
 }
