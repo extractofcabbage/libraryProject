@@ -139,6 +139,48 @@ public class MainDAO {
 		
 		return noticeList;
 	}
+
+	public void updateOverude_DAO() {
+		System.out.println("Due DAO");
+		ArrayList dueList=new ArrayList();
+		String sql="select * from rental where due_date<now() AND status='대출중'";
+		try {
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				dueList.add(rs.getInt("no"));
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			  close(pstmt);
+			  close(rs);
+	    }
+		
+		for(int i=0; i<dueList.size(); i++) {
+		System.out.println("연체변경할 rental no : "+ dueList.get(i));
+		}
+		
+		
+		
+		for(int i=0; i<dueList.size(); i++) {
+			try {
+				System.out.println(i+"번 째 연체변경시작");
+				sql="UPDATE rental SET status=? where no=?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, "연체");
+				pstmt.setInt(2, (int)dueList.get(i));
+				pstmt.executeUpdate();
+				System.out.println(i+"번 째 연체변경완료");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+		}
+
+
+	}
 	
 	
 }
