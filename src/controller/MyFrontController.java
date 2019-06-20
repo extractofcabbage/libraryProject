@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import action.my.MyInfoDeleteAction;
 import action.my.MyInfoPassChangeAction;
+import action.my.MyInfoProfilProAction;
 import vo.ActionForward;
 import vo.MemberBean;
 
@@ -85,7 +86,16 @@ public class MyFrontController extends HttpServlet{
 			forward = new ActionForward();
 			forward.setPath("./mypage/page_my_profil.jsp");
 		}
-		
+		else if(command.equals("/myInfoProfilPro.my")) {
+			
+			action = new MyInfoProfilProAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		if(forward != null) {
 			if(forward.isRedirect()) {

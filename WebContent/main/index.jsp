@@ -121,44 +121,18 @@
   		
   		<div class="rslides_container">
       		<ul class="rslides" id="slider2">
+      			<c:forEach var="review" items="${recentReviewList}">
         		<li>
         			<div class="w3-left center-book-review-img" style="margin-left: 35px">
-        				<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" alt="최신 리뷰" class="w3-card" >
+        				<img src="${review.image}" alt="최신 리뷰" class="w3-card" >
         			</div>
         			<div class="center-book-review">
-        				<h4>제목입니다 제목 맞나요?ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</h4>
-        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
-        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
-        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
+        				<h4>${review.title }</h4>
+        				${review.content}
         			</div>
-        			<h4 class="w3-center w3-clear" style="margin: 0"><a href="#">글보기</a></h4>
+        			<h4 class="w3-center w3-clear" style="margin: 0"><a href="reviewView.rv?no=${review.no}&page=1">글보기</a></h4>
         		</li>
-        		
-        		<li>
-        			<div class="w3-left center-book-review-img" style="margin-left: 35px">
-        				<img src="${pageContext.request.contextPath}/images/main/jjangoo.gif" alt="최신 리뷰" class="w3-card" >
-        			</div>
-        			<div class="center-book-review">
-        				<h4>제목입니다 제목 맞나요?</h4>
-        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
-        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
-        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
-        			</div>
-        			<h4 class="w3-center w3-clear" style="margin: 0"><a href="#">글보기</a></h4>
-        		</li>
-        		
-        		<li>
-        			<div class="w3-left center-book-review-img" style="margin-left: 35px">
-        				<img src="${pageContext.request.contextPath}/images/main/sampleimg.jpg" alt="최신 리뷰" class="w3-card" >
-        			</div>
-        			<div class="center-book-review">
-        				<h4>제목입니다 제목 맞나요?</h4>
-        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
-        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
-        				나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살나무아미타불 관세음 보살
-        			</div>
-        			<h4 class="w3-center w3-clear" style="margin: 0"><a href="#">글보기</a></h4>
-        		</li>
+        		</c:forEach>
       		</ul>
     	</div>
   	</div>
