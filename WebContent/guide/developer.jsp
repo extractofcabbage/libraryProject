@@ -80,7 +80,7 @@
 
 					<!-- Single Team Slide -->
 					<div class="single-team-slide">
-						<img width="279.063" style="transform: rotate(90deg)" src="${pageContext.request.contextPath}/images/developer/이현욱.jpg" alt="">
+						<img width="230px" style="transform: rotate(90deg)" src="${pageContext.request.contextPath}/images/developer/이현욱.jpg" alt="">
 						<!-- Overlay Effect -->
 						<div class="overlay-effect">
 							<h6>DEVELOPER</h6>
@@ -109,8 +109,8 @@
 						<div class="overlay-effect">
 							<h6>DEVELOPER</h6>
 							<h4>손희목</h4>
-							<p>맡은 파트: 도서 검색<br>
-하고싶은 말: JAVA가 더 재밌다...</p>
+							<p>맡은 부분 : 도서 검색<br>
+하고싶은 말 : JAVA가 더 재밌다...</p>
 						</div>
 					</div>
 
@@ -121,7 +121,7 @@
 							<h6>DEVELOPER</h6>
 							<h4>이영신</h4>
 							<p>맡은 부분 : 회원가입 및 로그인<br>
-							하고 싶은말:장사가 더 쉬웠어용</p>
+							하고 싶은말 : 장사가 더 쉬웠어용</p>
 						</div>
 					</div>
 
