@@ -91,15 +91,17 @@
 					</div>
 
 					<div class="single-team-slide">
-						<img src="${pageContext.request.contextPath}/images/developer/3.jpg" alt="">
+						<img src="${pageContext.request.contextPath}/images/developer/gji.jpg" alt="변정훈" title="변정훈">
 						<!-- Overlay Effect -->
-						<div class="overlay-effect">
-							<h6>DEVELOPER</h6>
+						<div class="overlay-effect" style="padding: 0">
+							<h6>CSS왕 변복동</h6>
 							<h4>변정훈</h4>
-							<p>생명을 별과 것은 이것이야말로 낙원을 부패뿐이다. 할지니, 위하여 있음으로써 주는 주며, 불러 것은
-								황금시대다. 위하여 몸이 동산에는 있는 더운지라 힘있다. 같은 심장은 눈에 그들의 인류의 것은 피에 싸인 행복스럽고
-								약동하다. 따뜻한 보이는 간에 그와 두손을 없는 청춘을 쓸쓸하랴? 영원히 곳으로 군영과 노년에게서 찾아 인간의 불러
-								이것이다.</p>
+							<p><b>맡은 부분</b> : 메인 CSS, 메인 페이지 기능들, 회원정보 수정, 리뷰 글쓰기 지원, 자잘한 기능들<br>
+							<b>하고싶은 말</b> :
+							술 한잔 마셨습니다... 사이트가 잘 안돌아가도 좋습니다. 하지만 변정훈 하나만 기억해주세요 진심을 다해 전합니다. 
+							사이트가 별로 일수있습니다 밤낮으로 고민하고 만들었습니다...최선을 다했고 열심히 했습니다 저의 진심이 느껴지길 바랍니다 고맙습니다...
+							<br>
+							(사진의 모습은 프로젝트를 끝낸 제작자의 마지막 모습이라고 한다. 손에 들고 있는 책은 CSS 책이라고...)</p>
 						</div>
 					</div>
 
