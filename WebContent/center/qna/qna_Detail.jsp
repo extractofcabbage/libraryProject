@@ -156,7 +156,7 @@ function SirenFunction(idMyDiv){
 							<div class="w3-row" >
 								<div class="w3-col m2 text-center">
 									<img class="w3-circle"
-										src="<%=commentMemberList.get(i).getImage()%>"
+										src="${pageContext.request.contextPath}/images/member/<%=commentMemberList.get(i).getImage()%>"
 										style="width: 96px; height: 96px">
 								</div>
 								<div class="w3-col m10 w3-container">

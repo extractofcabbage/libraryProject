@@ -130,7 +130,7 @@
         	<div>
         		<h4 class="w3-text-teal"><b><a
 									href="reviewView.rv?no=<%=reviewList.get(i).getNo()%>&page=<%=nowPage%>"><%=reviewList.get(i).getTitle()%></a></b></h4>
-        		<h4 class="review-list-writer"><img src="<%=memberList.get(i).getImage()%>" class="w3-circle" style="width:50px; margin:0">
+        		<h4 class="review-list-writer"><img src="${pageContext.request.contextPath}/images/member/<%=memberList.get(i).getImage()%>" class="w3-circle" style="width:50px;height:50px; margin:0">
         			&nbsp;&nbsp;<%=memberList.get(i).getName() %>
         			<span class="w3-opacity">&nbsp;&nbsp;<%=reviewList.get(i).getReg_date()%></span>
         			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 조회수

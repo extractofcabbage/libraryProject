@@ -30,11 +30,7 @@
 <%} else { %>
     
     <div class="w3-col s4">
-      <%if(memberBean.getImage().contains("standardimg.png")) {%>
-      <img src="<%=memberBean.getImage() %>" class="w3-circle w3-margin-right" style="width:60px; height: 60px; margin-top: 8px;">
-      <%} else {%>
       <img src="${pageContext.request.contextPath}/images/member/<%=memberBean.getImage() %>" class="w3-circle w3-margin-right" style="width:60px; height: 60px; margin-top: 8px;">	
-      <%} %>
     </div>
     <div class="w3-col s8 w3-bar">
       <span><a href="#"><strong class="w3-xxlarge"><%=memberBean.getName() %></strong></a></span>
