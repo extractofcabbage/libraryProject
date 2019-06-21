@@ -69,7 +69,7 @@ public class MemberDAO {
 	}
 	public int insertMember(MemberBean memberBean) {
 		int insertCount=0;
-		String standard_imgaddress="./images/memberStandardimg/standardimg.png";
+		String standard_imgaddress="standardimg.png";
 		try {
 			
 			String sql = "insert into member values(null,?,?,?,?,?,?,?,?,?,?,?,now())";

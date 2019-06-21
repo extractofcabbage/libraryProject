@@ -155,9 +155,15 @@ function SirenFunction(idMyDiv){
 							%>
 							<div class="w3-row" >
 								<div class="w3-col m2 text-center">
+								<%if(commentMemberList.get(i).getImage().contains("http")) {%>
+									<img class="w3-circle"
+										src="<%=commentMemberList.get(i).getImage()%>"
+										style="width: 96px; height: 96px">
+								<%} else { %>
 									<img class="w3-circle"
 										src="${pageContext.request.contextPath}/images/member/<%=commentMemberList.get(i).getImage()%>"
 										style="width: 96px; height: 96px">
+								<%} %>
 								</div>
 								<div class="w3-col m10 w3-container">
 									<h4>

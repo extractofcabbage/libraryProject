@@ -88,7 +88,6 @@
       	<td>성별</td>
       	<td>생년월일</td>
       	<td>전화번호</td>
-      	<td>프로필</td>
       	<td>주소1</td>
       	<td>주소2</td>
       	<td>우편번호</td>
@@ -114,7 +113,7 @@
 									        <td><%=memberBean.getNo()%></td>
 											<td><%=memberBean.getEmail()%></td>
 											<td><%=memberBean.getName()%></td>
-											<td><%=memberBean.getGender()%></td>
+											<td><%if(memberBean.getGender().equals("1")){%> 남 <%} else {%> 여 <%}%></td>
 											<td><%=memberBean.getBirth()%></td>
 											<td><%=memberBean.getPhone()%></td>
 <%-- 											<td><%=memberBean.getImage()%></td> --%>

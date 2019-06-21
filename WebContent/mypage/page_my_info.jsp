@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,15 +70,6 @@ function passChangeSubmit() {
 	}
 }
 
-function memberDelete() {
-	var isDelete = confirm("탈퇴하시겠습니까?");
-	if(isDelete) {
-		location.href='myInfoDelete.my';
-	} else {
-		window.close();
-	}
-}
-
 function profilChange() {
 	var profilImg = $("#profilImg").attr("src");
 	
@@ -113,7 +106,15 @@ function profilChange() {
       		<div class="w3-card w3-round w3-white">
         		<div class="w3-container">
          			<h4 class="w3-center">프로필 사진</h4>
-         			<p class="w3-center"><img src="${pageContext.request.contextPath}/images/member/${memberBean.image}" class="w3-circle" style="width:150px;height:150px;" alt="Avatar" id="profilImg"></p>
+         			<c:set var ="imageName" value = "${memberBean.image }"/>
+         			<c:choose>
+         				<c:when test="${fn:contains(imageName, 'http')}">
+         					<p class="w3-center"><img src="${memberBean.image}" class="w3-circle" style="width:150px;height:150px;" alt="Avatar" id="profilImg"></p>
+         				</c:when>
+         				<c:otherwise>
+         					<p class="w3-center"><img src="${pageContext.request.contextPath}/images/member/${memberBean.image}" class="w3-circle" style="width:150px;height:150px;" alt="Avatar" id="profilImg"></p>
+         				</c:otherwise>
+         			</c:choose>
          			<hr>
          			<p class="w3-center"><button class="changeBtn" onclick="profilChange()">프로필 사진 변경하기</button></p>
         		</div>
@@ -169,10 +170,6 @@ function profilChange() {
           	</tr>
           	<tr>
           		<td class="info-td-left">가입일자</td><td>${memberBean.reg_date }</td>
-          	</tr>
-          	<tr>
-          		<td class="info-td-left">탈퇴신청</td>
-          		<td><input type="button" class="w3-button w3-dark-grey w3-round-medium" value="탈퇴" onclick="memberDelete()"></td>
           	</tr>
           </table>
           <br><br>

@@ -11,11 +11,20 @@
 		maxActive="500"
 		maxIdle="100"
 	/>
-<!-- 	<Resource 	name = "jdbc/mysqlDB" -->
-<!-- 				auth = "Container" -->
-<!-- 				type = "javax.sql.DataSource" -->
-<!-- 				driverClassName = "com.mysql.jdbc.Driver" -->
-<!-- 				url = "jdbc:mysql://localhost/itwillbs5" -->
-<!-- 				username = "itwillbs5" -->
-<!-- 				password = "itwillbs8030909"/> -->
 </Context>
+
+
+<!-- <Context> -->
+<!-- 	<Resource  -->
+<!-- 		name="jdbc/teamproject" -->
+<!-- 		auth="Container" -->
+<!-- 		type="javax.sql.DataSource" -->
+<!-- 		url="jdbc:mysql://localhost/itwillbs9" -->
+<!-- 		username="itwillbs5" -->
+<!-- 		password="itwillbs8030909" -->
+<!-- 		driverClassName="com.mysql.jdbc.Driver" -->
+<!-- 		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" -->
+<!-- 		maxActive="500" -->
+<!-- 		maxIdle="100" -->
+<!-- 	/> -->
+<!-- </Context> -->

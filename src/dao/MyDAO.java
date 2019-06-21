@@ -49,24 +49,6 @@ public class MyDAO {
 		return updateCount;
 	}
 
-	public int deleteMember(int memberNo) {
-		int deleteCount = 0;
-		
-		String sql = "DELETE FROM member WHERE no=?";
-		
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, memberNo);
-			deleteCount = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return deleteCount;
-	}
-
 	public int updateProfilImage(int member_no, String image) {
 		int updateCount = 0;
 		

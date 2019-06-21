@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
-import action.my.MyInfoDeleteAction;
 import action.my.MyInfoPassChangeAction;
 import action.my.MyInfoProfilProAction;
 import vo.ActionForward;
@@ -70,16 +69,6 @@ public class MyFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		// 회원정보 - 삭제
-		else if(command.equals("/myInfoDelete.my")) {
-			action = new MyInfoDeleteAction(); 
-			
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}	
 		}
 		// 회원정보 - 프로필 이미지 변경
 		else if(command.equals("/myInfoProfilForm.my")) {
