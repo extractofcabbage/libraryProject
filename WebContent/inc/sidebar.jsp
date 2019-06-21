@@ -37,8 +37,8 @@
     <%} %>  	
     </div>
     <div class="w3-col s8 w3-bar">
-      <span><a href="#"><strong class="w3-xxlarge"><%=memberBean.getName() %></strong></a></span>
-      <a href="#" class="w3-right" style="padding: 8px 16px;" id="gear_a"><i class="fa fa-cog" id="gear"></i></a>
+      <span><a href="myInfo.my""><strong class="w3-xxlarge"><%=memberBean.getName() %></strong></a></span>
+      <a href="myInfo.my"" class="w3-right" style="padding: 8px 16px;" id="gear_a"><i class="fa fa-cog" id="gear"></i></a>
       <br><span>님 환영합니다!</span>
       <button class="w3-container w3-border w3-white">
       	<span onclick="location.href='logoutAction.me'"><strong>로그아웃</strong></span>
